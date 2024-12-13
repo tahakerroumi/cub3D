@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:43:30 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/11 15:22:04 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/13 05:17:54 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ char	**fill_map(char **str)
 	int		j;
 	char	**tmp;
 	char	**result;
-	int		end;
+	// int		end;
 
 	j = 0;
 	tmp = malloc((ft_doublepointerlen(str) + 1) * sizeof(char *));
 	if (!tmp)
 		return (NULL);
 	i = ft_doublepointerlen(str) - 1;
-	end = i;
+	// end = i;
 	while (i >= 0 && comparaison(str[i]) == -1)
 		i--;
 	i++;

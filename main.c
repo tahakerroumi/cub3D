@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/11 15:28:16 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/13 05:20:25 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,20 @@ int	comparaison(char *str)
 	return (1);
 }
 
+int	mlx_intro(t_minilibx *mlx)
+{
+	mlx->intro = mlx_init();
+	if (!mlx->intro)
+		return (1);
+	mlx->window = mlx_new_window(mlx->intro, LENGHT, WIDTH, "cub3d");
+	mlx->img.img = mlx_new_image(mlx->intro, LENGHT, WIDTH);
+	if (!mlx->img.img)
+		return (1);
+	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, \
+		&mlx->img.bits_per_pixel, &mlx->img.line_lenght, &mlx->img.endian);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_global	*global;
@@ -95,5 +109,7 @@ int	main(int ac, char **av)
 	if (global == NULL)
 		error_print("Failed to allocate memory");
 	pars(global, ac, av);
-
+	if (mlx_intro(&mlx))
+		return (free(global),0);
+	mlx_loop(mlx.intro);
 }

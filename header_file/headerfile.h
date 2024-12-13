@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   headerfile.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/11 15:29:50 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/13 05:29:27 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADERFILE_H
 # define HEADERFILE_H
 
+// #include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -21,10 +23,24 @@
 
 # include "../parsing/get_next_line.h"
 
+#define LENGHT 1250
+#define WIDTH 550
+
+typedef struct	s_img
+{
+	void	*img;
+	char	*pixel_ptr;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}				t_img;
+
 typedef struct	s_minilibx
 {
-	
-}
+	void	*intro;
+	void	*window;
+	t_img	img;
+}				t_minilibx;
 
 int		checkextention(char *av);
 void	error_print(char *str);

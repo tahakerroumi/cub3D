@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   playerexists.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:36:06 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/11 15:22:04 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/13 05:19:39 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	palyer_exists(t_global *global)
 	int	i;
 	int	j;
 	int	p;
-	int	playeri;
-	int	playerj;
+	int	playeri = 0;
+	int	playerj = 0;
 
 	i = 0;
 	p = 0;

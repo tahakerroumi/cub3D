@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   additional_functions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:52:46 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/11 15:22:04 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/13 05:09:55 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,8 @@ char	*ft_substr(char *s, int start, size_t len)
 
 int	checkextention(char *str)
 {
-	int	i;
 	int	len;
 
-	i = 0;
 	len = ft_strlen(str);
 	if (len <= 4)
 		return (-1);

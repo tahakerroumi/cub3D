@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 05:20:25 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:36:32 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,46 @@ int	comparaison(char *str)
 	return (1);
 }
 
+void	draw_pixel(t_minilibx *mlx, t_global *data, int x, int y)
+{
+	int i;
+	int	j;
+
+	int offset_x = x * TILE_SIZE;
+    int offset_y = y * TILE_SIZE;
+	i = -1;
+	while (++i < TILE_SIZE)
+	{
+		j = -1;
+		while (++j < TILE_SIZE)
+		{
+			if (data->map[y][x])
+				mlx_pixel_put(mlx->intro, mlx->window, offset_x + j, offset_y + i, 0xFF0000);
+			else if (!data->map[y][x])
+				mlx_pixel_put(mlx->intro, mlx->window, offset_x + j, offset_y + i, 0xFFFFFF);
+		}
+	}
+}
+
+void	create_map(t_minilibx *mlx, t_global *data)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < data->map_height)
+	{
+		x = -1;
+		while (++x < data->map_width)
+			draw_pixel(mlx, data, x, y);
+	}
+}
+
+void	start_game(t_minilibx *mlx, t_global *data)
+{
+	create_map(mlx, data);
+}
+
 int	mlx_intro(t_minilibx *mlx)
 {
 	mlx->intro = mlx_init();
@@ -95,8 +135,6 @@ int	mlx_intro(t_minilibx *mlx)
 	mlx->img.img = mlx_new_image(mlx->intro, LENGHT, WIDTH);
 	if (!mlx->img.img)
 		return (1);
-	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, \
-		&mlx->img.bits_per_pixel, &mlx->img.line_lenght, &mlx->img.endian);
 	return (0);
 }
 
@@ -111,5 +149,6 @@ int	main(int ac, char **av)
 	pars(global, ac, av);
 	if (mlx_intro(&mlx))
 		return (free(global),0);
+	start_game(&mlx, global);
 	mlx_loop(mlx.intro);
 }

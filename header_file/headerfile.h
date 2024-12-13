@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 05:29:27 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:42:10 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <string.h>
+# include <math.h>
 
 # include "../parsing/get_next_line.h"
 
 #define LENGHT 1250
 #define WIDTH 550
+#define TILE_SIZE 30
 
 typedef struct	s_img
 {

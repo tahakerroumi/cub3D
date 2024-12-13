@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 11:36:32 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:56:37 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,12 @@ void	draw_pixel(t_minilibx *mlx, t_global *data, int x, int y)
 		j = -1;
 		while (++j < TILE_SIZE)
 		{
-			if (data->map[y][x])
-				mlx_pixel_put(mlx->intro, mlx->window, offset_x + j, offset_y + i, 0xFF0000);
-			else if (!data->map[y][x])
-				mlx_pixel_put(mlx->intro, mlx->window, offset_x + j, offset_y + i, 0xFFFFFF);
+			if (data->map[y][x] == '1')
+				mlx_pixel_put(mlx->intro, mlx->window, offset_x + i, offset_y + j, 0xFF0000);
+			else if (data->map[y][x] == '0')
+				mlx_pixel_put(mlx->intro, mlx->window, offset_x + i, offset_y + j, 0xFFFFFF);
+			// else if (data->map[y][x] == ' ')
+			
 		}
 	}
 }
@@ -113,17 +115,59 @@ void	create_map(t_minilibx *mlx, t_global *data)
 	int	y;
 
 	y = -1;
-	while (++y < data->map_height)
+	while (++y < data->map_width * TILE_SIZE)
 	{
 		x = -1;
-		while (++x < data->map_width)
+		while (++x < data->map_lenght * TILE_SIZE)
 			draw_pixel(mlx, data, x, y);
 	}
+}
+
+void	draw_player(t_minilibx *mlx)
+{
+	int	i, j;
+
+	mlx->player.px = TILE_SIZE + (TILE_SIZE / 2);
+	mlx->player.py = TILE_SIZE + (TILE_SIZE / 2);
+	i = 0;
+	while (i < TILE_SIZE / 2)
+	{
+		j = 0;
+		while (j < TILE_SIZE / 2)
+		{
+			mlx_pixel_put(mlx->intro, mlx->window, mlx->player.py + i, mlx->player.px + j, 0xDFFF00);
+			j++;
+		}
+		i++;
+	}
+	// int i = 0;
+	// int j = 0;
+
+	// while(i < global->map_lenght)
+	// {
+	// 	j = 0;
+	// 	while(i < global->map_lenght)
+	// 	{
+	// 		if()
+	// 		else
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+}
+
+int	key_routine(int keycode, t_minilibx *mlx)
+{
+	(void )mlx;
+	printf("%d\n", keycode);
+	return 0;
 }
 
 void	start_game(t_minilibx *mlx, t_global *data)
 {
 	create_map(mlx, data);
+	draw_player(mlx);
+	mlx_hook(mlx->window, 02, (1L<<0), key_routine, mlx);
 }
 
 int	mlx_intro(t_minilibx *mlx)
@@ -131,8 +175,8 @@ int	mlx_intro(t_minilibx *mlx)
 	mlx->intro = mlx_init();
 	if (!mlx->intro)
 		return (1);
-	mlx->window = mlx_new_window(mlx->intro, LENGHT, WIDTH, "cub3d");
-	mlx->img.img = mlx_new_image(mlx->intro, LENGHT, WIDTH);
+	mlx->window = mlx_new_window(mlx->intro, 90 * TILE_SIZE, 90 * TILE_SIZE, "cub3d");
+	mlx->img.img = mlx_new_image(mlx->intro, 90 * TILE_SIZE, 90 * TILE_SIZE);
 	if (!mlx->img.img)
 		return (1);
 	return (0);

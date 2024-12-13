@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 10:42:10 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:34:42 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@
 
 # include "../parsing/get_next_line.h"
 
-#define LENGHT 1250
-#define WIDTH 550
 #define TILE_SIZE 30
+
+typedef struct	s_player
+{
+	int	px;
+	int py;
+}				t_player;
 
 typedef struct	s_img
 {
@@ -39,9 +43,10 @@ typedef struct	s_img
 
 typedef struct	s_minilibx
 {
-	void	*intro;
-	void	*window;
-	t_img	img;
+	void		*intro;
+	void		*window;
+	t_img		img;
+	t_player	player;
 }				t_minilibx;
 
 int		checkextention(char *av);
@@ -76,7 +81,7 @@ typedef struct s_global
 	char	*ea;
 	char	*f;
 	char	*c;
-	int		map_height;
+	int		map_lenght;
 	int		map_width;
 	int		fr;
 	int		fg;

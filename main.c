@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 20:56:37 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/13 23:01:45 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,97 +86,91 @@ int	comparaison(char *str)
 	return (1);
 }
 
-void	draw_pixel(t_minilibx *mlx, t_global *data, int x, int y)
+void create_map(t_minilibx *mlx, t_global *data)
 {
-	int i;
-	int	j;
+    int i, j; // Size of each tile
 
-	int offset_x = x * TILE_SIZE;
-    int offset_y = y * TILE_SIZE;
-	i = -1;
-	while (++i < TILE_SIZE)
-	{
-		j = -1;
-		while (++j < TILE_SIZE)
-		{
-			if (data->map[y][x] == '1')
-				mlx_pixel_put(mlx->intro, mlx->window, offset_x + i, offset_y + j, 0xFF0000);
-			else if (data->map[y][x] == '0')
-				mlx_pixel_put(mlx->intro, mlx->window, offset_x + i, offset_y + j, 0xFFFFFF);
-			// else if (data->map[y][x] == ' ')
-			
-		}
-	}
+    i = 0;
+    while (data->map[i])
+    {
+        j = 0;
+        while (data->map[i][j])
+        {
+            int x_start = j * TILE_SIZE; // Top-left corner x-coordinate of the tile
+            int y_start = i * TILE_SIZE; // Top-left corner y-coordinate of the tile
+            int color;
+
+            // Determine the color based on the map value
+            if (data->map[i][j] == '1')
+                color = 0xFF0000; // Red for '1'
+            else if (data->map[i][j] == '0' || data->map[i][j] == 'N')
+                color = 0xAAAAAA; // Transparent gray for '0' (approximation with light gray)
+            // else if (data->map[i][j] == 'N')
+            //     color = 0x0000FF; // Blue for 'N'
+            else if (data->map[i][j] == ' ')
+                color = 0x000000; // Black for space
+            else
+                color = 0x000000; // Default to white for any other value (optional)
+
+            // Draw the full tile
+            for (int y = y_start; y < y_start + TILE_SIZE; y++) // Iterate over tile height
+            {
+                for (int x = x_start; x < x_start + TILE_SIZE; x++) // Iterate over tile width
+                {
+                    mlx_pixel_put(mlx->intro, mlx->window, x, y, color);
+                }
+            }
+            j++; // Move to the next tile in the row
+        }
+        i++; // Move to the next row of tiles
+    }
 }
 
-void	create_map(t_minilibx *mlx, t_global *data)
+
+void draw_player(t_minilibx *mlx, t_global *data)
 {
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < data->map_width * TILE_SIZE)
-	{
-		x = -1;
-		while (++x < data->map_lenght * TILE_SIZE)
-			draw_pixel(mlx, data, x, y);
-	}
-}
-
-void	draw_player(t_minilibx *mlx)
-{
-	int	i, j;
-
-	mlx->player.px = TILE_SIZE + (TILE_SIZE / 2);
-	mlx->player.py = TILE_SIZE + (TILE_SIZE / 2);
-	i = 0;
-	while (i < TILE_SIZE / 2)
+	int i = 0;
+	int j;
+	int b = -1;
+	while(data->map[i])
 	{
 		j = 0;
-		while (j < TILE_SIZE / 2)
+		while (data->map[i][j])
 		{
-			mlx_pixel_put(mlx->intro, mlx->window, mlx->player.py + i, mlx->player.px + j, 0xDFFF00);
+			if (data->map[i][j] == 'N')
+			{
+				mlx->player.px = j;
+				mlx->player.py = i;
+				while (++b < TILE_SIZE / 3)
+				{
+					int c = -1;
+					while(++c < TILE_SIZE / 3)
+					{
+						mlx_pixel_put(mlx->intro, mlx->window, mlx->player.px * TILE_SIZE + c, mlx->player.py * TILE_SIZE + b, 0xFFFFFF);
+					}
+				}
+			}
 			j++;
 		}
 		i++;
 	}
-	// int i = 0;
-	// int j = 0;
-
-	// while(i < global->map_lenght)
-	// {
-	// 	j = 0;
-	// 	while(i < global->map_lenght)
-	// 	{
-	// 		if()
-	// 		else
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-}
-
-int	key_routine(int keycode, t_minilibx *mlx)
-{
-	(void )mlx;
-	printf("%d\n", keycode);
-	return 0;
 }
 
 void	start_game(t_minilibx *mlx, t_global *data)
 {
 	create_map(mlx, data);
-	draw_player(mlx);
-	mlx_hook(mlx->window, 02, (1L<<0), key_routine, mlx);
+	draw_player(mlx, data);
+	// mlx_hook(mlx->window, 02, (1L<<0), key_routine, mlx);
 }
 
-int	mlx_intro(t_minilibx *mlx)
+int	mlx_intro(t_minilibx *mlx, t_global *global)
 {
+	// (void)global;
 	mlx->intro = mlx_init();
 	if (!mlx->intro)
 		return (1);
-	mlx->window = mlx_new_window(mlx->intro, 90 * TILE_SIZE, 90 * TILE_SIZE, "cub3d");
-	mlx->img.img = mlx_new_image(mlx->intro, 90 * TILE_SIZE, 90 * TILE_SIZE);
+	mlx->window = mlx_new_window(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_lenght, "cub3d");
+	mlx->img.img = mlx_new_image(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_lenght);
 	if (!mlx->img.img)
 		return (1);
 	return (0);
@@ -191,7 +185,7 @@ int	main(int ac, char **av)
 	if (global == NULL)
 		error_print("Failed to allocate memory");
 	pars(global, ac, av);
-	if (mlx_intro(&mlx))
+	if (mlx_intro(&mlx, global))
 		return (free(global),0);
 	start_game(&mlx, global);
 	mlx_loop(mlx.intro);

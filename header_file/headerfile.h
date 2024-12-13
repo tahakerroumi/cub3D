@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   headerfile.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 20:34:42 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/13 21:56:54 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # include "../parsing/get_next_line.h"
 
-#define TILE_SIZE 30
+#define TILE_SIZE 100
 
 typedef struct	s_player
 {

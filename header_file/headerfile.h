@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   headerfile.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 21:56:54 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:42:51 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,15 @@ int		check_elementsnumber(t_elements *elements);
 void	compare_texture(char **str, t_elements **elements);
 void	map_size(t_global *global);
 void	store_rgb(t_global *global);
+
+/*game initialization*/
+void	start_game(t_minilibx *mlx, t_global *data);
+int		mlx_intro(t_minilibx *mlx, t_global *global);
+void 	draw_player(t_minilibx *mlx, t_global *data);
+void	my_pixel_put(int x, int y, t_img *img, int color);
+void	draw_tile(int i, int j, t_img *img, int color);
+void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j);
+void	create_map(t_minilibx *mlx, t_global *data);
+void draw_player(t_minilibx *mlx, t_global *data);
 
 #endif

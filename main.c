@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 23:01:45 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:25:32 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,51 +86,97 @@ int	comparaison(char *str)
 	return (1);
 }
 
-void create_map(t_minilibx *mlx, t_global *data)
+// void create_map(t_minilibx *mlx, t_global *data)
+// {
+//     int i, j;
+
+//     i = 0;
+//     while (data->map[i])
+//     {
+//         j = 0;
+//         while (data->map[i][j])
+//         {
+//             int x_start = j * TILE_SIZE;
+//             int y_start = i * TILE_SIZE;
+//             int color;
+
+//             if (data->map[i][j] == '1')
+//                 color = 0xFF0000;
+//             else if (data->map[i][j] == '0' || data->map[i][j] == 'N')
+//                 color = 0xAAAAAA;
+//             else if (data->map[i][j] == ' ')
+//                 color = 0x000000;
+//             else
+//                 color = 0x000000;
+//             for (int y = y_start; y < y_start + TILE_SIZE; y++)
+//             {
+//                 for (int x = x_start; x < x_start + TILE_SIZE; x++)
+//                 {
+//                     mlx_pixel_put(mlx->intro, mlx->window, x, y, color);
+//                 }
+//             }
+//             j++;
+//         }
+//         i++;
+//     }
+// }
+
+void	my_pixel_put(int x, int y, t_img *img, int color)
 {
-    int i, j; // Size of each tile
+	int	offset;
 
-    i = 0;
-    while (data->map[i])
-    {
-        j = 0;
-        while (data->map[i][j])
-        {
-            int x_start = j * TILE_SIZE; // Top-left corner x-coordinate of the tile
-            int y_start = i * TILE_SIZE; // Top-left corner y-coordinate of the tile
-            int color;
-
-            // Determine the color based on the map value
-            if (data->map[i][j] == '1')
-                color = 0xFF0000; // Red for '1'
-            else if (data->map[i][j] == '0' || data->map[i][j] == 'N')
-                color = 0xAAAAAA; // Transparent gray for '0' (approximation with light gray)
-            // else if (data->map[i][j] == 'N')
-            //     color = 0x0000FF; // Blue for 'N'
-            else if (data->map[i][j] == ' ')
-                color = 0x000000; // Black for space
-            else
-                color = 0x000000; // Default to white for any other value (optional)
-
-            // Draw the full tile
-            for (int y = y_start; y < y_start + TILE_SIZE; y++) // Iterate over tile height
-            {
-                for (int x = x_start; x < x_start + TILE_SIZE; x++) // Iterate over tile width
-                {
-                    mlx_pixel_put(mlx->intro, mlx->window, x, y, color);
-                }
-            }
-            j++; // Move to the next tile in the row
-        }
-        i++; // Move to the next row of tiles
-    }
+	offset = (y * img->line_lenght) + (x * (img->bits_per_pixel / 8));
+	// if (x >= 0 && x < img->width && y >= 0 && y < img->height)
+    *(unsigned int *)(img->pixel_ptr + offset) = color;
 }
 
+void	draw_tile(int i, int j, t_img *img, int color)
+{
+	int x;
+	int y;
+
+	y = -1;
+	while (++y < TILE_SIZE)
+	{
+		x = -1;
+		while (++x < TILE_SIZE)
+			my_pixel_put(x + (j * TILE_SIZE), y + (i * TILE_SIZE), img, color);
+	}
+		
+}
+
+void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j)
+{
+	if (data->map[i][j] == '0' || data->map[i][j] == 'N')
+		draw_tile(i, j, &mlx->img, 0xAAAAAA);
+	else if (data->map[i][j] == '1')
+		draw_tile(i, j, &mlx->img, 0xFF0000);
+	else if (data->map[i][j] == ' ')
+		draw_tile(i, j, &mlx->img, 0x000000);
+	else
+		draw_tile(i, j, &mlx->img, 0xAAAAAA);
+}
+
+void	create_map(t_minilibx *mlx, t_global *data)
+{
+	int	x;
+	int y;
+
+	y = -1;
+	while (data->map[++y])
+	{
+		x = -1;
+		while (data->map[y][++x])
+			pixel_manager(mlx, data, y, x);
+	}
+	mlx_put_image_to_window(mlx->intro, mlx->window, mlx->img.img, 0, 0);
+}
 
 void draw_player(t_minilibx *mlx, t_global *data)
 {
 	int i = 0;
 	int j;
+	int c;
 	int b = -1;
 	while(data->map[i])
 	{
@@ -143,11 +189,9 @@ void draw_player(t_minilibx *mlx, t_global *data)
 				mlx->player.py = i;
 				while (++b < TILE_SIZE / 3)
 				{
-					int c = -1;
+					c = -1;
 					while(++c < TILE_SIZE / 3)
-					{
 						mlx_pixel_put(mlx->intro, mlx->window, mlx->player.px * TILE_SIZE + c, mlx->player.py * TILE_SIZE + b, 0xFFFFFF);
-					}
 				}
 			}
 			j++;
@@ -165,7 +209,6 @@ void	start_game(t_minilibx *mlx, t_global *data)
 
 int	mlx_intro(t_minilibx *mlx, t_global *global)
 {
-	// (void)global;
 	mlx->intro = mlx_init();
 	if (!mlx->intro)
 		return (1);
@@ -173,6 +216,7 @@ int	mlx_intro(t_minilibx *mlx, t_global *global)
 	mlx->img.img = mlx_new_image(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_lenght);
 	if (!mlx->img.img)
 		return (1);
+	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_lenght, &mlx->img.endian);
 	return (0);
 }
 

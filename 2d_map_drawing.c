@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/14 18:36:39 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/15 05:19:48 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	draw_tile(int i, int j, t_img *img, int color)
 		x = -1;
 		while (++x < TILE_SIZE)
 			my_pixel_put(x + (j * TILE_SIZE), y + (i * TILE_SIZE), img, color);
-	}
-		
+	}	
 }
 
 void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j)
@@ -59,32 +58,39 @@ void	create_map(t_minilibx *mlx, t_global *data)
 		while (data->map[y][++x])
 			pixel_manager(mlx, data, y, x);
 	}
-	mlx_put_image_to_window(mlx->intro, mlx->window, mlx->img.img, 0, 0);
 }
-void draw_player(t_minilibx *mlx, t_global *data)
+
+void	draw_player(t_minilibx *mlx)
 {
-	int i = 0;
+	int i;
 	int j;
-	int c;
-	int b = -1;
-	while(data->map[i])
+
+	i = -1;
+	while (++i < TILE_SIZE / 3)
 	{
-		j = 0;
-		while (data->map[i][j])
+		j = -1;
+		while (++j < TILE_SIZE / 3)
+			my_pixel_put(mlx->player.px + j, mlx->player.py + i, &mlx->img, 0xFFFFFF);
+	}
+}
+
+void player_finder(t_minilibx *mlx, t_global *data)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while(data->map[++i])
+	{
+		j = -1;
+		while (data->map[i][++j])
 		{
 			if (data->map[i][j] == 'N')
 			{
-				mlx->player.px = j;
-				mlx->player.py = i;
-				while (++b < TILE_SIZE / 3)
-				{
-					c = -1;
-					while(++c < TILE_SIZE / 3)
-						mlx_pixel_put(mlx->intro, mlx->window, mlx->player.px * TILE_SIZE + c, mlx->player.py * TILE_SIZE + b, 0xFFFFFF);
-				}
+				mlx->player.px = j * TILE_SIZE;
+				mlx->player.py = i * TILE_SIZE;
+				draw_player(mlx);
 			}
-			j++;
 		}
-		i++;
 	}
 }

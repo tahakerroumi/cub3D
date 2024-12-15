@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/14 18:42:51 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/15 03:49:39 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,25 @@
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
+#include <stdbool.h>
 
 # include "../parsing/get_next_line.h"
 
-#define TILE_SIZE 100
+#define TILE_SIZE 50
+
+#define W 119
+#define A 97
+#define S 115
+#define D 100
+#define UP 65362
+#define LEFT 65361
+#define DOWN 65364
+#define RIGHT 65363
 
 typedef struct	s_player
 {
-	int	px;
-	int py;
+	double	px;
+	double	py;
 }				t_player;
 
 typedef struct	s_img
@@ -40,14 +50,6 @@ typedef struct	s_img
 	int		line_lenght;
 	int		endian;
 }				t_img;
-
-typedef struct	s_minilibx
-{
-	void		*intro;
-	void		*window;
-	t_img		img;
-	t_player	player;
-}				t_minilibx;
 
 int		checkextention(char *av);
 void	error_print(char *str);
@@ -91,6 +93,15 @@ typedef struct s_global
 	int		cb;
 }	t_global;
 
+typedef struct	s_minilibx
+{
+	void		*intro;
+	void		*window;
+	t_img		img;
+	t_player	player;
+	t_global	*data;
+}				t_minilibx;
+
 // void	fill_elements(char **str, t_elements **elements, int type);
 int		check_elements(char **map, t_elements **elements);
 int		comparaison(char *str);
@@ -118,11 +129,11 @@ void	store_rgb(t_global *global);
 /*game initialization*/
 void	start_game(t_minilibx *mlx, t_global *data);
 int		mlx_intro(t_minilibx *mlx, t_global *global);
-void 	draw_player(t_minilibx *mlx, t_global *data);
+void 	draw_player(t_minilibx *mlx);
 void	my_pixel_put(int x, int y, t_img *img, int color);
 void	draw_tile(int i, int j, t_img *img, int color);
 void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j);
 void	create_map(t_minilibx *mlx, t_global *data);
-void draw_player(t_minilibx *mlx, t_global *data);
+void 	player_finder(t_minilibx *mlx, t_global *data);
 
 #endif

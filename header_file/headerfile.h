@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/15 03:49:39 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/15 06:27:34 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ void	draw_tile(int i, int j, t_img *img, int color);
 void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j);
 void	create_map(t_minilibx *mlx, t_global *data);
 void 	player_finder(t_minilibx *mlx, t_global *data);
+int		key_routine(int keycode, t_minilibx *mlx);
 
 #endif

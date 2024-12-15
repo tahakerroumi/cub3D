@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/15 05:19:48 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/15 06:51:31 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ void	draw_tile(int i, int j, t_img *img, int color)
 	{
 		x = -1;
 		while (++x < TILE_SIZE)
-			my_pixel_put(x + (j * TILE_SIZE), y + (i * TILE_SIZE), img, color);
+		{
+			if (x && y)
+				my_pixel_put(x + (j * TILE_SIZE), y + (i * TILE_SIZE), img, color);
+			else
+				my_pixel_put(x + (j * TILE_SIZE), y + (i * TILE_SIZE), img, 0x000000);
+		}
 	}	
 }
 
@@ -70,27 +75,6 @@ void	draw_player(t_minilibx *mlx)
 	{
 		j = -1;
 		while (++j < TILE_SIZE / 3)
-			my_pixel_put(mlx->player.px + j, mlx->player.py + i, &mlx->img, 0xFFFFFF);
-	}
-}
-
-void player_finder(t_minilibx *mlx, t_global *data)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while(data->map[++i])
-	{
-		j = -1;
-		while (data->map[i][++j])
-		{
-			if (data->map[i][j] == 'N')
-			{
-				mlx->player.px = j * TILE_SIZE;
-				mlx->player.py = i * TILE_SIZE;
-				draw_player(mlx);
-			}
-		}
+				my_pixel_put(mlx->player.px + j, mlx->player.py + i, &mlx->img, 0xFFFFFF);
 	}
 }

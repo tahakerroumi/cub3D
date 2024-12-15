@@ -6,11 +6,32 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/15 06:14:39 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/15 07:08:03 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header_file/headerfile.h"
+
+void player_finder(t_minilibx *mlx, t_global *data)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while(data->map[++i])
+	{
+		j = -1;
+		while (data->map[i][++j])
+		{
+			if (data->map[i][j] == 'N')
+			{
+				mlx->player.px = j * TILE_SIZE;
+				mlx->player.py = i * TILE_SIZE;
+				draw_player(mlx);
+			}
+		}
+	}
+}
 
 bool	can_mouve(t_minilibx *mlx, int keycode)
 {
@@ -19,14 +40,14 @@ bool	can_mouve(t_minilibx *mlx, int keycode)
 
 	x = (int)(mlx->player.px / TILE_SIZE);
 	y = (int)(mlx->player.py / TILE_SIZE);
-	if (keycode == W)
+	if (keycode == W || keycode == UP)
 		y = (int)((mlx->player.py - 10) / TILE_SIZE);
-	else if (keycode == S)
+	else if (keycode == S || keycode == DOWN)
 		y = (int)((mlx->player.py + 20) / TILE_SIZE);
-	else if (keycode == A)
-		x = (int)((mlx->player.px - 10) / TILE_SIZE);
-	else if (keycode == D)
+	else if (keycode == RIGHT)
 		x = (int)((mlx->player.px + 20) / TILE_SIZE);
+	else if (keycode == LEFT)
+		x = (int)((mlx->player.px - 10) / TILE_SIZE);
 	if (x < 0 || y < 0 || y >= mlx->data->map_lenght * TILE_SIZE || x >= mlx->data->map_width * TILE_SIZE)
         return (false);
 	return (mlx->data->map[y][x] == '0' || mlx->data->map[y][x] == 'N');
@@ -36,13 +57,13 @@ int key_routine(int keycode, t_minilibx *mlx)
 {
 	if (can_mouve(mlx, keycode))
 	{
-		if (keycode == W)
+		if (keycode == W || keycode == UP)
 			mlx->player.py -= 10;
-		else if (keycode == S)
+		else if (keycode == S || keycode == DOWN)
 			mlx->player.py += 10;
-		else if (keycode == A)
+		else if (keycode == LEFT)
 			mlx->player.px -= 10;
-		else if (keycode == D)
+		else if (keycode == RIGHT)
 			mlx->player.px += 10;
 	}
     create_map(mlx, mlx->data);

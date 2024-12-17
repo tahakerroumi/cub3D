@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/15 07:08:03 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:33:44 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_file/headerfile.h"
+#include "../header_file/headerfile.h"
 
 void player_finder(t_minilibx *mlx, t_global *data)
 {
@@ -43,9 +43,9 @@ bool	can_mouve(t_minilibx *mlx, int keycode)
 	if (keycode == W || keycode == UP)
 		y = (int)((mlx->player.py - 10) / TILE_SIZE);
 	else if (keycode == S || keycode == DOWN)
-		y = (int)((mlx->player.py + 20) / TILE_SIZE);
+		y = (int)((mlx->player.py + 10 + TILE_SIZE / 3) / TILE_SIZE);
 	else if (keycode == RIGHT)
-		x = (int)((mlx->player.px + 20) / TILE_SIZE);
+		x = (int)((mlx->player.px + 10 + TILE_SIZE / 3) / TILE_SIZE);
 	else if (keycode == LEFT)
 		x = (int)((mlx->player.px - 10) / TILE_SIZE);
 	if (x < 0 || y < 0 || y >= mlx->data->map_lenght * TILE_SIZE || x >= mlx->data->map_width * TILE_SIZE)

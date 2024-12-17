@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/15 06:51:31 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:33:40 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_file/headerfile.h"
+#include "../header_file/headerfile.h"
 
 void	my_pixel_put(int x, int y, t_img *img, int color)
 {

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/17 15:33:40 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/18 00:23:09 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,7 @@ void	draw_tile(int i, int j, t_img *img, int color)
 	{
 		x = -1;
 		while (++x < TILE_SIZE)
-		{
-			if (x && y)
-				my_pixel_put(x + (j * TILE_SIZE), y + (i * TILE_SIZE), img, color);
-			else
-				my_pixel_put(x + (j * TILE_SIZE), y + (i * TILE_SIZE), img, 0x000000);
-		}
+			my_pixel_put(x + (j * TILE_SIZE), y + (i * TILE_SIZE), img, color);
 	}	
 }
 
@@ -44,7 +39,7 @@ void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j)
 	if (data->map[i][j] == '0' || data->map[i][j] == 'N')
 		draw_tile(i, j, &mlx->img, 0xAAAAAA);
 	else if (data->map[i][j] == '1')
-		draw_tile(i, j, &mlx->img, 0xFF0000);
+		draw_tile(i, j, &mlx->img, 0xFF000000);
 	else if (data->map[i][j] == ' ')
 		draw_tile(i, j, &mlx->img, 0x000000);
 	else
@@ -77,4 +72,5 @@ void	draw_player(t_minilibx *mlx)
 		while (++j < TILE_SIZE / 3)
 				my_pixel_put(mlx->player.px + j, mlx->player.py + i, &mlx->img, 0xFFFFFF);
 	}
+	draw_player_view(mlx);
 }

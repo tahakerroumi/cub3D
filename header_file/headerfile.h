@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/15 06:27:34 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/19 02:20:52 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
-#include <stdbool.h>
+# include <stdbool.h>
 
 # include "../parsing/get_next_line.h"
 
@@ -31,15 +31,22 @@
 #define A 97
 #define S 115
 #define D 100
-#define UP 65362
 #define LEFT 65361
-#define DOWN 65364
 #define RIGHT 65363
+
+#define FOV 60
+#define M_PI 3.14159265358979323846
+#define R_SPEED 0.045
+#define P_SPEED 4
+#define RADIUS 50
 
 typedef struct	s_player
 {
 	double	px;
 	double	py;
+	double	angle;
+	double	dir_x;
+	double	dir_y;
 }				t_player;
 
 typedef struct	s_img
@@ -136,5 +143,7 @@ void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j);
 void	create_map(t_minilibx *mlx, t_global *data);
 void 	player_finder(t_minilibx *mlx, t_global *data);
 int		key_routine(int keycode, t_minilibx *mlx);
+void    draw_player_view(t_minilibx *mlx);
+
 
 #endif

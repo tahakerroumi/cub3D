@@ -6,11 +6,24 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/17 15:33:44 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/19 04:47:55 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header_file/headerfile.h"
+
+void	player_type(t_player *player, char c)
+{
+	if (c == 'N')
+		player->angle = (3 * M_PI) / 2;
+	else if (c == 'S')
+		player->angle = M_PI / 2;
+	else if (c == 'W')
+		player->angle = M_PI;
+	else if (c == 'E')
+		player->angle = 0.0;
+	return ;
+}
 
 void player_finder(t_minilibx *mlx, t_global *data)
 {
@@ -23,8 +36,10 @@ void player_finder(t_minilibx *mlx, t_global *data)
 		j = -1;
 		while (data->map[i][++j])
 		{
-			if (data->map[i][j] == 'N')
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W'
+				|| data->map[i][j] == 'E') // must add the player definer
 			{
+				player_type(&mlx->player, data->map[i][j]);
 				mlx->player.px = j * TILE_SIZE;
 				mlx->player.py = i * TILE_SIZE;
 				draw_player(mlx);
@@ -33,39 +48,26 @@ void player_finder(t_minilibx *mlx, t_global *data)
 	}
 }
 
-bool	can_mouve(t_minilibx *mlx, int keycode)
-{
-	int	x;
-	int	y ;
-
-	x = (int)(mlx->player.px / TILE_SIZE);
-	y = (int)(mlx->player.py / TILE_SIZE);
-	if (keycode == W || keycode == UP)
-		y = (int)((mlx->player.py - 10) / TILE_SIZE);
-	else if (keycode == S || keycode == DOWN)
-		y = (int)((mlx->player.py + 10 + TILE_SIZE / 3) / TILE_SIZE);
-	else if (keycode == RIGHT)
-		x = (int)((mlx->player.px + 10 + TILE_SIZE / 3) / TILE_SIZE);
-	else if (keycode == LEFT)
-		x = (int)((mlx->player.px - 10) / TILE_SIZE);
-	if (x < 0 || y < 0 || y >= mlx->data->map_lenght * TILE_SIZE || x >= mlx->data->map_width * TILE_SIZE)
-        return (false);
-	return (mlx->data->map[y][x] == '0' || mlx->data->map[y][x] == 'N');
-}
-
 int key_routine(int keycode, t_minilibx *mlx)
 {
-	if (can_mouve(mlx, keycode))
+	if (keycode == W)
 	{
-		if (keycode == W || keycode == UP)
-			mlx->player.py -= 10;
-		else if (keycode == S || keycode == DOWN)
-			mlx->player.py += 10;
-		else if (keycode == LEFT)
-			mlx->player.px -= 10;
-		else if (keycode == RIGHT)
-			mlx->player.px += 10;
+		mlx->player.px += P_SPEED * cos(mlx->player.angle);
+		mlx->player.py += sin(mlx->player.angle) * P_SPEED;
 	}
+	else if (keycode == S)
+	{
+		mlx->player.px -= P_SPEED * cos(mlx->player.angle);
+		mlx->player.py -= sin(mlx->player.angle) * P_SPEED;
+	}
+	else if (keycode == D)
+		mlx->player.px += 4;
+	else if (keycode == A)
+		mlx->player.px -= 4;
+	else if (keycode == RIGHT)
+		mlx->player.angle += 0.1;
+	else if (keycode == LEFT)
+		mlx->player.angle -= 0.1;
     create_map(mlx, mlx->data);
     draw_player(mlx);
 	mlx_put_image_to_window(mlx->intro, mlx->window, mlx->img.img, 0, 0);
@@ -85,7 +87,7 @@ int	mlx_intro(t_minilibx *mlx, t_global *global)
 	mlx->intro = mlx_init();
 	if (!mlx->intro)
 		return (1);
-	mlx->window = mlx_new_window(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_lenght, "cub3d");
+	mlx->window = mlx_new_window(mlx->intro, 1080, 650, "cub3d");
 	mlx->img.img = mlx_new_image(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_lenght);
 	if (!mlx->img.img)
 		return (1);

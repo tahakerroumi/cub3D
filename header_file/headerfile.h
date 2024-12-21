@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/19 02:20:52 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:57:13 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,21 @@
 
 #define FOV 60
 #define M_PI 3.14159265358979323846
-#define R_SPEED 0.045
-#define P_SPEED 4
+#define R_SPEED 0.04
+#define P_SPEED 2
 #define RADIUS 50
+
+struct s_global;
+
+typedef struct	s_key_flags
+{
+	int	move_forward;
+	int	move_backward;
+	int	move_left;
+	int	move_right;
+	int	rotate_right;
+	int	rotate_left;
+}				t_key_flags;
 
 typedef struct	s_player
 {
@@ -57,6 +69,16 @@ typedef struct	s_img
 	int		line_lenght;
 	int		endian;
 }				t_img;
+
+typedef struct	s_minilibx
+{
+	void			*intro;
+	void			*window;
+	t_img			img;
+	t_player		player;
+	struct s_global	*data;
+	t_key_flags		key;
+}				t_minilibx;
 
 int		checkextention(char *av);
 void	error_print(char *str);
@@ -100,14 +122,6 @@ typedef struct s_global
 	int		cb;
 }	t_global;
 
-typedef struct	s_minilibx
-{
-	void		*intro;
-	void		*window;
-	t_img		img;
-	t_player	player;
-	t_global	*data;
-}				t_minilibx;
 
 // void	fill_elements(char **str, t_elements **elements, int type);
 int		check_elements(char **map, t_elements **elements);
@@ -134,7 +148,7 @@ void	map_size(t_global *global);
 void	store_rgb(t_global *global);
 
 /*game initialization*/
-void	start_game(t_minilibx *mlx, t_global *data);
+void	start_game(t_minilibx *mlx);
 int		mlx_intro(t_minilibx *mlx, t_global *global);
 void 	draw_player(t_minilibx *mlx);
 void	my_pixel_put(int x, int y, t_img *img, int color);

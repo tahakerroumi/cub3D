@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/15 03:29:24 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:47:17 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ int	main(int ac, char **av)
 	pars(global, ac, av);
 	if (mlx_intro(&mlx, global))
 		return (free(global),0);
-	start_game(&mlx, global);
-	mlx_loop(mlx.intro);
+	start_game(&mlx);
 }

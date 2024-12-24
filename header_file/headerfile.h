@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/21 14:57:13 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:58:34 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@
 
 # include "../parsing/get_next_line.h"
 
+#define	WIDTH 1200
+#define	LENGHT 800
+
 #define TILE_SIZE 50
+#define	FOV 60
 
 #define W 119
 #define A 97
@@ -34,13 +38,18 @@
 #define LEFT 65361
 #define RIGHT 65363
 
-#define FOV 60
 #define M_PI 3.14159265358979323846
 #define R_SPEED 0.04
 #define P_SPEED 2
-#define RADIUS 50
 
 struct s_global;
+
+typedef struct	s_ray
+{
+	double	ray_angle;
+	double	distance;
+	int		flag;
+}				t_ray;
 
 typedef struct	s_key_flags
 {
@@ -54,11 +63,12 @@ typedef struct	s_key_flags
 
 typedef struct	s_player
 {
-	double	px;
-	double	py;
-	double	angle;
+	double	px; // position x in pixels (in 2d adding the tiles)
+	double	py; // position y in pixels (in 2d adding the tiles)
+	double	angle; // angle that defines the direction of the player view
 	double	dir_x;
 	double	dir_y;
+	double	fov_rad; // field of view but in radian
 }				t_player;
 
 typedef struct	s_img
@@ -77,6 +87,7 @@ typedef struct	s_minilibx
 	t_img			img;
 	t_player		player;
 	struct s_global	*data;
+	t_ray			ray;
 	t_key_flags		key;
 }				t_minilibx;
 
@@ -106,6 +117,8 @@ typedef struct s_elements
 typedef struct s_global
 {
 	char	**map;
+	int		map_x; // player x position in the map
+	int		map_y; // player y position in the map
 	char	*no;
 	char	*so;
 	char	*we;

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/21 14:54:41 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/24 01:55:12 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,61 @@ void player_pos_dir(t_minilibx *mlx, t_global *data)
 		while (data->map[i][++j])
 		{
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W'
-				|| data->map[i][j] == 'E') // must add the player definer
+				|| data->map[i][j] == 'E')
 			{
+				mlx->data->map_x = j;
+				mlx->data->map_y = i;
 				player_type(&mlx->player, data->map[i][j]);
 				mlx->player.px = j * TILE_SIZE;
 				mlx->player.py = i * TILE_SIZE;
+				mlx->player.fov_rad = FOV * (M_PI / 180);
 			}
 		}
 	}
 }
 
-int	the_magic(void	*cub3d)
+double	first_intersection()
 {
-	t_minilibx *mlx;
+	
+}
+
+double	angle_check(double	ray)
+{
+	if (ray >= 2 * M_PI)
+		ray -= 2 * M_PI;
+	else if (ray < 0)
+		ray += 2 * M_PI;
+	return (ray);	
+}
+
+double	get_horizontal(t_minilibx *mlx, double ray)
+{
+	double	y_step;
+	double	x_step;
+}
+
+void	game_loop(t_minilibx *mlx)
+{
+	int			ray;
+	double		ver_point;
+	double		hor_point;
+
+	mlx->ray.ray_angle = mlx->player.angle - (mlx->player.fov_rad / 2);
+	ray = 0;
+	while (ray < LENGHT)
+	{
+		mlx->ray.flag = 0;
+		hor_point = get_horizontal(mlx, angle_check(mlx->ray.ray_angle));
+	}
+}
+
+int	program_routine(void	*cub3d)
+{
+	t_minilibx	*mlx;
 
 	mlx = (t_minilibx *)cub3d;
-	
+	events();
+	game_loop();
 }
 
 
@@ -88,7 +127,7 @@ void	start_game(t_minilibx *mlx)
 	// player_finder(mlx, data);
 	// mlx_put_image_to_window(mlx->intro, mlx->window, mlx->img.img, 0, 0);
 	// mlx_hook(mlx->window, 02, (1L<<0), key_press, mlx);
-	mlx_loop_hook(mlx->intro, the_magic, (void *)mlx);
+	mlx_loop_hook(mlx->intro, program_routine, (void *)mlx);
 	mlx_loop(mlx->intro);
 }
 
@@ -107,8 +146,8 @@ int	mlx_intro(t_minilibx *mlx, t_global *global)
 	mlx->intro = mlx_init();
 	if (!mlx->intro)
 		return (1);
-	mlx->window = mlx_new_window(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_lenght, "cub3d");
-	mlx->img.img = mlx_new_image(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_lenght);
+	mlx->window = mlx_new_window(mlx->intro, WIDTH, LENGHT, "cub3d");
+	mlx->img.img = mlx_new_image(mlx->intro, WIDTH, LENGHT);
 	if (!mlx->img.img)
 		return (1);
 	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_lenght, &mlx->img.endian);

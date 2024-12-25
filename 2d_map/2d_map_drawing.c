@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/18 00:23:09 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/25 12:58:04 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ void	my_pixel_put(int x, int y, t_img *img, int color)
 {
 	int	offset;
 
+	if (x < 0)
+		return ;
+	else if (x >= LENGHT)
+		return ;
+	if (y < 0)
+		return ;
+	else if (y >= WIDTH)
+		return ;
 	offset = (y * img->line_lenght) + (x * (img->bits_per_pixel / 8));
     *(unsigned int *)(img->pixel_ptr + offset) = color;
 }

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 00:02:18 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/19 02:01:19 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/25 13:14:43 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    draw_player_view(t_minilibx *mlx)
         mlx->player.angle += 2 * M_PI;
     else if (mlx->player.angle >= 2 * M_PI)
         mlx->player.angle -= 2 * M_PI;
-    while (i < RADIUS)
+    while (i < 50)
     {
         eye_x = mlx->player.px + (i * cos(mlx->player.angle));
         eye_y = mlx->player.py + (i * sin(mlx->player.angle));

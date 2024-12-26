@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/26 18:50:06 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/26 20:06:22 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,17 +189,10 @@ int wall_hit(double x, double y, t_minilibx *mlx)
 	int  x_m;
 	int  y_m;
 
-	if (!mlx->data || !mlx->data->map)
-	{
-    	fprintf(stderr, "Invalid map data\n");
-    	exit(EXIT_FAILURE);
-	}
 	if (x < 0 || y < 0 || y > mlx->data->map_width  * TILE_SIZE)
 		return (0);
-	x_m = floor (x / TILE_SIZE);
-	y_m = floor (y / TILE_SIZE);
-	printf("%d\n",y_m );
-	printf("%s\n", mlx->data->map[y_m]);
+	x_m = floor(x / TILE_SIZE);
+	y_m = floor(y / TILE_SIZE);
 	if (y_m >= mlx->data->map_width || x_m >= (int)ft_strlen(mlx->data->map[y_m]))
 		return (0);
 	if (mlx->data->map[y_m] && x_m <= (int)ft_strlen(mlx->data->map[y_m]))
@@ -225,8 +218,6 @@ double	get_vertical(t_minilibx	*mlx, double ray)
 		y_step *= -1;
 	while (wall_hit(inter_x - pixel, inter_y, mlx))
 	{
-		// if (inter_x < 0 || inter_y < 0 || inter_x >= mlx->data->map_lenght || inter_y >= mlx->data->map_width)
-        // 	break;
 		inter_x += x_step;
 		inter_y += y_step;
 	}
@@ -276,7 +267,6 @@ void	rays_loop(t_minilibx *mlx)
 			mlx->ray.distance = hor_point;
 			mlx->ray.flag = 1;
 		}
-		printf("--> ym = %d|||| --->xm = %d\n\n", mlx->data->map_width, mlx->data->map_lenght);
 		render_wall(mlx, ray);
 		ray++;
 		mlx->ray.ray_angle = angle_check(mlx->ray.ray_angle + (mlx->player.fov_rad / LENGHT));

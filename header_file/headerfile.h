@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/23 14:58:34 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/26 19:54:32 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 
 #define M_PI 3.14159265358979323846
 #define R_SPEED 0.04
-#define P_SPEED 2
+#define P_SPEED 0.10
 
 struct s_global;
 

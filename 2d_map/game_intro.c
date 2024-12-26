@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/26 15:45:21 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/26 18:50:06 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,24 +283,66 @@ void	rays_loop(t_minilibx *mlx)
 	}
 }
 
+int check_collision(double x, double y, t_minilibx *mlx)
+{
+    int map_x = (int)(x / TILE_SIZE);
+    int map_y = (int)(y / TILE_SIZE);
+
+    if (map_x >= 0 && map_x < mlx->data->map_width && map_y >= 0 && map_y < mlx->data->map_lenght)
+        return (mlx->data->map[map_y][map_x] == '1');
+    return (1);
+}
+
+void events(t_minilibx *mlx)
+{
+    if (mlx->key.move_forward)
+    {
+        mlx->player.px += cos(mlx->player.angle) * P_SPEED;
+        mlx->player.py += sin(mlx->player.angle) * P_SPEED;
+        if (check_collision(mlx->player.px, mlx->player.py, mlx))
+        {
+            mlx->player.px -= cos(mlx->player.angle) * P_SPEED;
+            mlx->player.py -= sin(mlx->player.angle) * P_SPEED;
+        }
+    }
+}
+
 int	program_routine(void	*cub3d)
 {
 	t_minilibx	*mlx;
 
 	mlx = (t_minilibx *)cub3d;
-	// events(mlx);
+	events(mlx);
 	rays_loop(mlx);
 	mlx_put_image_to_window(mlx->intro, mlx->window, mlx->img.img, 0, 0);
+	// mlx_destroy_image(mlx->intro, mlx->img.img);
 	return (0);
 }
 
+int	key_press(int keycode, void *cub)
+{
+	t_minilibx *mlx;
+
+	mlx = (t_minilibx *)cub;
+	if (keycode == W)
+		mlx->key.move_forward = 1;
+	return (0);
+}
+
+int	key_release(int keycode, void *cub)
+{
+	t_minilibx *mlx;
+
+	mlx = (t_minilibx *)cub;
+	if (keycode == W)
+		mlx->key.move_forward = 0;
+	return (0);
+}
 
 void	start_game(t_minilibx *mlx)
 {
-	// create_map(mlx, data);
-	// player_finder(mlx, data);
-	// mlx_put_image_to_window(mlx->intro, mlx->window, mlx->img.img, 0, 0);
-	// mlx_hook(mlx->window, 02, (1L<<0), key_press, mlx);
+	mlx_hook(mlx->window, 2, (1L << 0), key_press, (void *)mlx);
+	mlx_hook(mlx->window, 3, (1L << 1), key_release, (void *)mlx);
 	mlx_loop_hook(mlx->intro, program_routine, (void *)mlx);
 	mlx_loop(mlx->intro);
 }

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/25 19:39:17 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/26 15:45:21 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,20 +116,34 @@ void	draw_wall(t_minilibx *mlx, int ray, double t_pix, double b_pix)
 
 void render_wall(t_minilibx *mlx, int ray)
 {
-	double wall_h;
-	double b_pix;
-	double t_pix;
+    double wall_h;
+    double b_pix;
+    double t_pix;
 
-	mlx->ray.distance *= cos(angle_check(mlx->ray.ray_angle - mlx->player.angle));
-	wall_h = (TILE_SIZE / mlx->ray.distance) * ((LENGHT / 2) / tan(mlx->player.fov_rad / 2));
-	b_pix = (WIDTH / 2) + (wall_h / 2);
-	t_pix = (WIDTH / 2) - (wall_h / 2);
-	if (b_pix > WIDTH)
-		b_pix = WIDTH;
-	if (t_pix < 0)
-		t_pix = 0;
-	draw_wall(mlx, ray, t_pix, b_pix);
-	// draw_floor_ceiling(mlx, ray, t_pix, b_pix); // draw the floor and the ceiling
+    // Correct for fish-eye effect by adjusting the ray distance
+    mlx->ray.distance *= cos(angle_check(mlx->ray.ray_angle - mlx->player.angle));
+    
+    // Calculate wall height based on distance and screen projection
+    if (mlx->ray.distance > 0) // Prevent division by zero
+        wall_h = (TILE_SIZE / mlx->ray.distance) * ((LENGHT / 2) / tan(mlx->player.fov_rad / 2));
+    else
+        wall_h = 0;
+
+    // Determine top and bottom pixel positions for the wall slice
+    b_pix = (LENGHT / 2) + (wall_h / 2);
+    t_pix = (LENGHT / 2) - (wall_h / 2);
+
+    // Clamp to screen bounds
+    if (b_pix > LENGHT)
+        b_pix = LENGHT;
+    if (t_pix < 0)
+        t_pix = 0;
+
+    // Draw the wall slice
+    draw_wall(mlx, ray, t_pix, b_pix);
+
+    // Optionally draw the floor and ceiling
+    // draw_floor_ceiling(mlx, ray, t_pix, b_pix);
 }
 
 int unit_circle(double angle, char c)
@@ -250,7 +264,7 @@ void	rays_loop(t_minilibx *mlx)
 
 	mlx->ray.ray_angle = mlx->player.angle - (mlx->player.fov_rad / 2);
 	ray = 0;
-	while (ray <  WIDTH )
+	while (ray <  WIDTH - 1)
 	{
 		mlx->ray.flag = 0;
 		hor_point = get_horizontal(mlx, angle_check(mlx->ray.ray_angle));

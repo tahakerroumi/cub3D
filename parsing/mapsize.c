@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapsize.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:18:34 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 22:13:55 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/28 14:50:26 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	map_size(t_global *global)
 	i = 0;
 	max = 0;
 	tmp = 0;
-	global->map_lenght = ft_doublepointerlen(global->map);
+	global->map_height  = ft_doublepointerlen(global->map);
 	while (global->map[i])
 	{
 		tmp = ft_strlen(global->map[i]);

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/26 19:54:32 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/28 14:50:26 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,23 @@
 
 # include "../parsing/get_next_line.h"
 
-#define	WIDTH 1200
-#define	LENGHT 800
+#define	WIDTH 		800
+#define	LENGHT 		800
 
-#define TILE_SIZE 50
-#define	FOV 60
+#define TILE_SIZE 	50
+#define	FOV 		60
 
-#define W 119
-#define A 97
-#define S 115
-#define D 100
-#define LEFT 65361
-#define RIGHT 65363
+#define W 			119
+#define A 			97
+#define S 			115
+#define D 			100
+#define LEFT 		65361
+#define RIGHT 		65363
+#define	ESC			65307
 
-#define M_PI 3.14159265358979323846
-#define R_SPEED 0.04
-#define P_SPEED 0.10
+#define M_PI		3.14159265358979323846
+#define R_SPEED 	0.04
+#define P_SPEED 	0.10
 
 struct s_global;
 
@@ -125,7 +126,7 @@ typedef struct s_global
 	char	*ea;
 	char	*f;
 	char	*c;
-	int		map_lenght;
+	int		map_height ;
 	int		map_width;
 	int		fr;
 	int		fg;
@@ -170,7 +171,8 @@ void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j);
 void	create_map(t_minilibx *mlx, t_global *data);
 void 	player_finder(t_minilibx *mlx, t_global *data);
 int		key_routine(int keycode, t_minilibx *mlx);
-void    draw_player_view(t_minilibx *mlx);
+// void    draw_player_view(t_minilibx *mlx);
 
+double	angle_check(double	ray);
 
 #endif

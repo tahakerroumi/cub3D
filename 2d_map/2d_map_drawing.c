@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/28 17:09:46 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/28 18:12:01 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ void	draw_player(t_minilibx *mlx)
 	double	ver_distance;
 	double	hor_distance;
 	double	distance;
-	while (i < TILE_SIZE / 10)
+	while (i < TILE_SIZE * 20)
 	{
 		hor_distance = get_horizontal(mlx, angle_check(mlx->ray.ray_angle));
 		ver_distance = get_vertical(mlx, angle_check(mlx->ray.ray_angle));
@@ -209,6 +209,6 @@ void	draw_player(t_minilibx *mlx)
 		// printf("vertical distance = -- > %d\n", (int)ver_distance);
 		draw_ray(mlx,mlx->ray.ray_angle, distance);
 		i++;
-		mlx->ray.ray_angle = angle_check(mlx->ray.ray_angle + (mlx->player.fov_rad / TILE_SIZE * 3));
+		mlx->ray.ray_angle = angle_check(mlx->ray.ray_angle + (mlx->player.fov_rad / (TILE_SIZE * TILE_SIZE)));
 	}
 }

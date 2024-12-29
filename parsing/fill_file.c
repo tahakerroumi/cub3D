@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:43:30 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 05:17:54 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_file/headerfile.h"
+#include "../inc/headerfile.h"
 
 int	fil_otherelements3(char **tmp)
 {

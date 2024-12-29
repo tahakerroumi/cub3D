@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:34:15 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/25 19:32:49 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_file/headerfile.h"
+#include "../inc/headerfile.h"
 
 size_t	ft_countwords(char *s, char c)//add it here
 {

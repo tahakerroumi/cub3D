@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pfree.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:11:41 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 20:21:26 by abakhcha         ###   ########.fr       */
+/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_file/headerfile.h"
+#include "../inc/headerfile.h"
 
 void dbarray_free(char **str1, char **str2, char **str3)
 {

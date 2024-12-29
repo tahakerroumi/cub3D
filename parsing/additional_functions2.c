@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:53:33 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/13 05:17:03 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_file/headerfile.h"
+#include "../inc/headerfile.h"
 
 void	ft_doublepointerfree(char **str)
 {

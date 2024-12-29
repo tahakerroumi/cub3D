@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/28 14:50:26 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/29 17:02:52 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define	WIDTH 		800
 #define	LENGHT 		800
 
-#define TILE_SIZE 	50
+#define TILE_SIZE 	64
 #define	FOV 		60
 
 #define W 			119
@@ -41,7 +41,7 @@
 
 #define M_PI		3.14159265358979323846
 #define R_SPEED 	0.04
-#define P_SPEED 	0.10
+#define P_SPEED 	1
 
 struct s_global;
 
@@ -172,7 +172,20 @@ void	create_map(t_minilibx *mlx, t_global *data);
 void 	player_finder(t_minilibx *mlx, t_global *data);
 int		key_routine(int keycode, t_minilibx *mlx);
 // void    draw_player_view(t_minilibx *mlx);
-
+int unit_circle(double angle, char c);
+int inter_check(float angle, double *inter, double *step, int is_horizon);
+int	key_press(int keycode, void *cub);
+int	key_release(int keycode, void *cub);
 double	angle_check(double	ray);
+void	keys_init(t_minilibx *mlx);
+void player_pos_dir(t_minilibx *mlx, t_global *data);
+double	angle_check(double	ray);
+void	player_type(t_player *player, char c);
+void	my_pixel_put(int x, int y, t_img *img, int color);
+void draw_ray(t_minilibx *mlx, double ray_angle, double distance);
+int	wall_hit(t_minilibx *mlx, double dx, double dy);
+double	get_vertical(t_minilibx *mlx, double ray);
+double	get_horizontal(t_minilibx *mlx, double ray);
+void events(t_minilibx *mlx);
 
 #endif

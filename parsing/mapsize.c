@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:18:34 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/28 14:50:26 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header_file/headerfile.h"
+#include "../inc/headerfile.h"
 
 void	map_size(t_global *global)
 {

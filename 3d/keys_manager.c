@@ -6,35 +6,74 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/29 17:52:45 by tkerroum         ###   ########.fr       */
+/*   Updated: 2024/12/29 18:38:42 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/headerfile.h"
 
-void events(t_minilibx *mlx)
+int	check_wall(t_minilibx *mlx, double px, double py)
 {
+	double new_pos_x = px;
+	double new_pos_y = py;
+	int	x;
+	int	y;
+
     if (mlx->key.move_forward)
     {
-        mlx->player.px += P_SPEED * cos(mlx->player.angle);
-        mlx->player.py += sin(mlx->player.angle) * P_SPEED;
+        new_pos_x += P_SPEED * cos(mlx->player.angle);
+        new_pos_y += sin(mlx->player.angle) * P_SPEED;
     }
     else if (mlx->key.move_backward)
     {
-        mlx->player.px -= P_SPEED * cos(mlx->player.angle);
-        mlx->player.py -= sin(mlx->player.angle) * P_SPEED;
+        new_pos_x -= P_SPEED * cos(mlx->player.angle);
+        new_pos_y -= sin(mlx->player.angle) * P_SPEED;
     }
-
     if (mlx->key.move_left)
     {
-        mlx->player.px -= P_SPEED * sin(mlx->player.angle);
-        mlx->player.py += P_SPEED * cos(mlx->player.angle);
+        new_pos_x -= P_SPEED * sin(mlx->player.angle);
+        new_pos_y += P_SPEED * cos(mlx->player.angle);
     }
     else if (mlx->key.move_right)
     {
-        mlx->player.px += P_SPEED * sin(mlx->player.angle);
-        mlx->player.py -= P_SPEED * cos(mlx->player.angle);
+        new_pos_x += P_SPEED * sin(mlx->player.angle);
+        new_pos_y -= P_SPEED * cos(mlx->player.angle);
     }
+
+	x = floor(new_pos_x / TILE_SIZE);
+	y = floor(new_pos_y / TILE_SIZE); // Corrected from using `new_pos_x` to `new_pos_y`
+
+	if (mlx->data->map[y][x] == '1') // Check if the new position collides with a wall
+		return (0);
+	return (1);
+}
+
+void events(t_minilibx *mlx)
+{
+	if (check_wall(mlx, mlx->player.px, mlx->player.py))
+	{
+    	if (mlx->key.move_forward)
+    	{
+    	    mlx->player.px += P_SPEED * cos(mlx->player.angle);
+    	    mlx->player.py += sin(mlx->player.angle) * P_SPEED;
+    	}
+    	else if (mlx->key.move_backward)
+    	{
+    	    mlx->player.px -= P_SPEED * cos(mlx->player.angle);
+    	    mlx->player.py -= sin(mlx->player.angle) * P_SPEED;
+    	}
+	
+    	if (mlx->key.move_left)
+    	{
+    	    mlx->player.px -= P_SPEED * sin(mlx->player.angle);
+    	    mlx->player.py += P_SPEED * cos(mlx->player.angle);
+    	}
+    	else if (mlx->key.move_right)
+    	{
+    	    mlx->player.px += P_SPEED * sin(mlx->player.angle);
+    	    mlx->player.py -= P_SPEED * cos(mlx->player.angle);
+    	}
+	}
     if (mlx->key.rotate_left)
     {
         mlx->player.angle -= R_SPEED;

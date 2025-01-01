@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 17:02:52 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/01 01:45:51 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define	WIDTH 		800
 #define	LENGHT 		800
 
-#define TILE_SIZE 	64
+#define TILE_SIZE 	44
 #define	FOV 		60
 
 #define W 			119
@@ -40,8 +40,8 @@
 #define	ESC			65307
 
 #define M_PI		3.14159265358979323846
-#define R_SPEED 	0.04
-#define P_SPEED 	1
+#define R_SPEED 	0.004
+#define P_SPEED 	0.2
 
 struct s_global;
 

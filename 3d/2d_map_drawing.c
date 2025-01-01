@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/29 16:29:06 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/01 02:01:45 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int unit_circle(double angle, char c)
 	if (c == 'x')
 	{
 		if (angle > 0 && angle < M_PI)
-		return (1);
+			return (1);
 	}
 	else if (c == 'y')
 	{
 		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
-		return (1);
+			return (1);
 	}
 	return (0);
 }
@@ -67,14 +67,14 @@ void	draw_player(t_minilibx *mlx)
 
 	/*drawing the player pov*/ 
 
-	mlx->ray.ray_angle = mlx->player.angle - (mlx->player.fov_rad / 2);
+	mlx->ray.ray_angle = angle_check(mlx->player.angle - (mlx->player.fov_rad / 2));
 	i = 0;
 	double	ver_distance;
 	double	hor_distance;
 	while (i < WIDTH)
 	{
-		hor_distance = get_horizontal(mlx, angle_check(mlx->ray.ray_angle));
-		ver_distance = get_vertical(mlx, angle_check(mlx->ray.ray_angle));
+		hor_distance = get_horizontal(mlx, (mlx->ray.ray_angle));
+		ver_distance = get_vertical(mlx, (mlx->ray.ray_angle));
 		if (hor_distance < ver_distance)
 			draw_ray(mlx,mlx->ray.ray_angle, hor_distance);
 		else

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/01 01:45:51 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/01 03:09:15 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "../parsing/get_next_line.h"
 
 #define	WIDTH 		800
-#define	LENGHT 		800
+#define	HEIGHT 		800
 
 #define TILE_SIZE 	44
 #define	FOV 		60
@@ -77,7 +77,7 @@ typedef struct	s_img
 	void	*img;
 	char	*pixel_ptr;
 	int		bits_per_pixel;
-	int		line_lenght;
+	int		line_HEIGHT;
 	int		endian;
 }				t_img;
 

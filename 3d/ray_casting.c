@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:47:17 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/01 01:42:57 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/01 02:05:35 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ double	get_vertical(t_minilibx *mlx, double ray)
 		dy *= -1;
 	while (wall_hit(mlx, nearest_x - pixel, nearest_y))
 	{
-		// my_pixel_put((int)nearest_x, (int)nearest_y, &mlx->img, 0x0000FF);
 		nearest_x += dx;
 		nearest_y += dy;
 	}
@@ -69,7 +68,6 @@ double	get_horizontal(t_minilibx *mlx, double ray)
 		dx *= -1;
 	while (wall_hit(mlx, nearest_x, nearest_y - pixel))
 	{
-		// my_pixel_put((int)nearest_x,  (int)nearest_y, &mlx->img, 0x0000FF);
 		nearest_x += dx;
 		nearest_y += dy;
 	}

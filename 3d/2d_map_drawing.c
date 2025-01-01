@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/01 02:01:45 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/01 03:21:19 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,32 @@ int inter_check(float angle, double *inter, double *step, int is_horizon)
 	return (1);
 }
 
+void draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
+{
+	while (t_pix < b_pix)
+		my_pixel_put(ray, t_pix++, &mlx->img, 0xffd83b);
+}
+
+void	draw_walls(t_minilibx *mlx, int ray)
+{
+	double wall_h;
+	double b_pix;
+	double t_pix;
+
+	mlx->ray.distance *= cos(angle_check(mlx->ray.ray_angle - mlx->player.angle));
+	wall_h = (TILE_SIZE / mlx->ray.distance) * ((WIDTH / 2) / tan(mlx->player.fov_rad / 2));
+	b_pix = (HEIGHT / 2) + (wall_h / 2);
+	t_pix = (HEIGHT / 2) - (wall_h / 2);
+	if (b_pix > HEIGHT)
+		b_pix = HEIGHT;
+	if (t_pix < 0)
+		t_pix = 0;
+	draw_wall(mlx, ray, t_pix, b_pix);
+}
+
 void	draw_player(t_minilibx *mlx)
 {
 	int i;
-	int j;
-
-	i = -1;
-	/*    drawing the player   */ 
-	create_map(mlx, mlx->data);
-	while (++i < TILE_SIZE / 5)
-	{
-		j = -1;
-		while (++j < TILE_SIZE / 5)
-				my_pixel_put(mlx->player.px + j, mlx->player.py + i, &mlx->img, 0x2986cc);
-	}
-
-	/*drawing the player pov*/ 
 
 	mlx->ray.ray_angle = angle_check(mlx->player.angle - (mlx->player.fov_rad / 2));
 	i = 0;
@@ -76,9 +86,10 @@ void	draw_player(t_minilibx *mlx)
 		hor_distance = get_horizontal(mlx, (mlx->ray.ray_angle));
 		ver_distance = get_vertical(mlx, (mlx->ray.ray_angle));
 		if (hor_distance < ver_distance)
-			draw_ray(mlx,mlx->ray.ray_angle, hor_distance);
+			mlx->ray.distance = hor_distance;
 		else
-			draw_ray(mlx,mlx->ray.ray_angle, ver_distance);
+			mlx->ray.distance = ver_distance;
+		draw_walls(mlx, i);
 		i++;
 		mlx->ray.ray_angle = angle_check(mlx->ray.ray_angle + (mlx->player.fov_rad / (WIDTH)));
 	}

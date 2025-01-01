@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/29 18:38:42 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/01 02:05:50 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	check_wall(t_minilibx *mlx, double px, double py)
     }
 
 	x = floor(new_pos_x / TILE_SIZE);
-	y = floor(new_pos_y / TILE_SIZE); // Corrected from using `new_pos_x` to `new_pos_y`
+	y = floor(new_pos_y / TILE_SIZE);
 
-	if (mlx->data->map[y][x] == '1') // Check if the new position collides with a wall
+	if (mlx->data->map[y][x] == '1')
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2024/12/29 16:41:01 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/01 03:24:19 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ int	program_routine(void	*cub3d)
 
 	mlx = (t_minilibx *)cub3d;
 	events(mlx);
-	// create_map(mlx, mlx->data);
 	draw_player(mlx);
 	mlx_put_image_to_window(mlx->intro, mlx->window, mlx->img.img, 0, 0);
-	// mlx_destroy_image(mlx->intro, mlx->img.img);
-	// mlx_destroy_image(mlx->intro, mlx->img.img);
-	// rays_loop(mlx);
-	// mlx_destroy_image(mlx->intro, mlx->img.img);
+	mlx_destroy_image(mlx->intro, mlx->img.img);
+	mlx->img.img = mlx_new_image(mlx->intro,WIDTH, HEIGHT);
 	return (0);
 }
 
@@ -41,11 +38,11 @@ int	mlx_intro(t_minilibx *mlx, t_global *global)
 	mlx->intro = mlx_init();
 	if (!mlx->intro)
 		return (1);
-	mlx->window = mlx_new_window(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_height, "cub3d");
-	mlx->img.img = mlx_new_image(mlx->intro, TILE_SIZE * global->map_width, TILE_SIZE * global->map_height );
+	mlx->window = mlx_new_window(mlx->intro, WIDTH, HEIGHT, "cub3d");
+	mlx->img.img = mlx_new_image(mlx->intro, WIDTH, HEIGHT);
 	if (!mlx->img.img)
 		return (1);
-	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_lenght, &mlx->img.endian);
+	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_HEIGHT, &mlx->img.endian);
 	player_pos_dir(mlx, global);
 	keys_init(mlx);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/04 18:13:23 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/05 16:07:57 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,45 +29,67 @@ int	comparaison2(char *str)
 	return (1);
 }
 
-char	**doubleptr_strim2(char **str, char **map, int end, int start)
+char **doubleptr_strim2(char **str, char **map, int end, int start)
 {
-	int	i;
+    int i = 0;
 
-	i = -1;
-	while (start <= end)
-	{
-		map[i++] = ft_strdup(str[start]);
-		start++;
-	}
-	map[i] = NULL;
-	return (map);
+    while (start <= end)
+    {
+        map[i] = ft_strdup(str[start]); // Copy the string
+        if (!map[i])                    // Check for strdup failure
+        {
+            while (i-- > 0)
+                free(map[i]);
+            free(map);
+            return (NULL);
+        }
+        start++;
+        i++;
+    }
+    map[i] = NULL; // Properly terminate the array
+    return (map);
 }
 
-
-char	**doubleptr_strim(char **str, int end)
+char **doubleptr_strim(char **str, int end)
 {
-	char	**map;
-	int		i;
-	int		size;
-	int		start;
+    char **map;
+    int i = 0, size = 0, start = 0;
 
-	i = 0;
-	size = 0;
-	start = 0;
-	while (str[i++] && (comparaison2(str[i]) == -1
-			|| ft_strncmp
-			(ft_strtrim(str[i]), "\0", 2) == 0))
-		size++;
-	start = size;
-	if (str[end] == NULL)
-		end--;
-	i = end;
-	while (end > start && ft_strncmp(ft_strtrim(str[i--]), "\0", 2) == 0)
-		end--;
-	map = malloc((end - start + 2) * sizeof(char *));
-	if (!map)
-		return (NULL);
-	return (doubleptr_strim2(str, map, end, start));
+    if (!str || end < 0) // Validate inputs
+        return (NULL);
+
+    // Calculate the start index
+    while (str[i] && (comparaison2(str[i]) == -1 || 
+           ft_strncmp(ft_strtrim(str[i]), "\0", 2) == 0))
+    {
+        size++;
+        i++;
+    }
+    start = size;
+
+    // Adjust the end index
+    if (str[end] == NULL)
+        end--;
+    while (end > start)
+    {
+        char *trimmed = ft_strtrim(str[end]);
+        if (ft_strncmp(trimmed, "\0", 2) != 0)
+        {
+            free(trimmed);
+            break;
+        }
+        free(trimmed);
+        end--;
+    }
+
+    // Allocate memory for the new array
+    if (end < start)
+        return (NULL); // No valid strings to copy
+    map = malloc((end - start + 2) * sizeof(char *));
+    if (!map)
+        return (NULL);
+
+    return (doubleptr_strim2(str, map, end, start));
 }
 
 int	comparaison(char *str)

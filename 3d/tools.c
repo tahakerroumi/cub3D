@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:48:22 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/01 03:10:56 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:46:40 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void player_pos_dir(t_minilibx *mlx, t_global *data)
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W'
 				|| data->map[i][j] == 'E')
 			{
-				mlx->data->map_x = j;
-				mlx->data->map_y = i;
 				player_type(&mlx->player, data->map[i][j]);
 				mlx->player.px = j * TILE_SIZE + (TILE_SIZE / 2);
 				mlx->player.py = i * TILE_SIZE + (TILE_SIZE / 2);
@@ -65,7 +63,7 @@ void	my_pixel_put(int x, int y, t_img *img, int color)
 
 	if (x < 0 || y >= HEIGHT || y < 0 || x >= WIDTH)
 		return ;
-	offset = (y * img->line_HEIGHT) + (x * (img->bits_per_pixel / 8));
+	offset = (y * img->line_height) + (x * (img->bits_per_pixel / 8));
     *(int *)(img->pixel_ptr + offset) = color;
 }
 

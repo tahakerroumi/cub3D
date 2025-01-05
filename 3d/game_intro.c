@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/05 11:12:09 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:30:36 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	program_routine(void	*cub3d)
 
 	mlx = (t_minilibx *)cub3d;
 	events(mlx);
-	draw_player(mlx);
+	rays_casting(mlx);
 	mlx_put_image_to_window(mlx->intro, mlx->window, mlx->img.img, 0, 0);
 	mlx_destroy_image(mlx->intro, mlx->img.img);
 	mlx->img.img = mlx_new_image(mlx->intro,WIDTH, HEIGHT);
@@ -36,6 +36,7 @@ int	end_program(void *cub3d)
 		mlx->window);
 	mlx_destroy_display(mlx->intro);
 	free(mlx->intro);
+	// before exiting we should free what should be freed.
 	exit(1);	
 }
 
@@ -57,7 +58,7 @@ int	mlx_intro(t_minilibx *mlx, t_global *global)
 	mlx->img.img = mlx_new_image(mlx->intro, WIDTH, HEIGHT);
 	if (!mlx->img.img)
 		return (1);
-	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_HEIGHT, &mlx->img.endian);
+	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_height, &mlx->img.endian);
 	player_pos_dir(mlx, global);
 	keys_init(mlx);
 	return (0);

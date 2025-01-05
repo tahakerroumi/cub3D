@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/04 14:10:18 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:42:02 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,24 @@ void draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
 		my_pixel_put(ray, t_pix++, &mlx->img, 0xffd83b);
 }
 
-void draw_floor_ceiling(t_minilibx *mlx, int ray, int t_pix, int b_pix)
+void	draw_floor(t_minilibx *mlx, int ray, int b_pix)
 {
- int  i;
-//  int  c;
+	int color;
 
-	i = b_pix;
-	while (i < HEIGHT)
-		my_pixel_put(ray, i++, &mlx->img, 1770211);
+	color = (mlx->data->floor_red << 16) | (mlx->data->floor_green << 8) | mlx->data->floor_blue;
+	while (b_pix < HEIGHT)
+		my_pixel_put(ray, b_pix++, &mlx->img, color);
+}
+
+void	draw_ceiling(t_minilibx *mlx, int ray, int t_pix)
+{
+	int i;
+	int	color;
+
+	color = (mlx->data->ceiling_red << 16) | (mlx->data->ceiling_green << 8) | mlx->data->ceiling_blue;
 	i = 0;
 	while (i < t_pix)
-		my_pixel_put(ray, i++, &mlx->img, 4895121);
+		my_pixel_put(ray, i++, &mlx->img, color);
 }
 
 void	draw_walls(t_minilibx *mlx, int ray)
@@ -84,10 +91,11 @@ void	draw_walls(t_minilibx *mlx, int ray)
 	if (t_pix < 0)
 		t_pix = 0;
 	draw_wall(mlx, ray, t_pix, b_pix);
-	draw_floor_ceiling(mlx, ray, t_pix, b_pix);
+	draw_floor(mlx, ray, b_pix);
+	draw_ceiling(mlx, ray, t_pix);
 }
 
-void	draw_player(t_minilibx *mlx)
+void	rays_casting(t_minilibx *mlx)
 {
 	int i;
 

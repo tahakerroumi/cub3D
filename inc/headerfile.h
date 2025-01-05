@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/05 11:08:42 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:14:45 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ typedef struct	s_player
 	double	px; // position x in pixels (in 2d adding the tiles)
 	double	py; // position y in pixels (in 2d adding the tiles)
 	double	angle; // angle that defines the direction of the player view
-	double	dir_x;
-	double	dir_y;
 	double	fov_rad; // field of view but in radian
 }				t_player;
 
@@ -77,7 +75,7 @@ typedef struct	s_img
 	void	*img;
 	char	*pixel_ptr;
 	int		bits_per_pixel;
-	int		line_HEIGHT;
+	int		line_height;
 	int		endian;
 }				t_img;
 
@@ -92,17 +90,6 @@ typedef struct	s_minilibx
 	t_key_flags		key;
 }				t_minilibx;
 
-int		checkextention(char *av);
-void	error_print(char *str);
-char	*ft_substr(char *s, int start, size_t len);
-int		ft_strncmp(char *s1, char *s2, size_t n);
-char	**ft_split(char *s, char c);
-char	*ft_strtrim(char *s1);
-size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
-char	*ft_strdup(char *s1);
-int		ft_atoi(char *str);
-char	**doublepointercopy(char **map);
-char	**map_to_doublepointer(char *av);
 
 typedef struct s_elements
 {
@@ -118,8 +105,6 @@ typedef struct s_elements
 typedef struct s_global
 {
 	char	**map;
-	int		map_x; // player x position in the map
-	int		map_y; // player y position in the map
 	char	*no;
 	char	*so;
 	char	*we;
@@ -128,16 +113,26 @@ typedef struct s_global
 	char	*c;
 	int		map_height ;
 	int		map_width;
-	int		fr;
-	int		fg;
-	int		fb;
-	int		cr;
-	int		cg;
-	int		cb;
+	int		floor_red;
+	int		floor_green;
+	int		floor_blue;
+	int		ceiling_red;
+	int		ceiling_green;
+	int		ceiling_blue;
 }	t_global;
 
+int		checkextention(char *av);
+void	error_print(char *str);
+char	*ft_substr(char *s, int start, size_t len);
+int		ft_strncmp(char *s1, char *s2, size_t n);
+char	**ft_split(char *s, char c);
+char	*ft_strtrim(char *s1);
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
+char	*ft_strdup(char *s1);
+int		ft_atoi(char *str);
+char	**doublepointercopy(char **map);
+char	**map_to_doublepointer(char *av);
 
-// void	fill_elements(char **str, t_elements **elements, int type);
 int		check_elements(char **map, t_elements **elements);
 int		comparaison(char *str);
 int		ft_doublepointerlen(char **str);
@@ -164,14 +159,15 @@ void	store_rgb(t_global *global);
 /*game initialization*/
 void	start_game(t_minilibx *mlx);
 int		mlx_intro(t_minilibx *mlx, t_global *global);
-void 	draw_player(t_minilibx *mlx);
+void	rays_casting(t_minilibx *mlx);
+
 void	my_pixel_put(int x, int y, t_img *img, int color);
 void	draw_tile(int i, int j, t_img *img, int color);
 void	pixel_manager(t_minilibx *mlx, t_global *data, int i, int j);
 void	create_map(t_minilibx *mlx, t_global *data);
 void 	player_finder(t_minilibx *mlx, t_global *data);
 int		key_routine(int keycode, t_minilibx *mlx);
-// void    draw_player_view(t_minilibx *mlx);
+
 int unit_circle(double angle, char c);
 int inter_check(float angle, double *inter, double *step, int is_horizon);
 int	key_press(int keycode, void *cub);

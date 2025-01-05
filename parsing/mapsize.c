@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:18:34 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:14:45 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	store_rgb(t_global *global)
 	char	**tmp;
 
 	tmp = ft_split(global->c, ',');
-	global->cr = ft_atoi(tmp[0]);
-	global->cg = ft_atoi(tmp[1]);
-	global->cb = ft_atoi(tmp[2]);
+	global->ceiling_red = ft_atoi(tmp[0]);
+	global->ceiling_green = ft_atoi(tmp[1]);
+	global->ceiling_blue = ft_atoi(tmp[2]);
 	ft_doublepointerfree(tmp);
 	tmp = ft_split(global->f, ',');
-	global->fr = ft_atoi(tmp[0]);
-	global->fg = ft_atoi(tmp[1]);
-	global->fb = ft_atoi(tmp[2]);
+	global->floor_red = ft_atoi(tmp[0]);
+	global->floor_green = ft_atoi(tmp[1]);
+	global->floor_blue = ft_atoi(tmp[2]);
 	ft_doublepointerfree(tmp);
 }

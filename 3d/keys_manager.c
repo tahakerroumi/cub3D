@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/01 02:05:50 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:08:24 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ void events(t_minilibx *mlx)
 }
 
 
-int	key_press(int keycode, void *cub)
+int	key_press(int keycode, void *cub3d)
 {
 	t_minilibx *mlx;
 
-	mlx = (t_minilibx *)cub;
+	mlx = (t_minilibx *)cub3d;
 	if (keycode == W)
 		mlx->key.move_forward = 1;
 	else if (keycode == S)
@@ -106,6 +106,8 @@ int	key_press(int keycode, void *cub)
 		mlx->key.rotate_left = 1;
 	else if (keycode == RIGHT)
 		mlx->key.rotate_right = 1;
+	else if (keycode == ESC)
+		end_program(cub3d);
 	return (0);
 }
 

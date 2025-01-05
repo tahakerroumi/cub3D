@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:47:17 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/01 02:05:35 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/01 04:12:03 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ int	wall_hit(t_minilibx *mlx, double dx, double dy)
 {
 	int x;
 	int y;
-	if (dx < 0 || dy < 0 || dy >= mlx->data->map_height * TILE_SIZE || dx >= mlx->data->map_width * TILE_SIZE )
+	if (dx < 0 || dy < 0 || dy >= mlx->data->map_height * TILE_SIZE || dx >= mlx->data->map_width * TILE_SIZE)
 		return (0);
 	x = floor(dx / TILE_SIZE);
 	y = floor(dy / TILE_SIZE);
 	if (x < 0 || y < 0 || y >= mlx->data->map_height || x >= mlx->data->map_width)
-        return (0); 
-	
+        return (0);
 	if (mlx->data->map[y][x] == '1')
 		return (0);
 	return (1);

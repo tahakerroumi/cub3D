@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/01 03:21:19 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/04 14:10:18 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,19 @@ void draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
 		my_pixel_put(ray, t_pix++, &mlx->img, 0xffd83b);
 }
 
+void draw_floor_ceiling(t_minilibx *mlx, int ray, int t_pix, int b_pix)
+{
+ int  i;
+//  int  c;
+
+	i = b_pix;
+	while (i < HEIGHT)
+		my_pixel_put(ray, i++, &mlx->img, 1770211);
+	i = 0;
+	while (i < t_pix)
+		my_pixel_put(ray, i++, &mlx->img, 4895121);
+}
+
 void	draw_walls(t_minilibx *mlx, int ray)
 {
 	double wall_h;
@@ -71,6 +84,7 @@ void	draw_walls(t_minilibx *mlx, int ray)
 	if (t_pix < 0)
 		t_pix = 0;
 	draw_wall(mlx, ray, t_pix, b_pix);
+	draw_floor_ceiling(mlx, ray, t_pix, b_pix);
 }
 
 void	draw_player(t_minilibx *mlx)

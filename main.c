@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:13:23 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	**doubleptr_strim2(char **str, char **map, int end, int start)
 	map[i] = NULL;
 	return (map);
 }
+
 
 char	**doubleptr_strim(char **str, int end)
 {

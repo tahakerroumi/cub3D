@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/01 03:09:15 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/05 11:08:42 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # include "../parsing/get_next_line.h"
 
-#define	WIDTH 		800
+#define	WIDTH 		1200
 #define	HEIGHT 		800
 
 #define TILE_SIZE 	44
@@ -40,8 +40,8 @@
 #define	ESC			65307
 
 #define M_PI		3.14159265358979323846
-#define R_SPEED 	0.004
-#define P_SPEED 	0.2
+#define R_SPEED 	0.009
+#define P_SPEED 	0.4
 
 struct s_global;
 
@@ -187,5 +187,6 @@ int	wall_hit(t_minilibx *mlx, double dx, double dy);
 double	get_vertical(t_minilibx *mlx, double ray);
 double	get_horizontal(t_minilibx *mlx, double ray);
 void events(t_minilibx *mlx);
+int	end_program(void *cub3d);
 
 #endif

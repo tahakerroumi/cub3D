@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/05 14:14:45 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:38:53 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # include "../parsing/get_next_line.h"
 
-#define	WIDTH 		1200
-#define	HEIGHT 		800
+#define	WIDTH 		2000
+#define	HEIGHT 		1200
 
 #define TILE_SIZE 	44
 #define	FOV 		60
@@ -40,8 +40,8 @@
 #define	ESC			65307
 
 #define M_PI		3.14159265358979323846
-#define R_SPEED 	0.009
-#define P_SPEED 	0.4
+#define R_SPEED 	0.05
+#define P_SPEED 	2
 
 struct s_global;
 
@@ -111,7 +111,7 @@ typedef struct s_global
 	char	*ea;
 	char	*f;
 	char	*c;
-	int		map_height ;
+	int		map_height;
 	int		map_width;
 	int		floor_red;
 	int		floor_green;

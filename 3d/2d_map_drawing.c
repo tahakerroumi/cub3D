@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/05 14:42:02 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:44:09 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int inter_check(float angle, double *inter, double *step, int is_horizon)
 void draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
 {
 	while (t_pix < b_pix)
-		my_pixel_put(ray, t_pix++, &mlx->img, 0xffd83b);
+		my_pixel_put(ray, t_pix++, &mlx->img, 0xa981ff);
 }
 
 void	draw_floor(t_minilibx *mlx, int ray, int b_pix)

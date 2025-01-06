@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/05 12:30:36 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:26:45 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ int	mlx_intro(t_minilibx *mlx, t_global *global)
 	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_height, &mlx->img.endian);
 	player_pos_dir(mlx, global);
 	keys_init(mlx);
+	printf("-->%d\n\n", mlx->data->map_width);
+    printf("-->%d\n\n", mlx->data->map_height);
 	return (0);
 }

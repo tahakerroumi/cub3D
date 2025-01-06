@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/05 11:08:24 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:01:23 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void events(t_minilibx *mlx)
     	if (mlx->key.move_forward)
     	{
     	    mlx->player.px += P_SPEED * cos(mlx->player.angle);
-    	    mlx->player.py += sin(mlx->player.angle) * P_SPEED;
+    	    mlx->player.py += P_SPEED * sin(mlx->player.angle);
     	}
     	else if (mlx->key.move_backward)
     	{
     	    mlx->player.px -= P_SPEED * cos(mlx->player.angle);
-    	    mlx->player.py -= sin(mlx->player.angle) * P_SPEED;
+    	    mlx->player.py -= P_SPEED * sin(mlx->player.angle);
     	}
 	
     	if (mlx->key.move_left)

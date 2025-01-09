@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/09 13:22:24 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:04:15 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct	s_ray
 	double	ray_angle;
 	double	distance;
 	int		flag;
+	double	wall_px;
+	double	wall_py;
 }				t_ray;
 
 typedef struct	s_key_flags

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:47:17 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/07 16:29:34 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:05:51 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ double	get_vertical(t_minilibx *mlx, double ray)
 	{
 		nearest_x += dx;
 		nearest_y += dy;
+		mlx->ray.wall_px = nearest_x;
+		mlx->ray.wall_py = nearest_y;
 	}
 	return (sqrt(pow(nearest_x - mlx->player.px, 2) + pow(nearest_y - mlx->player.py, 2)));
 }
@@ -72,6 +74,8 @@ double	get_horizontal(t_minilibx *mlx, double ray)
 	{
 		nearest_x += dx;
 		nearest_y += dy;
+		mlx->ray.wall_px = nearest_x;
+		mlx->ray.wall_py = nearest_y;
 	}
 	return (sqrt(pow(nearest_x - mlx->player.px, 2) + pow(nearest_y - mlx->player.py, 2)));
 }

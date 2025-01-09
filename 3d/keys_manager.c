@@ -6,11 +6,21 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/06 18:01:23 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:52:50 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/headerfile.h"
+
+int	safe_place(char **map, int x, int y)
+{
+	if (map[y][x] == '0')
+		return (1);
+	if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'W'
+		|| map[y][x] == 'E')
+		return (1);
+	return (0);
+}
 
 int	check_wall(t_minilibx *mlx, double px, double py)
 {
@@ -39,13 +49,9 @@ int	check_wall(t_minilibx *mlx, double px, double py)
         new_pos_x += P_SPEED * sin(mlx->player.angle);
         new_pos_y -= P_SPEED * cos(mlx->player.angle);
     }
-
 	x = floor(new_pos_x / TILE_SIZE);
 	y = floor(new_pos_y / TILE_SIZE);
-
-	if (mlx->data->map[y][x] == '1')
-		return (0);
-	return (1);
+	return (safe_place(mlx->data->map, x, y));
 }
 
 void events(t_minilibx *mlx)

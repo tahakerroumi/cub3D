@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/09 13:24:35 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:30:39 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ int	main(int ac, char **av)
 	global = (t_global *)calloc(1, sizeof(t_global));
 	if (global == NULL)
 		error_print("Failed to allocate memory");
-	mlx.data = global;
 	pars(global, ac, av);
 	if (mlx_intro(&mlx, global))
 		return (free(global),0);

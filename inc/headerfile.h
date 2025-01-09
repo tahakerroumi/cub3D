@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/09 14:04:15 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:33:34 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define	WIDTH 		1000
 #define	HEIGHT 		800
 
-#define TILE_SIZE 	44
+#define TILE_SIZE 	64
 #define	FOV 		60
 
 #define W 			119

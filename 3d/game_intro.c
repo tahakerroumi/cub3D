@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/07 16:24:58 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:29:37 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	start_game(t_minilibx *mlx)
 
 int	mlx_intro(t_minilibx *mlx, t_global *global)
 {
+	mlx->data = global;
 	mlx->intro = mlx_init();
 	if (!mlx->intro)
 		return (1);

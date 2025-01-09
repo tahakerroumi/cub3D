@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/06 15:44:09 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:20:07 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,15 @@ void	rays_casting(t_minilibx *mlx)
 		hor_distance = get_horizontal(mlx, (mlx->ray.ray_angle));
 		ver_distance = get_vertical(mlx, (mlx->ray.ray_angle));
 		if (hor_distance < ver_distance)
+		{
 			mlx->ray.distance = hor_distance;
+			mlx->ray.flag = 0;
+		}
 		else
+		{
 			mlx->ray.distance = ver_distance;
+			mlx->ray.flag = 1;
+		}
 		draw_walls(mlx, i);
 		i++;
 		mlx->ray.ray_angle = angle_check(mlx->ray.ray_angle + (mlx->player.fov_rad / (WIDTH)));

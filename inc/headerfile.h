@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   headerfile.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/09 17:33:34 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:51:18 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # include "../parsing/get_next_line.h"
 
-#define	WIDTH 		1000
+#define	WIDTH 		800
 #define	HEIGHT 		800
 
 #define TILE_SIZE 	64
@@ -68,17 +68,30 @@ typedef struct	s_player
 {
 	double	px; // position x in pixels (in 2d adding the tiles)
 	double	py; // position y in pixels (in 2d adding the tiles)
-	double	angle; // angle that defines the direction of the player view
+	double	angle; // angle that defines the direction of the player view 
 	double	fov_rad; // field of view but in radian
 }				t_player;
+
+// typedef struct	s_img
+// {
+// 	void	*img;
+// 	char	*pixel_ptr;
+// 	int		bits_per_pixel;
+// 	int		line_height;
+// 	int		endian;
+// }				t_img;
 
 typedef struct	s_img
 {
 	void	*img;
 	char	*pixel_ptr;
 	int		bits_per_pixel;
-	int		line_height;
+	int		line_length;
 	int		endian;
+	char	*addr;
+	int		line_height;
+	int		width;
+	int		height;
 }				t_img;
 
 typedef struct	s_minilibx
@@ -90,6 +103,11 @@ typedef struct	s_minilibx
 	struct s_global	*data;
 	t_ray			ray;
 	t_key_flags		key;
+/***********************************/
+	t_img			*no_img;//added
+	t_img			*so_img;//added
+	t_img			*ea_img;//added
+	t_img			*we_img;//added
 }				t_minilibx;
 
 
@@ -186,5 +204,6 @@ double	get_vertical(t_minilibx *mlx, double ray);
 double	get_horizontal(t_minilibx *mlx, double ray);
 void events(t_minilibx *mlx);
 int	end_program(void *cub3d);
+t_img	*new_img(t_minilibx *data, char *path);
 
 #endif

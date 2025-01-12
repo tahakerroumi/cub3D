@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   2d_map_drawing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/09 18:10:56 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/12 16:05:59 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,53 @@ int inter_check(float angle, double *inter, double *step, int is_horizon)
 	return (1);
 }
 
+// void draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
+// {
+//     mlx->ea_img = new_img(mlx, mlx->data->ea);  // Load the texture image
+
+//     while (t_pix < b_pix)
+//     {
+//         // Calculate the texture coordinates for the current pixel
+//         int tex_y = (int)((t_pix - (HEIGHT / 2 - (b_pix - t_pix) / 2)) * mlx->ea_img.height / (b_pix - t_pix));
+
+//         // Get the color from the texture at the calculated coordinates
+//         int color = mlx->ea_img.addr[tex_y * mlx->img.bits_per_pixel / 4 + tex_x];
+
+//         // Draw the pixel on the screen
+//         my_pixel_put(ray, t_pix++, &mlx->img, color);  // Use the correct image and color
+//     }
+// }
+
+double	map( double max, double maxwh, double p)
+{
+	return (((p / maxwh) * max)  );
+}
+
+unsigned int	get_pixel_put(int x, int y, t_img *img)
+{
+	int	offset;
+
+	if (x < 0 || y >= img->height || y < 0 || x >= img->width)
+		return 0;
+	offset = (y * img->line_length) + (x * (img->bits_per_pixel / 8));
+	if ( offset < 0)
+		return 0;
+    return   *(unsigned int *)(img->addr + offset);
+}
+
 void draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
 {
+	int x, y;
+	int tot = b_pix - t_pix ;
+	int i =0;
+	x = map(mlx->ea_img->width ,WIDTH, ray  );
+	
 	while (t_pix < b_pix)
-		my_pixel_put(ray, t_pix++, &mlx->img, 0xa981ff);
+	{
+		y = map(mlx->ea_img->height , tot ,i++);
+		my_pixel_put(ray, t_pix++, &mlx->img, get_pixel_put(x, y, mlx->ea_img));
+		// mlx_put_image_to_window(mlx->intro, mlx->window, mlx->ea_img->img, 0, 0);
+	}
 }
 
 void	draw_floor(t_minilibx *mlx, int ray, int b_pix)
@@ -86,6 +129,7 @@ void	draw_walls(t_minilibx *mlx, int ray)
 	wall_h = (TILE_SIZE / mlx->ray.distance) * ((WIDTH / 2) / tan(mlx->player.fov_rad / 2));
 	b_pix = (HEIGHT / 2) + (wall_h / 2);
 	t_pix = (HEIGHT / 2) - (wall_h / 2);
+
 	if (b_pix > HEIGHT)
 		b_pix = HEIGHT;
 	if (t_pix < 0)
@@ -103,6 +147,7 @@ void	rays_casting(t_minilibx *mlx)
 	i = 0;
 	double	ver_distance;
 	double	hor_distance;
+	
 	while (i < WIDTH)
 	{
 		hor_distance = get_horizontal(mlx, (mlx->ray.ray_angle));
@@ -110,11 +155,13 @@ void	rays_casting(t_minilibx *mlx)
 		if (hor_distance < ver_distance)
 		{
 			mlx->ray.distance = hor_distance;
+			get_horizontal(mlx, (mlx->ray.ray_angle));
 			mlx->ray.flag = 0;
 		}
 		else
 		{
 			mlx->ray.distance = ver_distance;
+			get_vertical(mlx, (mlx->ray.ray_angle));
 			mlx->ray.flag = 1;
 		}
 		draw_walls(mlx, i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:48:22 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/09 17:40:56 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:57:48 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,16 @@ void	my_pixel_put(int x, int y, t_img *img, int color)
 	if (x < 0 || y >= HEIGHT || y < 0 || x >= WIDTH)
 		return ;
 	offset = (y * img->line_height) + (x * (img->bits_per_pixel / 8));
-    *(int *)(img->pixel_ptr + offset) = color;
+    *(unsigned int *)(img->pixel_ptr + offset) = color;
 }
+
 
 void draw_ray(t_minilibx *mlx, double ray_angle, double distance)
 {
     int x_start = mlx->player.px;
     int y_start = mlx->player.py;
 
-	int i = 0;
+	int i = 0; 
     while (i <= distance)
     {
 		my_pixel_put(x_start + (i * cos(ray_angle)),  y_start + (i * sin(ray_angle)), &mlx->img, 0xFFFFFF);

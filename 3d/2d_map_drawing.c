@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/13 16:29:29 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:57:04 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,16 @@ unsigned int	get_pixel_put(int x, int y, t_img *img)
 }
 float    get_xcord (t_minilibx *mlx)
 {
-   if (mlx->ray.flag == 1)
-      return (fmodf(mlx->ray.wall_py * (64 / TILE_SIZE), 64));
-   return (fmodf(mlx->ray.wall_px  * (64 / TILE_SIZE), 64));
+	int x = 0;
+//    if (mlx->ray.flag == 1)
+//       return (fmodf(mlx->ray.wall_py * (64 / TILE_SIZE), 64));
+//    return (fmodf(mlx->ray.wall_px  * (64 / TILE_SIZE), 64));
+	if(mlx->ray.flag)
+		x = (int)mlx->ray.wall_py % 64;
+	else
+		x = (int)mlx->ray.wall_px % 64;
+	return x;
 }
-
-
 
 void draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
 {

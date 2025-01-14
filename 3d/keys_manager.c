@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/09 17:52:50 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:30:58 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,21 @@ int	safe_place(char **map, int x, int y)
 	return (0);
 }
 
-int	check_wall(t_minilibx *mlx, double px, double py)
+int check_wall(t_minilibx *mlx, double px, double py)
 {
-	double new_pos_x = px;
-	double new_pos_y = py;
-	int	x;
-	int	y;
+    double new_pos_x = px;
+    double new_pos_y = py;
+    int x, y;
 
     if (mlx->key.move_forward)
     {
         new_pos_x += P_SPEED * cos(mlx->player.angle);
-        new_pos_y += sin(mlx->player.angle) * P_SPEED;
+        new_pos_y += P_SPEED * sin(mlx->player.angle);
     }
     else if (mlx->key.move_backward)
     {
         new_pos_x -= P_SPEED * cos(mlx->player.angle);
-        new_pos_y -= sin(mlx->player.angle) * P_SPEED;
+        new_pos_y -= P_SPEED * sin(mlx->player.angle);
     }
     if (mlx->key.move_left)
     {
@@ -49,9 +48,17 @@ int	check_wall(t_minilibx *mlx, double px, double py)
         new_pos_x += P_SPEED * sin(mlx->player.angle);
         new_pos_y -= P_SPEED * cos(mlx->player.angle);
     }
-	x = floor(new_pos_x / TILE_SIZE);
-	y = floor(new_pos_y / TILE_SIZE);
-	return (safe_place(mlx->data->map, x, y));
+    for (double dx = -10.0; dx <= 10.0; dx += 10.0)
+    {
+        for (double dy = -10.0; dy <= 10.0; dy += 10.0)
+        {
+            x = floor((new_pos_x + dx) / TILE_SIZE);
+            y = floor((new_pos_y + dy) / TILE_SIZE);
+            if (!safe_place(mlx->data->map, x, y))
+                return 0;
+        }
+    }
+    return 1;
 }
 
 void events(t_minilibx *mlx)

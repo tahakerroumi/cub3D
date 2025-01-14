@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/14 16:39:12 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:33:39 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,38 @@ int inter_check(float angle, double *inter, double *step, int is_horizon)
 	return (1);
 }
 
+unsigned int 	get_color(int x, int y, t_img *text)
+{
+	char	*pixel;
+
+	if (x < 0 || x >= text->width || y < 0 || y >= text->height)
+		return (0);
+	pixel = text->addr + (y * text->line_length + x
+		* (text->bits_per_pixel / 8));
+	return (*(unsigned int *)pixel);
+}
+
+int	get_x_cord(t_minilibx *mlx)
+{
+	if (mlx->ray.flag)
+		return ((int)mlx->ray.wall_py % TILE_SIZE);
+	else
+		return ((int)mlx->ray.wall_px % TILE_SIZE);
+}
+
 void draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
 {
+	int wall_height = b_pix - t_pix;
+	int px = get_x_cord(mlx);
+	
+	// int y = t_pix;
 	while (t_pix < b_pix)
 	{
-		if (mlx->ray.flag)
-			my_pixel_put(ray, t_pix++, &mlx->img, 0xEB5A3C);
-		else
-			my_pixel_put(ray, t_pix++, &mlx->img, 0xC4D9FF);
+		int dis_top = t_pix + (wall_height / 2) - HEIGHT / 2;
+		int py = dis_top * ((double)mlx->ea_img->height / wall_height);
+		my_pixel_put(ray, t_pix++, &mlx->img, get_color(px, py, mlx->ea_img));
+		// else
+		// 	my_pixel_put(ray, t_pix++, &mlx->img, 0xC4D9FF);
 	}
 }
 
@@ -91,17 +115,12 @@ void	draw_walls(t_minilibx *mlx, int ray)
 	wall_h = (TILE_SIZE / mlx->ray.distance) * ((WIDTH / 2) / tan(mlx->player.fov_rad / 2));
 	b_pix = (HEIGHT / 2) + (wall_h / 2);
 	t_pix = (HEIGHT / 2) - (wall_h / 2);
-
-	if (b_pix > HEIGHT)
-		b_pix = HEIGHT;
-	if (t_pix < 0)
-		t_pix = 0;
 	draw_floor(mlx, ray, b_pix);
 	draw_wall(mlx, ray, t_pix, b_pix);
 	draw_ceiling(mlx, ray, t_pix);
 }
 
-void	rays_casting(t_minilibx *mlx)
+void	 rays_casting(t_minilibx *mlx)
 {
 	int i;
 

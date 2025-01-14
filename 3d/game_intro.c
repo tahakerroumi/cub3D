@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/14 16:18:43 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:29:43 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	end_program(void *cub3d)
 
 void	start_game(t_minilibx *mlx)
 {
-	mlx->ea_img = new_img(mlx, mlx->data->ea);	
+	mlx->ea_img = new_img(mlx, mlx->data->ea);
 	mlx_hook(mlx->window, 02, (1L << 0), key_press, (void *)mlx);
 	mlx_hook(mlx->window, 03, (1L << 1), key_release, (void *)mlx);
 	mlx_hook(mlx->window, 17, 0, end_program, (void *)mlx);

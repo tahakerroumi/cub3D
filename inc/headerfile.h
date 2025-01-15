@@ -6,17 +6,17 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 07:46:47 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 07:51:11 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADERFILE_H
 # define HEADERFILE_H
 
-#include <mlx.h>
 # include "../parsing/get_next_line.h"
 # include <fcntl.h>
 # include <math.h>
+# include <mlx.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -41,7 +41,7 @@
 # define R_SPEED 0.07
 # define P_SPEED 2
 
-struct s_global;
+struct	s_global;
 
 typedef struct s_ray
 {
@@ -64,10 +64,10 @@ typedef struct s_key_flags
 
 typedef struct s_player
 {
-	double px;      // position x in pixels (in 2d adding the tiles)
-	double py;      // position y in pixels (in 2d adding the tiles)
-	double angle;   // angle that defines the direction of the player view
-	double fov_rad; // field of view but in radian
+	double	px;
+	double	py;
+	double	angle;
+	double	fov_rad;
 }					t_player;
 
 typedef struct s_img
@@ -92,11 +92,11 @@ typedef struct s_minilibx
 	struct s_global	*data;
 	t_ray			ray;
 	t_key_flags		key;
-	t_img *no_img;
-	t_img *so_img;
-	t_img *ea_img;
-	t_img *we_img;
-	int		wall_height;
+	t_img			*no_img;
+	t_img			*so_img;
+	t_img			*ea_img;
+	t_img			*we_img;
+	int				wall_height;
 }					t_minilibx;
 
 typedef struct s_elements
@@ -196,7 +196,7 @@ double				angle_check(double ray);
 void				player_type(t_player *player, char c);
 void				my_pixel_put(int x, int y, t_img *img, int color);
 int					safe_place(char **map, int x, int y);
-t_img				*get_wall_texture(t_minilibx *mlx)
+t_img				*get_wall_texture(t_minilibx *mlx);
 
 /*end game (free all data)*/
 int					end_program(void *cub3d);

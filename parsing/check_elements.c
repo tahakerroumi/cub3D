@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:58:01 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 11:39:42 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:03:57 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void	check_fc(t_global *global)
 			ft_doublepointerfree(tmp);
 			error_print("elements problem\n");
 		}
-		ft_doublepointerfree(tmp);
+	ft_doublepointerfree(tmp);
+	ft_doublepointerfree(tmp2);
 }

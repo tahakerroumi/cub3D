@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 16:22:10 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:11:39 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,24 @@ char	**doubleptr_strim(char **str, int end)
 	if (!str || end < 0) // Validate inputs
 		return (NULL);
 	// Calculate the start index
-	while (str[i] && (comparaison2(str[i]) == -1
-			|| ft_strncmp(ft_strtrim(str[i]), "\0", 2) == 0))
+	char *tmp;
+	
+	while (str[i])
 	{
-		size++;
-		i++;
+		tmp = ft_strtrim(str[i]);
+
+		if(tmp != NULL && (comparaison2(str[i]) == -1 || ft_strncmp(tmp, "\0", 2) == 0))
+		{
+			free(tmp);
+			size++;
+			i++;
+		}
+		else
+		{
+			if(tmp)
+				free(tmp);
+			break;
+		}
 	}
 	start = size;
 	// Adjust the end index
@@ -129,4 +142,5 @@ int	main(int ac, char **av)
 	if (mlx_intro(&mlx, global))
 		return (free(global), 0);
 	start_game(&mlx);
+	
 }

@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:53:33 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 15:45:02 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:30:57 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_doublepointerfree(char **str)
 			free(str[i]);
 			i++;
 		}
-		free(str[i]);
+		free(str);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:47:23 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 16:22:01 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:11:04 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ void	pars2(t_global *global)
 	check_walls(global);
 	palyer_exists(global);
 	if (rgb_format(global->c) == -1 || rgb_format(global->f) == -1)
+	{
+		//here i must free all the previous allocations
 		error_print("check your rgb format\n");
+	}
 }
 
 void	pars(t_global *global, int ac, char **av)
@@ -114,12 +117,11 @@ void	pars(t_global *global, int ac, char **av)
 		free(elements);
 		error_print("check the top of your map \n");
 	}
-	// free(elements->map);
-	// free(elements);
 	ft_doublepointerfree(file_content);
 	ft_doublepointerfree(file_content2);
 	ft_doublepointerfree(file_content3);
 	global->map = doublepointercopy(elements->map);
+	free(elements);//hadi zdtha hna lhasni nxoufek wach ktkhademha mn ba3d wla la 
 	pars2(global);
 	map_size(global);
 	store_rgb(global);

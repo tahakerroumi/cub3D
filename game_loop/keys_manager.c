@@ -6,90 +6,37 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 05:19:44 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 07:02:00 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/headerfile.h"
 
-int	check_wall(t_minilibx *mlx, double px, double py)
+void	update_position(t_minilibx *mlx)
 {
-	double	new_pos_x;
-	double	new_pos_y;
+	double	dx;
+	double	dy;
 
-	new_pos_x = px;
-	new_pos_y = py;
-	int x, y;
-	if (mlx->key.move_forward)
+	get_direction(mlx, &dx, &dy);
+	if (check_wall(mlx, mlx->player.px, mlx->player.py))
 	{
-		new_pos_x += P_SPEED * cos(mlx->player.angle);
-		new_pos_y += P_SPEED * sin(mlx->player.angle);
+		mlx->player.px += dx * P_SPEED;
+		mlx->player.py += dy * P_SPEED;
 	}
-	else if (mlx->key.move_backward)
-	{
-		new_pos_x -= P_SPEED * cos(mlx->player.angle);
-		new_pos_y -= P_SPEED * sin(mlx->player.angle);
-	}
-	if (mlx->key.move_left)
-	{
-		new_pos_x -= P_SPEED * sin(mlx->player.angle);
-		new_pos_y += P_SPEED * cos(mlx->player.angle);
-	}
-	else if (mlx->key.move_right)
-	{
-		new_pos_x += P_SPEED * sin(mlx->player.angle);
-		new_pos_y -= P_SPEED * cos(mlx->player.angle);
-	}
-	for (double dx = -10.0; dx <= 10.0; dx += 10.0)
-	{
-		for (double dy = -10.0; dy <= 10.0; dy += 10.0)
-		{
-			x = floor((new_pos_x + dx) / TILE_SIZE);
-			y = floor((new_pos_y + dy) / TILE_SIZE);
-			if (!safe_place(mlx->data->map, x, y))
-				return (0);
-		}
-	}
-	return (1);
+}
+
+void	update_rotation(t_minilibx *mlx)
+{
+	if (mlx->key.rotate_left)
+		mlx->player.angle = angle_check(mlx->player.angle - R_SPEED);
+	else if (mlx->key.rotate_right)
+		mlx->player.angle = angle_check(mlx->player.angle + R_SPEED);
 }
 
 void	events(t_minilibx *mlx)
 {
-	if (check_wall(mlx, mlx->player.px, mlx->player.py))
-	{
-		if (mlx->key.move_forward)
-		{
-			mlx->player.px += P_SPEED * cos(mlx->player.angle);
-			mlx->player.py += P_SPEED * sin(mlx->player.angle);
-		}
-		else if (mlx->key.move_backward)
-		{
-			mlx->player.px -= P_SPEED * cos(mlx->player.angle);
-			mlx->player.py -= P_SPEED * sin(mlx->player.angle);
-		}
-		if (mlx->key.move_left)
-		{
-			mlx->player.px -= P_SPEED * sin(mlx->player.angle);
-			mlx->player.py += P_SPEED * cos(mlx->player.angle);
-		}
-		else if (mlx->key.move_right)
-		{
-			mlx->player.px += P_SPEED * sin(mlx->player.angle);
-			mlx->player.py -= P_SPEED * cos(mlx->player.angle);
-		}
-	}
-	if (mlx->key.rotate_left)
-	{
-		mlx->player.angle -= R_SPEED;
-		if (mlx->player.angle < 0)
-			mlx->player.angle += 2 * M_PI;
-	}
-	else if (mlx->key.rotate_right)
-	{
-		mlx->player.angle += R_SPEED;
-		if (mlx->player.angle > 2 * M_PI)
-			mlx->player.angle -= 2 * M_PI;
-	}
+	update_position(mlx);
+	update_rotation(mlx);
 }
 
 int	key_press(int keycode, void *cub3d)

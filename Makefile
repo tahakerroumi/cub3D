@@ -8,7 +8,7 @@ SRC = main.c \
 		parsing/ft_split.c parsing/get_next_line_utils.c parsing/get_next_line.c parsing/mapsize.c \
 		parsing/pars.c parsing/playerexists.c \
 		game_loop/initialization.c game_loop/keys_manager.c game_loop/ray_casting.c game_loop/start_game.c \
-		game_loop/texturespart.c game_loop/tools.c game_loop/world_maker.c
+		game_loop/texturespart.c game_loop/tools.c game_loop/world_maker.c game_loop/movement.c
 		
 
 OBJ = $(SRC:.c=.o)

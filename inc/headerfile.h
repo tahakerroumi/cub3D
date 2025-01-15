@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 05:42:44 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 07:46:47 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define ESC 65307
 
 # define M_PI 3.14159265358979323846
-# define R_SPEED 0.02
-# define P_SPEED 0.9
+# define R_SPEED 0.07
+# define P_SPEED 2
 
 struct s_global;
 
@@ -96,6 +96,7 @@ typedef struct s_minilibx
 	t_img *so_img;
 	t_img *ea_img;
 	t_img *we_img;
+	int		wall_height;
 }					t_minilibx;
 
 typedef struct s_elements
@@ -174,6 +175,8 @@ t_img				*new_img(t_minilibx *data, char *path);
 int					key_press(int keycode, void *cub3d);
 int					key_release(int keycode, void *cub);
 void				events(t_minilibx *mlx);
+void				get_direction(t_minilibx *mlx, double *dx, double *dy);
+int					check_wall(t_minilibx *mlx, double px, double py);
 
 /*Game routine*/
 int					program_routine(void *cub3d);
@@ -193,6 +196,7 @@ double				angle_check(double ray);
 void				player_type(t_player *player, char c);
 void				my_pixel_put(int x, int y, t_img *img, int color);
 int					safe_place(char **map, int x, int y);
+t_img				*get_wall_texture(t_minilibx *mlx)
 
 /*end game (free all data)*/
 int					end_program(void *cub3d);

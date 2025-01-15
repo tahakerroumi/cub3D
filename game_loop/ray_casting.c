@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:47:17 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 05:30:11 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 07:19:31 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	world_manager(t_minilibx *mlx, int ray)
 			/ tan(mlx->player.fov_rad / 2));
 	b_pix = (HEIGHT / 2) + (wall_h / 2);
 	t_pix = (HEIGHT / 2) - (wall_h / 2);
+	mlx->wall_height = b_pix - t_pix;
 	draw_ceiling(mlx, ray, t_pix);
 	draw_wall(mlx, ray, t_pix, b_pix);
 	draw_floor(mlx, ray, b_pix);
@@ -31,7 +32,9 @@ void	world_manager(t_minilibx *mlx, int ray)
 
 int	wall_hit(t_minilibx *mlx, double dx, double dy)
 {
-	int x, y;
+	int	x;
+	int	y;
+
 	if (dx < 0 || dy < 0)
 		return (0);
 	x = (int)(dx / TILE_SIZE);
@@ -99,7 +102,7 @@ double	get_horizontal(t_minilibx *mlx, double ray)
 
 void	ray_casting(t_minilibx *mlx)
 {
-	int i;
+	int	i;
 
 	mlx->ray.ray_angle = angle_check(mlx->player.angle - (mlx->player.fov_rad
 				/ 2));

@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 05:29:31 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 07:47:41 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,36 +53,17 @@ int	player_view_checker(float angle, double *inter, double *step,
 
 void	draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
 {
-	int	wall_height;
-	int	px;
-	int	y;
-	int	py;
+	int		y;
+	int		py;
+	t_img	*texture;
 
-	wall_height = b_pix - t_pix;
-	px = get_x_cord(mlx);
 	y = t_pix;
+	texture = get_wall_texture(mlx);
 	while (t_pix < b_pix)
 	{
-		py = (t_pix - y) * ((double)mlx->ea_img->height / wall_height);
-		if (mlx->ray.flag == 1)
-		{
-			if (mlx->ray.ray_angle < ((3 * M_PI) / 2)
-				&& mlx->ray.ray_angle > M_PI / 2)
-				my_pixel_put(ray, t_pix++, &mlx->img, get_color(px, py,
-						mlx->we_img));
-			else
-				my_pixel_put(ray, t_pix++, &mlx->img, get_color(px, py,
-						mlx->ea_img));
-		}
-		else
-		{
-			if (mlx->ray.ray_angle < M_PI && mlx->ray.ray_angle > 0)
-				my_pixel_put(ray, t_pix++, &mlx->img, get_color(px, py,
-						mlx->no_img));
-			else
-				my_pixel_put(ray, t_pix++, &mlx->img, get_color(px, py,
-						mlx->so_img));
-		}
+		py = (t_pix - y) * ((double)mlx->ea_img->height / mlx->wall_height);
+		my_pixel_put(ray, t_pix++, &mlx->img,
+			get_color(get_x_cord(mlx), py, texture));
 	}
 }
 
@@ -90,7 +71,8 @@ void	draw_floor(t_minilibx *mlx, int ray, int b_pix)
 {
 	int	color;
 
-	color = (mlx->data->floor_red << 16) | (mlx->data->floor_green << 8) | mlx->data->floor_blue;
+	color = (mlx->data->floor_red << 16) | (mlx->data->floor_green << 8) | \
+		mlx->data->floor_blue;
 	while (b_pix < HEIGHT)
 		my_pixel_put(ray, b_pix++, &mlx->img, color);
 }
@@ -100,7 +82,8 @@ void	draw_ceiling(t_minilibx *mlx, int ray, int t_pix)
 	int	i;
 	int	color;
 
-	color = (mlx->data->ceiling_red << 16) | (mlx->data->ceiling_green << 8) | mlx->data->ceiling_blue;
+	color = (mlx->data->ceiling_red << 16) | (mlx->data->ceiling_green << 8) | \
+		mlx->data->ceiling_blue;
 	i = 0;
 	while (i < t_pix)
 		my_pixel_put(ray, i++, &mlx->img, color);

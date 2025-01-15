@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   additional_functions2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:53:33 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:45:02 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	**doublepointercopy(char **map)
 		i++;
 	}
 	test[i] = NULL;
+	ft_doublepointerfree(map);
 	return (test);
 }
 

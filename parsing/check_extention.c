@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_extention.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:01:01 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:05:48 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,19 @@ void	check_for_unwanted_chars(t_global *global)
 {
 	int	i;
 	int	j;
+	char *tmp;
 
 	i = 0;
 	while (global->map[i])
 	{
 		j = 0;
-		if (ft_strlen(ft_strtrim(global->map[i])) == 0)
+		tmp = ft_strtrim(global->map[i]);
+		if (ft_strlen(tmp) == 0)
+		{
+			free(tmp);
 			error_print("empty line in the map\n");
+		}
+		free(tmp);
 		while (global->map[i][j])
 		{
 			if (global->map[i][j] != '1'

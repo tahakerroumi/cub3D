@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:58:01 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:39:42 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	check_elements(char **map, t_elements **elements)
 		{
 			tmp = ft_split(tmp1, ' ');
 			if (elements_are_mixed(tmp[0]) == -1)
+			{
+				ft_doublepointerfree(tmp);
 				break ;
+			}
 			compare_texture(tmp, elements);
 			compare_floorcellingcolor(tmp, elements);
 			ft_doublepointerfree(tmp);
@@ -45,6 +48,7 @@ int	check_elements(char **map, t_elements **elements)
 		i++;
 		free(tmp1);
 	}
+	free(tmp1);
 	return (check_elementsnumber(*elements));
 }
 
@@ -63,6 +67,7 @@ void	check_fc(t_global *global)
 		|| ft_atoi(tmp[2]) < 0
 		|| ft_atoi(tmp[2]) > 255)
 	{
+		ft_doublepointerfree(tmp);
 		error_print("elements problem\n");
 	}
 	tmp2 = ft_split(global->f, ',');
@@ -74,5 +79,9 @@ void	check_fc(t_global *global)
 		|| ft_atoi(tmp2[1]) > 255
 		|| ft_atoi(tmp2[2]) < 0
 		|| ft_atoi(tmp2[2]) > 255)
-		error_print("elements problem\n");
+		{
+			ft_doublepointerfree(tmp);
+			error_print("elements problem\n");
+		}
+		ft_doublepointerfree(tmp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 07:13:33 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:22:10 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@
 
 int	comparaison2(char *str)
 {
-	if (ft_strncmp(ft_strtrim(str), "NO", 2) == 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "SO", 2) == 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "WE", 2) == 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "EA", 2) == 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "F", 1) == 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "C", 1) == 0)
-		return (-1);
-	return (1);
+	char *tmp;
+
+	tmp = ft_strtrim(str);
+	if (ft_strncmp(tmp, "NO", 2) == 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "SO", 2) == 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "WE", 2) == 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "EA", 2) == 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "F", 1) == 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "C", 1) == 0)
+		return (free(tmp),-1);
+	return (free(tmp),1);
 }
 
 char	**doubleptr_strim2(char **str, char **map, int end, int start)
@@ -95,19 +98,22 @@ char	**doubleptr_strim(char **str, int end)
 
 int	comparaison(char *str)
 {
-	if (ft_strncmp(ft_strtrim(str), "NO", 2) != 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "SO", 2) != 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "WE", 2) != 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "EA", 2) != 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "F", 1) != 0)
-		return (-1);
-	if (ft_strncmp(ft_strtrim(str), "C", 1) != 0)
-		return (-1);
-	return (1);
+	char *tmp;
+
+	tmp = ft_strtrim(str);
+	if (ft_strncmp(tmp, "NO", 2) != 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "SO", 2) != 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "WE", 2) != 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "EA", 2) != 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "F", 1) != 0)
+		return (free(tmp),-1);
+	if (ft_strncmp(tmp, "C", 1) != 0)
+		return (free(tmp),-1);
+	return (free(tmp),1);
 }
 
 int	main(int ac, char **av)
@@ -119,6 +125,7 @@ int	main(int ac, char **av)
 	if (global == NULL)
 		error_print("Failed to allocate memory");
 	pars(global, ac, av);
+	// exit(1);
 	if (mlx_intro(&mlx, global))
 		return (free(global), 0);
 	start_game(&mlx);

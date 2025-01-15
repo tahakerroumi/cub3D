@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapsize.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:18:34 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/05 14:14:45 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:09:00 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	store_rgb(t_global *global)
 	global->floor_green = ft_atoi(tmp[1]);
 	global->floor_blue = ft_atoi(tmp[2]);
 	ft_doublepointerfree(tmp);
+	
 }

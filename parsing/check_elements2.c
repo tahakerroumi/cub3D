@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:58:08 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:31:39 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	elements_are_mixed(char *str)
 {
+	if(!str)
+		return (-1);
 	if (ft_strncmp(str, "NO", 2) == 0)
 		return (1);
 	else if (ft_strncmp(str, "SO", 2) == 0)

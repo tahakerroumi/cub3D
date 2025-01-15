@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:48:22 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/12 14:57:48 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/15 04:51:03 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/headerfile.h"
 
-void player_pos_dir(t_minilibx *mlx, t_global *data)
+void	player_pos_dir(t_minilibx *mlx, t_global *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
-	while(data->map[++i])
+	while (data->map[++i])
 	{
 		j = -1;
 		while (data->map[i][++j])
 		{
-			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W'
-				|| data->map[i][j] == 'E')
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
 			{
 				player_type(&mlx->player, data->map[i][j]);
 				mlx->player.px = j * TILE_SIZE + (TILE_SIZE / 2);
@@ -35,13 +35,13 @@ void player_pos_dir(t_minilibx *mlx, t_global *data)
 	}
 }
 
-double	angle_check(double	ray)
+double	angle_check(double ray)
 {
 	if (ray > 2 * M_PI)
 		ray -= 2 * M_PI;
 	else if (ray < 0)
 		ray += 2 * M_PI;
-	return (ray);	
+	return (ray);
 }
 
 void	player_type(t_player *player, char c)
@@ -64,19 +64,15 @@ void	my_pixel_put(int x, int y, t_img *img, int color)
 	if (x < 0 || y >= HEIGHT || y < 0 || x >= WIDTH)
 		return ;
 	offset = (y * img->line_height) + (x * (img->bits_per_pixel / 8));
-    *(unsigned int *)(img->pixel_ptr + offset) = color;
+	*(unsigned int *)(img->pixel_ptr + offset) = color;
 }
 
-
-void draw_ray(t_minilibx *mlx, double ray_angle, double distance)
+int	safe_place(char **map, int x, int y)
 {
-    int x_start = mlx->player.px;
-    int y_start = mlx->player.py;
-
-	int i = 0; 
-    while (i <= distance)
-    {
-		my_pixel_put(x_start + (i * cos(ray_angle)),  y_start + (i * sin(ray_angle)), &mlx->img, 0xFFFFFF);
-		i++;
-    }
+	if (map[y][x] == '0')
+		return (1);
+	if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'W'
+		|| map[y][x] == 'E')
+		return (1);
+	return (0);
 }

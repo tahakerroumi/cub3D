@@ -7,7 +7,8 @@ SRC = main.c \
 		parsing/check_elements.c parsing/check_elements2.c parsing/check_extention.c parsing/fill_file.c \
 		parsing/ft_split.c parsing/get_next_line_utils.c parsing/get_next_line.c parsing/mapsize.c \
 		parsing/pars.c parsing/playerexists.c \
-		3d/wall_debug.c 3d/tools.c 3d/ray_casting.c 3d/keys_manager.c 3d/game_intro.c 3d/2d_map_drawing.c 3d/texturespart.c\
+		game_loop/initialization.c game_loop/keys_manager.c game_loop/ray_casting.c game_loop/start_game.c \
+		game_loop/texturespart.c game_loop/tools.c game_loop/world_maker.c
 		
 
 OBJ = $(SRC:.c=.o)

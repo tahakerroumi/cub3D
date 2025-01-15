@@ -1,7 +1,8 @@
 NO textures/file.xpm
-SO textures/file.xpm
-WE textures/file.xpm
-EA textures/file.xpm
+SO textures/file1.xpm
+WE textures/file2.xpm
+EA textures/file3.xpm
+
 F 50,50,50
 C 135,206,235
 

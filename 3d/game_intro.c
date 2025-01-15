@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/14 20:29:43 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/15 02:56:54 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	end_program(void *cub3d)
 
 void	start_game(t_minilibx *mlx)
 {
-	mlx->ea_img = new_img(mlx, mlx->data->ea);
 	mlx_hook(mlx->window, 02, (1L << 0), key_press, (void *)mlx);
 	mlx_hook(mlx->window, 03, (1L << 1), key_release, (void *)mlx);
 	mlx_hook(mlx->window, 17, 0, end_program, (void *)mlx);
@@ -51,10 +50,14 @@ void	start_game(t_minilibx *mlx)
 	mlx_loop(mlx->intro);
 }
 
-// int	textures_init(t_minilibx *mlx)
-// {
-	
-// }
+int	textures_init(t_minilibx *mlx)
+{
+	mlx->ea_img = new_img(mlx, mlx->data->ea);
+	mlx->we_img = new_img(mlx, mlx->data->we);
+	mlx->so_img = new_img(mlx, mlx->data->so);
+	mlx->no_img = new_img(mlx, mlx->data->no);
+	return (0);
+}
 
 int	mlx_intro(t_minilibx *mlx, t_global *global)
 {
@@ -69,7 +72,7 @@ int	mlx_intro(t_minilibx *mlx, t_global *global)
 	mlx->img.pixel_ptr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_height, &mlx->img.endian);
 	player_pos_dir(mlx, global);
 	keys_init(mlx);
-	// if (textures_init(mlx))
-	// 	return (1);
+	if (textures_init(mlx))
+		return (1);
 	return (0);
 }

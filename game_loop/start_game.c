@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:30:02 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 05:30:16 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:37:10 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int	end_program(void *cub3d)
 	mlx_destroy_image(mlx->intro, mlx->img.img);
 	mlx_destroy_window(mlx->intro, mlx->window);
 	mlx_destroy_display(mlx->intro);
-	// free(mlx->intro);
-	// before exiting we should free what should be freed.
+	free_elements(mlx);
 	exit(1);
 }
 

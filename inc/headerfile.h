@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   headerfile.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 13:58:40 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:40:10 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,9 @@ typedef struct s_elements
 	int				f;
 	int				c;
 	char			**map;
+	char		**file_content;
+	char		**file_content2;
+	char		**file_content3;
 }					t_elements;
 
 typedef struct s_global
@@ -203,4 +206,7 @@ t_img				*get_wall_texture(t_minilibx *mlx);
 int					end_program(void *cub3d);
 void    			free_elements(t_minilibx *mlx);
 
+void	pars2(t_global *global);
+void	map_size(t_global *global);
+void	store_rgb(t_global *global);
 #endif

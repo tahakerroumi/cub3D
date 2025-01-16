@@ -6,129 +6,85 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:47:23 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 15:39:13 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:41:31 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/headerfile.h"
 
-char	**map_to_doublepointer(char *av)
+void	dbarray_free(char **str1, char **str2, char **str3, t_global *global)
 {
-	char	*s1;
-	char	*l;
-	int		fd;
-	char	**map;
-
-	fd = open(av, O_RDWR);
-	if (fd == -1 || !fd)
-		error_print("Error::can not open the file\n");//must free global****************************************************************
-	l = get_next_line(fd);
-	if (l == NULL)
-		error_print("Error\nempty file \n");
-	s1 = calloc(1, 1);
-	while (l != NULL)
-	{
-		if (l[0] == '\n')
-			s1 = str_join(s1, "  \n");
-		else
-			s1 = str_join(s1, l);
-		free(l);
-		l = get_next_line(fd);
-	}
-	map = ft_split(s1, '\n');
-	free(s1);
-	close(fd);
-	return (map);
+	if (str1)
+		ft_doublepointerfree(str2);
+	if (str2)
+		ft_doublepointerfree(str2);
+	if (str3)
+		ft_doublepointerfree(str3);
+	if (global)
+		free(global);
 }
 
-int	rgb_format(char *str)
+void	pars_norm(int ac, char **av, t_global *global)
 {
-	int	def;
-	int	i;
-
-	i = 1;
-	def = 0;
-	while (str[i])
+	if (ac != 2)
 	{
-		if ((str[i] >= '0' && str[i] <= '9') || str[i] == ' ')
-			i++;
-		else if (str[i] == ','
-			&& ((str[i - 1] >= '0'
-					&& str[i - 1] <= '9')
-				|| str[i - 1] == ' '))
-		{
-			def += 1;
-			i++;
-		}
-		else
-			break ;
+		free(global);
+		error_print("Error\ncheck your arguments\n");
 	}
-	if (str[i] == '\0' && def == 2)
-		return (1);
-	return (-1);
-}
-
-void	pars2(t_global *global)
-{
-	check_for_textures_extension(global);
-	check_for_unwanted_chars(global);
-	check_fc(global);
-	check_textures_extention(global);
-	check_walls(global);
-	palyer_exists(global);
-	if (rgb_format(global->c) == -1 || rgb_format(global->f) == -1)
+	if (checkextention(av[1]) == -1)
 	{
-		//must free global and global map*******************************************************************
-		error_print("check your rgb format\n");
+		free(global);
+		error_print("Error\nextention error \n");
 	}
 }
 
-void	pars(t_global *global, int ac, char **av)
+void	normmm(t_elements *elements)
 {
-	t_elements	*elements;
+	free(elements->map);
+	free(elements);
+}
+
+void	pars2norm(t_elements *elements, char **av, t_global *global)
+{
 	char		**file_content;
 	char		**file_content2;
 	char		**file_content3;
 
-	if (ac != 2)
-		error_print("Error\ncheck your arguments\n");//must free global***********************************************************
-	if (checkextention(av[1]) == -1)
-		error_print("Error\nextention error \n");//must free global****************************************************************
-	elements = (t_elements *)calloc(1, sizeof(t_elements));
-	if (elements == NULL)
-		error_print("Error\nFailed to allocate memory\n");//must free global****************************************************************
 	file_content = map_to_doublepointer(av[1]);
 	file_content2 = map_to_doublepointer(av[1]);
 	file_content3 = map_to_doublepointer(av[1]);
-	if(!file_content || !file_content3 || !file_content2)
-		//must free global and elements and filecontents****************************************************************
+	if (!file_content || !file_content3 || !file_content2)
+		dbarray_free(file_content, file_content3, file_content2, global);
 	if (check_elements(file_content, &elements) == -1)
 	{
-		ft_doublepointerfree(file_content);
-		ft_doublepointerfree(file_content2);
-		ft_doublepointerfree(file_content3);
+		dbarray_free(file_content, file_content3, file_content2, global);
 		free(elements);
-		free(global);
 		error_print("Error\nthe elements are not correct \n");
 	}
 	elements->map = fill_map(file_content2);
 	if (fill_otherelements(file_content3, &global) == -1)
 	{
-		ft_doublepointerfree(file_content);
-		ft_doublepointerfree(file_content2);
-		ft_doublepointerfree(file_content3);
-		free(elements->map);
-		free(elements);
+		dbarray_free(file_content, file_content3, file_content2, NULL);
+		normmm(elements);
 		error_print("Error\ncheck the top of your map \n");
 	}
+	ft_doublepointerfree(file_content3);
 	ft_doublepointerfree(file_content);
 	ft_doublepointerfree(file_content2);
-	ft_doublepointerfree(file_content3);
+}
+
+void	pars(t_global *global, int ac, char **av)
+{
+	t_elements	*elements;
+
+	pars_norm(ac, av, global);
+	elements = (t_elements *)calloc(1, sizeof(t_elements));
+	if (elements == NULL)
+	{
+		free(global);
+		error_print("Error\nFailed to allocate memory\n");
+	}
+	pars2norm(elements, av, global);
 	global->map = doublepointercopy(elements->map);
 	free(elements);
-	//here i freed every thing i allocated
-	//global and globa->map are still allocated 
-	pars2(global);
-	map_size(global);
-	store_rgb(global);
 }

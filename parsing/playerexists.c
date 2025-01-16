@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:36:06 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 15:44:32 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:32:48 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,17 @@ void	player_exists2(int playeri, int playerj, t_global *global, int i)
 	&& global->map[playeri + 1][playerj] == '1'
 		&& global->map[playeri][playerj - 1] == '1'))
 	{
-		error_print("Error\nthe player is surronded\n");//must free global and global map*******************************************************************
+		free(global->map);
+		free(global);
+		error_print("Error\nthe player is surronded\n");
 	}
 	if (playeri == 0 || playeri == i - 1 || !global->map[playeri][playerj + 1]
 	|| !global->map[playeri - 1][playerj] || !global->map[playeri + 1][playerj]
 	|| !global->map[playeri][playerj - 1])
 	{
-		error_print("Error\ncheck the player position\n");//must free global and global map*******************************************************************
+		free(global->map);
+		free(global);
+		error_print("Error\ncheck the player position\n");
 	}
 }
 
@@ -45,10 +49,14 @@ int	conditionn(int i, int j, t_global *global)
 	return (-1);
 }
 
-void	if_p(int p)
+void	if_p(int p, t_global *global)
 {
 	if (p != 1)
-		error_print("Error\ncheck the players number\n");//must free global and global map*******************************************************************
+	{
+		free(global->map);
+		free(global);
+		error_print("Error\ncheck the players number\n");
+	}
 }
 
 void	palyer_exists(t_global *global)
@@ -56,15 +64,17 @@ void	palyer_exists(t_global *global)
 	int	i;
 	int	j;
 	int	p;
-	int	playeri = 0;
-	int	playerj = 0;
+	int	playeri;
+	int	playerj;
 
-	i = 0;
+	i = -1;
 	p = 0;
-	while (global->map[i])
+	playeri = 0;
+	playerj = 0;
+	while (global->map[++i])
 	{
-		j = 0;
-		while (global->map[i][j])
+		j = -1;
+		while (global->map[i][++j])
 		{
 			if (conditionn(i, j, global) == 1)
 			{
@@ -72,10 +82,8 @@ void	palyer_exists(t_global *global)
 				playeri = i;
 				playerj = j;
 			}
-			j++;
 		}
-		i++;
 	}
-	if_p(p);
+	if_p(p, global);
 	player_exists2(playeri, playerj, global, i);
 }

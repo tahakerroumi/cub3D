@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:58:01 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 15:38:37 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:20:18 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_elements(char **map, t_elements **elements)
 	int		i;
 
 	i = 0;
-	**elements = (typeof(**elements)){0};//make another function to init this struct
+	**elements = (typeof(**elements)){0};
 	while (map[i])
 	{
 		tmp1 = ft_strtrim(map[i]);
@@ -48,18 +48,21 @@ int	check_elements(char **map, t_elements **elements)
 		i++;
 		free(tmp1);
 	}
-	free(tmp1);
-	return (check_elementsnumber(*elements));
+	return (free(tmp1), check_elementsnumber(*elements));
 }
 
-void	check_fc(t_global *global)
+void	check_fc2(t_global *global)
 {
 	char	**tmp;
-	char	**tmp2;
 
 	tmp = ft_split(global->c, ',');
 	if (ft_doublepointerlen(tmp) != 3)
-		error_print("Error\nelements problem\n");//must free global and global map and tmp *******************************************************************
+	{
+		ft_doublepointerfree(tmp);
+		ft_doublepointerfree(global->map);
+		free(global);
+		error_print("Error\nelements problem\n");
+	}
 	if (ft_atoi(tmp[0]) < 0
 		|| ft_atoi(tmp[0]) > 255
 		|| ft_atoi(tmp[1]) < 0
@@ -68,21 +71,37 @@ void	check_fc(t_global *global)
 		|| ft_atoi(tmp[2]) > 255)
 	{
 		ft_doublepointerfree(tmp);
-		error_print("Error\nelements problem\n");//must free global and global map *******************************************************************
+		ft_doublepointerfree(global->map);
+		free(global);
+		error_print("Error\nelements problem\n");
 	}
+	ft_doublepointerfree(tmp);
+}
+
+void	check_fc(t_global *global)
+{
+	char	**tmp2;
+
+	check_fc2(global);
 	tmp2 = ft_split(global->f, ',');
 	if (ft_doublepointerlen(tmp2) != 3)
-		error_print("Error\nelements problem\n");//must free global and global map and tmp2*******************************************************************
+	{
+		ft_doublepointerfree(tmp2);
+		ft_doublepointerfree(global->map);
+		free(global);
+		error_print("Error\nelements problem\n");
+	}
 	if (ft_atoi(tmp2[0]) < 0
 		|| ft_atoi(tmp2[0]) > 255
 		|| ft_atoi(tmp2[1]) < 0
 		|| ft_atoi(tmp2[1]) > 255
 		|| ft_atoi(tmp2[2]) < 0
 		|| ft_atoi(tmp2[2]) > 255)
-		{
-			ft_doublepointerfree(tmp);
-			error_print("Error\nelements problem\n");//must free global and global map*******************************************************************
-		}
-	ft_doublepointerfree(tmp);
+	{
+		ft_doublepointerfree(global->map);
+		free(global);
+		ft_doublepointerfree(tmp2);
+		error_print("Error\nelements problem\n");
+	}
 	ft_doublepointerfree(tmp2);
 }

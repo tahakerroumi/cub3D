@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 15:38:14 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:13:39 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char	**doubleptr_strim2(char **str, char **map, int end, int start)
 	i = 0;
 	while (start <= end)
 	{
-		map[i] = ft_strdup(str[start]); // Copy the string
-		if (!map[i])                    // Check for strdup failure
+		map[i] = ft_strdup(str[start]);
+		if (!map[i])
 		{
 			while (i-- > 0)
 				free(map[i]);
@@ -52,22 +52,24 @@ char	**doubleptr_strim2(char **str, char **map, int end, int start)
 		start++;
 		i++;
 	}
-	map[i] = NULL; // Properly terminate the array
+	map[i] = NULL;
 	return (map);
 }
 
 char	**doubleptr_strim(char **str, int end)
 {
 	char	**map;
-	int		i = 0, size = 0, start;
+	int		i;
+	int size;
+	int start;
 	char	*trimmed;
-
-	i = 0, size = 0, start = 0;
-	if (!str || end < 0) // Validate inputs
-		return (NULL);
-	// Calculate the start index
 	char *tmp;
 	
+	i = 0;
+	size = 0;
+	start = 0;
+	if (!str || end < 0)
+		return (NULL);
 	while (str[i])
 	{
 		tmp = ft_strtrim(str[i]);
@@ -86,7 +88,6 @@ char	**doubleptr_strim(char **str, int end)
 		}
 	}
 	start = size;
-	// Adjust the end index
 	if (str[end] == NULL)
 		end--;
 	while (end > start)
@@ -100,9 +101,8 @@ char	**doubleptr_strim(char **str, int end)
 		free(trimmed);
 		end--;
 	}
-	// Allocate memory for the new array
 	if (end < start)
-		return (NULL); // No valid strings to copy
+		return (NULL);
 	map = malloc((end - start + 2) * sizeof(char *));
 	if (!map)
 		return (NULL);
@@ -139,6 +139,9 @@ int	main(int ac, char **av)
 		error_print("Error\nFailed to allocate memory");
 
 	pars(global, ac, av);
+	pars2(global);
+	map_size(global);
+	store_rgb(global);
 	
 	
 	if (mlx_intro(&mlx, global))

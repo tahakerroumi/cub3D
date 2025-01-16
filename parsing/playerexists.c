@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:36:06 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:44:23 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	player_exists2(int playeri, int playerj, t_global *global, int i)
 	&& global->map[playeri + 1][playerj] == '1'
 		&& global->map[playeri][playerj - 1] == '1'))
 	{
-		error_print("the player is surronded\n");
+		error_print("the player is surronded\n");//must free global and global map*******************************************************************
 	}
 	if (playeri == 0 || playeri == i - 1 || !global->map[playeri][playerj + 1]
 	|| !global->map[playeri - 1][playerj] || !global->map[playeri + 1][playerj]
 	|| !global->map[playeri][playerj - 1])
 	{
-		error_print("check the player position\n");
+		error_print("check the player position\n");//must free global and global map*******************************************************************
 	}
 }
 
@@ -48,7 +48,7 @@ int	conditionn(int i, int j, t_global *global)
 void	if_p(int p)
 {
 	if (p != 1)
-		error_print("check the players number\n");
+		error_print("check the players number\n");//must free global and global map*******************************************************************
 }
 
 void	palyer_exists(t_global *global)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   additional_functions2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:53:33 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 16:30:57 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:59:25 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	error_print(char *str)
 
 	i = 0;
 	while (str[i])
-		if (write(1, &str[i++], 1) == -1)
-			perror("write");
+		write(1, &str[i++], 1);
 	exit(1);
 }

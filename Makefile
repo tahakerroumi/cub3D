@@ -6,7 +6,7 @@ SRC = main.c \
 		parsing/additional_functions.c parsing/additional_functions2.c parsing/additional_functions3.c \
 		parsing/check_elements.c parsing/check_elements2.c parsing/check_extention.c parsing/fill_file.c \
 		parsing/ft_split.c parsing/get_next_line_utils.c parsing/get_next_line.c parsing/mapsize.c \
-		parsing/pars.c parsing/playerexists.c \
+		parsing/pars.c parsing/playerexists.c parsing/pfree.c parsing/free_elements.c \
 		game_loop/initialization.c game_loop/keys_manager.c game_loop/ray_casting.c game_loop/start_game.c \
 		game_loop/texturespart.c game_loop/tools.c game_loop/world_maker.c game_loop/movement.c
 		

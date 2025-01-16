@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pfree.c                                            :+:      :+:    :+:   */
+/*   free_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 20:11:41 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 13:44:54 by tkerroum         ###   ########.fr       */
+/*   Created: 2025/01/16 13:48:43 by tkerroum          #+#    #+#             */
+/*   Updated: 2025/01/16 13:59:17 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/headerfile.h"
 
-void dbarray_free(char **str1, char **str2, char **str3)
+void    free_elements(t_minilibx *mlx)
 {
-    if(str1)
-        free(str1);
-    if(str2)
-        ft_doublepointerfree(str2);
-    if(str3)
-        ft_doublepointerfree(str3);
+    (void)mlx;
+    printf("ojk\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:47:23 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 17:11:04 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:44:59 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**map_to_doublepointer(char *av)
 
 	fd = open(av, O_RDWR);
 	if (fd == -1 || !fd)
-		error_print("Error::can not open the file\n");
+		error_print("Error::can not open the file\n");//must free global****************************************************************
 	l = get_next_line(fd);
 	if (l == NULL)
 		error_print("Error\nempty file \n");
@@ -78,7 +78,7 @@ void	pars2(t_global *global)
 	palyer_exists(global);
 	if (rgb_format(global->c) == -1 || rgb_format(global->f) == -1)
 	{
-		//here i must free all the previous allocations
+		//must free global and global map*******************************************************************
 		error_print("check your rgb format\n");
 	}
 }
@@ -91,21 +91,24 @@ void	pars(t_global *global, int ac, char **av)
 	char		**file_content3;
 
 	if (ac != 2)
-		error_print("check your arguments\n");
+		error_print("check your arguments\n");//must free global***********************************************************
 	if (checkextention(av[1]) == -1)
-		error_print("extiontion error \n");
+		error_print("extention error \n");//must free global****************************************************************
 	elements = (t_elements *)calloc(1, sizeof(t_elements));
 	if (elements == NULL)
-		error_print("Failed to allocate memory\n");
+		error_print("Failed to allocate memory\n");//must free global****************************************************************
 	file_content = map_to_doublepointer(av[1]);
 	file_content2 = map_to_doublepointer(av[1]);
 	file_content3 = map_to_doublepointer(av[1]);
+	if(!file_content || !file_content3 || !file_content2)
+		//must free global and elements and filecontents****************************************************************
 	if (check_elements(file_content, &elements) == -1)
 	{
 		ft_doublepointerfree(file_content);
 		ft_doublepointerfree(file_content2);
 		ft_doublepointerfree(file_content3);
 		free(elements);
+		free(global);
 		error_print("the elements are not correct \n");
 	}
 	elements->map = fill_map(file_content2);
@@ -114,6 +117,7 @@ void	pars(t_global *global, int ac, char **av)
 		ft_doublepointerfree(file_content);
 		ft_doublepointerfree(file_content2);
 		ft_doublepointerfree(file_content3);
+		free(elements->map);
 		free(elements);
 		error_print("check the top of your map \n");
 	}
@@ -121,7 +125,9 @@ void	pars(t_global *global, int ac, char **av)
 	ft_doublepointerfree(file_content2);
 	ft_doublepointerfree(file_content3);
 	global->map = doublepointercopy(elements->map);
-	free(elements);//hadi zdtha hna lhasni nxoufek wach ktkhademha mn ba3d wla la 
+	free(elements);
+	//here i freed every thing i allocated
+	//global and globa->map are still allocated 
 	pars2(global);
 	map_size(global);
 	store_rgb(global);

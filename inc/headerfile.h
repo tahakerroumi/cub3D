@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 07:51:11 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:58:40 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_global
 	int				ceiling_blue;
 }					t_global;
 
+/*parsing*/
 int					checkextention(char *av);
 void				error_print(char *str);
 char				*ft_substr(char *s, int start, size_t len);
@@ -200,5 +201,6 @@ t_img				*get_wall_texture(t_minilibx *mlx);
 
 /*end game (free all data)*/
 int					end_program(void *cub3d);
+void    			free_elements(t_minilibx *mlx);
 
 #endif

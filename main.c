@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:07:22 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 17:11:39 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:58:29 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,14 @@ int	main(int ac, char **av)
 	global = (t_global *)calloc(1, sizeof(t_global));
 	if (global == NULL)
 		error_print("Failed to allocate memory");
+
 	pars(global, ac, av);
-	// exit(1);
+	
+	
 	if (mlx_intro(&mlx, global))
-		return (free(global), 0);
+		return (free_elements(&mlx), 0);
+
+
 	start_game(&mlx);
 	
 }

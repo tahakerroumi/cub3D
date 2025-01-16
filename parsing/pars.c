@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:47:23 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 14:44:59 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:39:13 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ void	pars(t_global *global, int ac, char **av)
 	char		**file_content3;
 
 	if (ac != 2)
-		error_print("check your arguments\n");//must free global***********************************************************
+		error_print("Error\ncheck your arguments\n");//must free global***********************************************************
 	if (checkextention(av[1]) == -1)
-		error_print("extention error \n");//must free global****************************************************************
+		error_print("Error\nextention error \n");//must free global****************************************************************
 	elements = (t_elements *)calloc(1, sizeof(t_elements));
 	if (elements == NULL)
-		error_print("Failed to allocate memory\n");//must free global****************************************************************
+		error_print("Error\nFailed to allocate memory\n");//must free global****************************************************************
 	file_content = map_to_doublepointer(av[1]);
 	file_content2 = map_to_doublepointer(av[1]);
 	file_content3 = map_to_doublepointer(av[1]);
@@ -109,7 +109,7 @@ void	pars(t_global *global, int ac, char **av)
 		ft_doublepointerfree(file_content3);
 		free(elements);
 		free(global);
-		error_print("the elements are not correct \n");
+		error_print("Error\nthe elements are not correct \n");
 	}
 	elements->map = fill_map(file_content2);
 	if (fill_otherelements(file_content3, &global) == -1)
@@ -119,7 +119,7 @@ void	pars(t_global *global, int ac, char **av)
 		ft_doublepointerfree(file_content3);
 		free(elements->map);
 		free(elements);
-		error_print("check the top of your map \n");
+		error_print("Error\ncheck the top of your map \n");
 	}
 	ft_doublepointerfree(file_content);
 	ft_doublepointerfree(file_content2);

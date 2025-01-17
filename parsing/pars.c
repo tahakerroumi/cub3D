@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:47:23 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 20:41:31 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/17 09:01:56 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ void	pars2norm(t_elements *elements, char **av, t_global *global)
 		dbarray_free(file_content, file_content3, file_content2, global);
 	if (check_elements(file_content, &elements) == -1)
 	{
-		dbarray_free(file_content, file_content3, file_content2, global);
+		ft_doublepointerfree(file_content3);
+		ft_doublepointerfree(file_content);
+		ft_doublepointerfree(file_content2);
 		free(elements);
 		error_print("Error\nthe elements are not correct \n");
 	}

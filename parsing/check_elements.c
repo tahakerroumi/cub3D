@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:58:01 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 20:20:18 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/17 09:05:30 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_elements(char **map, t_elements **elements)
 	while (map[i])
 	{
 		tmp1 = ft_strtrim(map[i]);
-		if (tmp1 && tmp1[0] != '\0')
+		if ( tmp1[0] != '\0')
 		{
 			tmp = ft_split(tmp1, ' ');
 			if (elements_are_mixed(tmp[0]) == -1)

@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 18:40:10 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/17 08:53:57 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,6 @@ typedef struct s_elements
 	int				f;
 	int				c;
 	char			**map;
-	char		**file_content;
-	char		**file_content2;
-	char		**file_content3;
 }					t_elements;
 
 typedef struct s_global

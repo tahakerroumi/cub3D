@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:36:06 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 17:32:48 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:01:30 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	if_p(int p, t_global *global)
 	{
 		free(global->map);
 		free(global);
-		error_print("Error\ncheck the players number\n");
+		error_print("Error\ncheck the players number or map\n");
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:47:23 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/17 09:01:56 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:00:49 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,23 @@ void	normmm(t_elements *elements)
 	free(elements);
 }
 
+void checkbeforee(char **map)
+{
+	int i = 0;
+
+	char *tmp;
+
+	while(map[i])
+	{
+		tmp = ft_strtrim(map[i]);
+		if(tmp[0] == '1')
+			return;
+		i++;	
+	}
+	printf("map problem\n");
+	free(tmp);
+	exit(1);
+}
 void	pars2norm(t_elements *elements, char **av, t_global *global)
 {
 	char		**file_content;
@@ -55,6 +72,7 @@ void	pars2norm(t_elements *elements, char **av, t_global *global)
 	file_content3 = map_to_doublepointer(av[1]);
 	if (!file_content || !file_content3 || !file_content2)
 		dbarray_free(file_content, file_content3, file_content2, global);
+	checkbeforee(file_content2);
 	if (check_elements(file_content, &elements) == -1)
 	{
 		ft_doublepointerfree(file_content3);

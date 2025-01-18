@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:01:01 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 20:51:36 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:52:55 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,48 @@ void	check_for_textures_extension(t_global *global)
 {
 	if (ft_strncmp(global->so + ft_strlen(global->so) - 4, ".xpm", 4) != 0)
 	{
+		free(global->c);
+		free(global->f);
+		free(global->ea);
+		free(global->no);	
+		free(global->so);	
+		free(global->we);
 		ft_doublepointerfree(global->map);
 		free(global);
 		error_print("Error\nSO texture must be a .xpm file\n");
 	}
 	if (ft_strncmp(global->no + ft_strlen(global->no) - 4, ".xpm", 4) != 0)
 	{
+		free(global->c);
+		free(global->f);
+		free(global->ea);
+		free(global->no);	
+		free(global->so);	
+		free(global->we);
 		ft_doublepointerfree(global->map);
 		free(global);
 		error_print("Error\nNO texture must be a .xpm file\n");
 	}
 	if (ft_strncmp(global->we + ft_strlen(global->we) - 4, ".xpm", 4) != 0)
 	{
+		free(global->c);
+		free(global->f);
+		free(global->ea);
+		free(global->no);	
+		free(global->so);	
+		free(global->we);
 		ft_doublepointerfree(global->map);
 		free(global);
 		error_print("Error\nWE texture must be a .xpm file\n");
 	}
 	if (ft_strncmp(global->ea + ft_strlen(global->ea) - 4, ".xpm", 4) != 0)
 	{
+		free(global->c);
+		free(global->f);
+		free(global->ea);
+		free(global->no);	
+		free(global->so);	
+		free(global->we);
 		ft_doublepointerfree(global->map);
 		free(global);
 		error_print("Error\nEA texture must be a .xpm file\n");

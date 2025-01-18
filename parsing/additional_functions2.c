@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   additional_functions2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:53:33 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 13:59:25 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:23:15 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,18 @@ int	ft_atoi(char *str)
 {
 	int	res;
 	int	negative;
+	int i;
 
 	negative = 1;
+	i = 0;
 	res = 0;
+	while(str[i])
+	{
+		// printf();
+		if(str[i] != ' ' && str[i] != '\n' && str[i] != '\t' && str[i] != '\v' && str[i] != '\f' && str[i] != '\r' && (str[i] < '0' || str[i] > '9'))
+			error_print("Error\nmixed int and chars\n");
+		i++;
+	}
 	while (*str && (*str == ' ' || *str == '\n' || *str == '\t'
 			|| *str == '\v' || *str == '\f' || *str == '\r'))
 		++str;

@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:01:01 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/18 13:52:55 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:09:58 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,14 +133,22 @@ void	check_walls(t_global *global)
 		while (global->map[i][j])
 		{
 			if (chek_walls2(global, i, j) == 1)
-				error_print("Error\ncheck ur walls pls\n");//must free global and global map*******************************************************************
+			{
+				free(global->map);
+				free(global);
+				error_print("Error\ncheck ur walls pls\n");
+			}
 			if (global->map[i][j] == '0'
 				&& (!global->map[i][j + 1]
 				|| !global->map[i - 1][j]
 				|| !global->map[i + 1][j]
 				|| !global->map[i][j - 1]))
 			{
-				error_print("Error\ncheck ur walls pls2\n");//must free global and global map*******************************************************************
+				{
+					free(global->map);
+					free(global);
+					error_print("Error\ncheck ur walls pls2\n");
+				}
 			}
 			j++;
 		}

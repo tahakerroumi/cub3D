@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:58:01 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/18 12:59:25 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:46:31 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ void	check_fc2(t_global *global)
 	if (ft_doublepointerlen(tmp) != 3 || chekerr(tmp) == -1)
 	{
 		ft_doublepointerfree(tmp);
+		free(global->c);
+		free(global->f);
+		free(global->no);
+		free(global->we);
+		free(global->so);
+		free(global->ea);
 		ft_doublepointerfree(global->map);
 		free(global);
 		error_print("Error\nelements problem\n");
@@ -124,6 +130,12 @@ void	check_fc2(t_global *global)
 		|| ft_atoi(tmp[2]) > 255)
 	{
 		ft_doublepointerfree(tmp);
+		free(global->c);
+		free(global->f);
+		free(global->no);
+		free(global->we);
+		free(global->so);
+		free(global->ea);
 		ft_doublepointerfree(global->map);
 		free(global);
 		error_print("Error\nelements problem\n");
@@ -141,8 +153,14 @@ void	check_fc(t_global *global)
 	{
 		ft_doublepointerfree(tmp2);
 		ft_doublepointerfree(global->map);
+		free(global->c);
+		free(global->f);
+		free(global->no);
+		free(global->we);
+		free(global->so);
+		free(global->ea);
 		free(global);
-		error_print("Error\nelements problem1\n");
+		error_print("Error\nelements problem\n");
 	}
 	if (ft_atoi(tmp2[0]) < 0
 		|| ft_atoi(tmp2[0]) > 255
@@ -151,6 +169,12 @@ void	check_fc(t_global *global)
 		|| ft_atoi(tmp2[2]) < 0
 		|| ft_atoi(tmp2[2]) > 255)
 	{
+		free(global->c);
+		free(global->f);
+		free(global->no);
+		free(global->we);
+		free(global->so);
+		free(global->ea);
 		ft_doublepointerfree(global->map);
 		free(global);
 		ft_doublepointerfree(tmp2);

@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:47:23 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/17 20:00:49 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:33:23 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	normmm(t_elements *elements)
 	free(elements);
 }
 
-void checkbeforee(char **map)
+int checkbeforee(char **map)
 {
 	int i = 0;
 
@@ -54,12 +54,14 @@ void checkbeforee(char **map)
 	{
 		tmp = ft_strtrim(map[i]);
 		if(tmp[0] == '1')
-			return;
-		i++;	
+		{
+			free(tmp);
+			return 1;
+		}
+		i++;
+		free(tmp);
 	}
-	printf("map problem\n");
-	free(tmp);
-	exit(1);
+	return (-1);
 }
 void	pars2norm(t_elements *elements, char **av, t_global *global)
 {
@@ -73,13 +75,13 @@ void	pars2norm(t_elements *elements, char **av, t_global *global)
 	if (!file_content || !file_content3 || !file_content2)
 		dbarray_free(file_content, file_content3, file_content2, global);
 	checkbeforee(file_content2);
-	if (check_elements(file_content, &elements) == -1)
+	if (check_elements(file_content, &elements) == -1 || checkbeforee(file_content2) == -1)
 	{
 		ft_doublepointerfree(file_content3);
 		ft_doublepointerfree(file_content);
 		ft_doublepointerfree(file_content2);
 		free(elements);
-		error_print("Error\nthe elements are not correct \n");
+		error_print("Error\nerror in the map or elements \n");
 	}
 	elements->map = fill_map(file_content2);
 	if (fill_otherelements(file_content3, &global) == -1)

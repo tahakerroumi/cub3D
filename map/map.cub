@@ -2,7 +2,13 @@ NO textures/file.xpm
 SO textures/file1.xpm
 WE textures/file2.xpm
 EA textures/file3.xpm
-F 50,50,50
-C 135,206,235
+
+F 50,           50,                     50
+C                                          135     ,206,23
+
+111
+1N1
+101
+111
 
 

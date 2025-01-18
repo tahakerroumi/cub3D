@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/17 08:53:57 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:33:28 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int					key_release(int keycode, void *cub);
 void				events(t_minilibx *mlx);
 void				get_direction(t_minilibx *mlx, double *dx, double *dy);
 int					check_wall(t_minilibx *mlx, double px, double py);
+char **split_once(char *s, char c);
 
 /*Game routine*/
 int					program_routine(void *cub3d);

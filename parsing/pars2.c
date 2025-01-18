@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:52:42 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/16 19:54:57 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:09:21 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ void	pars2(t_global *global)
 	palyer_exists(global);
 	if (rgb_format(global->c) == -1 || rgb_format(global->f) == -1)
 	{
+		free(global->c);
+		free(global->f);
+		free(global->ea);
+		free(global->no);	
+		free(global->so);	
+		free(global->we);		
 		free(global->map);
 		free(global);
 		error_print("check your rgb format\n");

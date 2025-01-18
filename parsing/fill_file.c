@@ -6,7 +6,7 @@
 /*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:43:30 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 15:22:47 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:42:36 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	fill_otherelements(char **file_content3, t_global **global)
 		tmp1 = ft_strtrim(file_content3[i]);
 		if (tmp1[0] != '\0')
 		{
-			tmp = ft_split(tmp1, ' ');
+			if(tmp1[0] == 'F' || tmp1[0] == 'C')
+				tmp = split_once(tmp1, ' ');
+			else
+				tmp = ft_split(tmp1, ' ');
 			fil_otherelements2(tmp, global);
 			ft_doublepointerfree(tmp);
 		}

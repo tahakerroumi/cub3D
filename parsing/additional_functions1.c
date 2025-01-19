@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   additional_functions1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 17:53:19 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 17:53:20 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:31:36 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	atoiii(char p)
 		&& p != '\r' && (p < '0' || p > '9'))
 		error_print("Error\nmixed int and chars\n");
 }
+
 int	ft_atoi(char *str)
 {
 	int	res;

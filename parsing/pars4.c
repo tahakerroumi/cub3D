@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars4.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/19 19:45:21 by abakhcha          #+#    #+#             */
+/*   Updated: 2025/01/19 19:46:29 by abakhcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int	chek_walls2(t_global *global, int i, int j)
@@ -33,9 +45,7 @@ void	check_walls(t_global *global)
 					|| !global->real_map[i - 1][j] || !global->real_map[i
 					+ 1][j] || !global->real_map[i][j - 1]))
 			{
-				{
-					error_print("Error\ncheck ur walls pls\n");
-				}
+				error_print("Error\ncheck ur walls pls\n");
 			}
 			j++;
 		}
@@ -61,10 +71,11 @@ void	check_emptyline(t_global *global)
 		i++;
 	}
 }
+
 int	rgb_format(char *str)
 {
-	int def;
-	int i;
+	int	def;
+	int	i;
 
 	i = 1;
 	def = 0;

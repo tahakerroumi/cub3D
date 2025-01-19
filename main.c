@@ -3,14 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 17:52:13 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 17:55:45 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:01:04 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+
+void	check_textures_extention(t_global *global)
+{
+	if (open(global->no_path, O_RDWR) == -1)
+	{
+		free_global(global);
+		error_print("Error\ncheck ur textures files\n");
+	}
+	else if (open(global->so_path, O_RDWR) == -1)
+	{
+		free_global(global);
+		error_print("Error\ncheck ur textures files\n");
+	}
+	else if (open(global->we_path, O_RDWR) == -1)
+	{
+		free_global(global);
+		error_print("Error\ncheck ur textures files\n");
+	}
+	else if (open(global->ea_path, O_RDWR) == -1)
+	{
+		free_global(global);
+		error_print("Error\ncheck ur textures files\n");
+	}
+}
+
+void	map_size2(t_global *global)
+{
+	int	i;
+	int	max;
+	int	tmp;
+
+	i = 0;
+	max = 0;
+	tmp = 0;
+	global->map_height = ft_doublepointerlen(global->real_map);
+	while (global->real_map[i])
+	{
+		tmp = ft_strlen(global->real_map[i]);
+		if (tmp > max)
+			max = tmp;
+		else
+			i++;
+	}
+	global->map_width = max;
+}
 
 int	checkextention(char *str)
 {

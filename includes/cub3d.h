@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 18:43:39 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 19:04:40 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:02:48 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define R_SPEED 0.01
 # define P_SPEED 0.8
 
-struct s_global;
+struct	s_global;
 
 typedef struct s_ray
 {

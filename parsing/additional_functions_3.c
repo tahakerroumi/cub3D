@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   additional_functions_3.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 17:53:17 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 17:53:18 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:32:08 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ char	*ft_strdup(char *s1)
 
 char	*str_join(char *s1, char *s2)
 {
-	int i;
-	int j;
-	char *str;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 0;
 	j = 0;

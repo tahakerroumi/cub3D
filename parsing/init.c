@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/19 19:32:53 by abakhcha          #+#    #+#             */
+/*   Updated: 2025/01/19 19:32:54 by abakhcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	init2(t_global *global)
@@ -31,7 +43,6 @@ void	init(t_global *global)
 	global->f = NULL;
 	global->c = NULL;
 	global->no_path = NULL;
-	;
 	global->so_path = NULL;
 	global->we_path = NULL;
 	global->ea_path = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 19:01:27 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 19:09:07 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:39:10 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,25 @@ char	**fill_map(int fd, t_global *global)
 	return (map);
 }
 
+void	fill_elements2(t_global *global, char *tmp, int x)
+{
+	if (x == 4)
+	{
+		global->ea_flag += 1;
+		global->ea = ft_strdup(tmp);
+	}
+	else if (x == 5)
+	{
+		global->f_flag += 1;
+		global->f = ft_strdup(tmp);
+	}
+	else if (x == 6)
+	{
+		global->c_flag += 1;
+		global->c = ft_strdup(tmp);
+	}
+}
+
 void	fill_elements(t_global *global, char *tmp, int x)
 {
 	if (x == 1)
@@ -56,22 +75,9 @@ void	fill_elements(t_global *global, char *tmp, int x)
 		global->we_flag += 1;
 		global->we = ft_strdup(tmp);
 	}
-	else if (x == 4)
-	{
-		global->ea_flag += 1;
-		global->ea = ft_strdup(tmp);
-	}
-	else if (x == 5)
-	{
-		global->f_flag += 1;
-		global->f = ft_strdup(tmp);
-	}
-	else if (x == 6)
-	{
-		global->c_flag += 1;
-		global->c = ft_strdup(tmp);
-	}
+	fill_elements2(global, tmp, x);
 }
+
 int	all_elements(t_global *global)
 {
 	if (global->no_flag > 1 || global->so_flag > 1 || global->we_flag > 1

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   additional_functions_4.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 17:53:22 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 17:53:23 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:32:31 by abakhcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_substr(char *s, int start, size_t len)
 
 void	ft_doublepointerfree(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str)

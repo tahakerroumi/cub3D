@@ -1,4 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars5.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/19 19:47:14 by abakhcha          #+#    #+#             */
+/*   Updated: 2025/01/19 19:58:17 by abakhcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
+
+void	formatt(int i, char **tmp1, char **tmp2, t_global *global)
+{
+	if (ft_atoi(tmp1[i]) > 255)
+	{
+		ft_doublepointerfree(tmp1);
+		free_global(global);
+		error_print("Error\nCheck your RGB values\n");
+	}
+	tmp2 = ft_split(tmp1[i], ' ');
+	if (!tmp2)
+	{
+		ft_doublepointerfree(tmp1);
+		free_global(global);
+		error_print("Error\nMemory allocation failed\n");
+	}
+	if (ft_doublepointerlen(tmp2) != 1)
+	{
+		ft_doublepointerfree(tmp2);
+		ft_doublepointerfree(tmp1);
+		free_global(global);
+		error_print("Error\nCheck your RGB format\n");
+	}
+	ft_doublepointerfree(tmp2);
+}
 
 void	check_rgb_format(t_global *global)
 {
@@ -7,6 +44,7 @@ void	check_rgb_format(t_global *global)
 	char	**tmp2;
 
 	i = 0;
+	tmp2 = NULL;
 	if (rgb_format(global->c + 1) == -1)
 	{
 		free_global(global);
@@ -15,24 +53,7 @@ void	check_rgb_format(t_global *global)
 	tmp1 = ft_split(global->c + 1, ',');
 	while (tmp1[i])
 	{
-		if (ft_atoi(tmp1[i]) > 255)
-		{
-			ft_doublepointerfree(tmp1);
-			error_print("Error\nCheck your RGB values\n");
-		}
-		tmp2 = ft_split(tmp1[i], ' ');
-		if (!tmp2)
-		{
-			ft_doublepointerfree(tmp1);
-			error_print("Error\nMemory allocation failed\n");
-		}
-		if (ft_doublepointerlen(tmp2) != 1)
-		{
-			ft_doublepointerfree(tmp2);
-			ft_doublepointerfree(tmp1);
-			error_print("Error\nCheck your RGB format\n");
-		}
-		ft_doublepointerfree(tmp2);
+		formatt(i, tmp1, tmp2, global);
 		i++;
 	}
 	ft_doublepointerfree(tmp1);
@@ -45,6 +66,7 @@ void	check_rgb_format1(t_global *global)
 	char	**tmp2;
 
 	i = 0;
+	tmp2 = NULL;
 	if (rgb_format(global->f + 1) == -1)
 	{
 		free_global(global);
@@ -53,24 +75,7 @@ void	check_rgb_format1(t_global *global)
 	tmp1 = ft_split(global->f + 1, ',');
 	while (tmp1[i])
 	{
-		if (ft_atoi(tmp1[i]) > 255)
-		{
-			ft_doublepointerfree(tmp1);
-			error_print("Error\nCheck your RGB values\n");
-		}
-		tmp2 = ft_split(tmp1[i], ' ');
-		if (!tmp2)
-		{
-			ft_doublepointerfree(tmp1);
-			error_print("Error\nMemory allocation failed\n");
-		}
-		if (ft_doublepointerlen(tmp2) != 1)
-		{
-			ft_doublepointerfree(tmp2);
-			ft_doublepointerfree(tmp1);
-			error_print("Error\nCheck your RGB format\n");
-		}
-		ft_doublepointerfree(tmp2);
+		formatt(i, tmp1, tmp2, global);
 		i++;
 	}
 	ft_doublepointerfree(tmp1);

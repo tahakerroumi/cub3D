@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/19 19:39:29 by abakhcha          #+#    #+#             */
+/*   Updated: 2025/01/19 19:39:50 by abakhcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	get_infos_from_map2(char *tmp, t_global *global)
@@ -59,6 +71,7 @@ int	map_size(t_global *global)
 	}
 	return (size);
 }
+
 int	ft_doublepointerlen(char **str)
 {
 	int	i;

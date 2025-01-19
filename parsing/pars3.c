@@ -1,4 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars3.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/19 19:40:01 by abakhcha          #+#    #+#             */
+/*   Updated: 2025/01/19 19:48:58 by abakhcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
+
+void	if_z(int z, t_global *global)
+{
+	if (z == 0)
+	{
+		free_global(global);
+		error_print("Error\nmap does not exitst or walls != 1\n");
+	}
+}
 
 void	check_emptymap(t_global *global)
 {
@@ -20,19 +41,15 @@ void	check_emptymap(t_global *global)
 		}
 		else if (tmp[0] != '\0')
 		{
-			free(tmp);
-			free_global(global);
+			(free(tmp), free_global(global));
 			error_print("Error\ncheck the file that contains the map\n");
 		}
 		free(tmp);
 		i++;
 	}
-	if (z == 0)
-	{
-		free_global(global);
-		error_print("Error\nmap does not exitst or walls != 1\n");
-	}
+	if_z(z, global);
 }
+
 void	check_emptymap2(t_global *global)
 {
 	int		i;
@@ -53,17 +70,13 @@ void	check_emptymap2(t_global *global)
 		}
 		else if (tmp[0] != '\0')
 		{
-			free(tmp);
+			(free(tmp), free_global(global));
 			error_print("Error\ncheck the file that contains the map\n");
 		}
 		free(tmp);
 		i--;
 	}
-	if (z == 0)
-	{
-		free(tmp);
-		error_print("Error\nmap does not exitst or walls problem\n");
-	}
+	if_z(z, global);
 }
 
 void	player_exists(t_global *global)
@@ -95,8 +108,8 @@ void	player_exists(t_global *global)
 
 void	check_for_unwanted_chars(t_global *global)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (global->real_map[i])

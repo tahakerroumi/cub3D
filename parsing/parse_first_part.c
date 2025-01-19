@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 17:57:43 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 18:33:48 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:13:15 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	map_size2(t_global *global)
 void	parse_first_part(t_global *global, int fd)
 {
 	init(global);
-	global->map = fill_map(fd);
+	global->map = fill_map(fd, global);
 	che_rgb_number(global);
 	get_infos_from_map(global->map, global);
 	check_extentions_format(global);

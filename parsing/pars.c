@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/19 19:01:27 by tkerroum          #+#    #+#             */
+/*   Updated: 2025/01/19 19:09:07 by tkerroum         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
-char	**fill_map(int fd)
+char	**fill_map(int fd, t_global *global)
 {
 	char	*s1;
 	char	*l;
 	char	**map;
 
 	if (fd == -1 || !fd)
-		error_print("Error::can not open the file\n");
+		(free(global), error_print("Error::can not open the file\n"));
 	l = get_next_line(fd);
 	if (l == NULL)
-		error_print("Error\nempty file \n");
+		(free_global(global), error_print("Error\nempty file \n"));
 	s1 = calloc(1, 1);
 	while (l != NULL)
 	{

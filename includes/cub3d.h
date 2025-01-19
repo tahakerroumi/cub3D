@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 18:43:39 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 18:44:02 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:04:40 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define RIGHT 65363
 # define ESC 65307
 # define M_PI 3.14159265358979323846
-# define R_SPEED 0.03
+# define R_SPEED 0.01
 # define P_SPEED 0.8
 
 struct s_global;
@@ -170,7 +170,6 @@ char				*ft_strtrim(char *s1);
 size_t				ft_strlcpy(char *dst, char *src, size_t dstsize);
 char				*ft_strdup(char *s1);
 char				*str_join(char *s1, char *s2);
-char				**fill_map(int fd);
 void				init(t_global *global);
 void				fill_elements(t_global *global, char *tmp, int x);
 int					all_elements(t_global *global);
@@ -194,6 +193,7 @@ void				check_extentions_format(t_global *global);
 void				check_extentions_format2(t_global *global);
 void				parse_first_part(t_global *global, int fd);
 int					map_size(t_global *global);
+char				**fill_map(int fd, t_global *global);
 
 /*game initialization*/
 int					mlx_intro(t_minilibx *mlx, t_global *global);

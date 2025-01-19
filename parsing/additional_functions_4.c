@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   additional_functions.c                             :+:      :+:    :+:   */
+/*   additional_functions_4.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 11:52:46 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/15 16:38:59 by abakhcha         ###   ########.fr       */
+/*   Created: 2025/01/19 17:53:22 by tkerroum          #+#    #+#             */
+/*   Updated: 2025/01/19 17:53:23 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
+#include "../includes/cub3d.h"
 
 char	*ft_strneww(size_t n)
 {
@@ -62,14 +62,18 @@ char	*ft_substr(char *s, int start, size_t len)
 	return (str);
 }
 
-int	checkextention(char *str)
+void	ft_doublepointerfree(char **str)
 {
-	int	len;
+	int i;
 
-	len = ft_strlen(str);
-	if (len <= 4)
-		return (-1);
-	if (ft_strncmp(".cub", str + len - 4, 4) != 0)
-		return (-1);
-	return (1);
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			free(str[i]);
+			i++;
+		}
+		free(str);
+	}
 }

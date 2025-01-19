@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:05:52 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 07:46:27 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:55:36 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
+#include "../includes/cub3d.h"
 
 t_img	*new_img(t_minilibx *data, char *path)
 {
@@ -30,8 +30,8 @@ t_img	*get_wall_texture(t_minilibx *mlx)
 {
 	if (mlx->ray.flag == 1)
 	{
-		if (mlx->ray.ray_angle < ((3 * M_PI) / 2)
-			&& mlx->ray.ray_angle > M_PI / 2)
+		if (mlx->ray.ray_angle < ((3 * M_PI) / 2) && mlx->ray.ray_angle > M_PI
+			/ 2)
 			return (mlx->we_img);
 		return (mlx->ea_img);
 	}

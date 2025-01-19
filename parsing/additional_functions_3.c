@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   additional_functions3.c                            :+:      :+:    :+:   */
+/*   additional_functions_3.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 11:55:26 by abakhcha          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:22 by tkerroum         ###   ########.fr       */
+/*   Created: 2025/01/19 17:53:17 by tkerroum          #+#    #+#             */
+/*   Updated: 2025/01/19 17:53:18 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
-
-int	is_space(char c)
-{
-	return (c == ' ' || (c > 8 && c < 14));
-}
+#include "../includes/cub3d.h"
 
 char	*ft_strtrim(char *s1)
 {
@@ -78,4 +73,27 @@ char	*ft_strdup(char *s1)
 	}
 	s2[i] = '\0';
 	return (s2);
+}
+
+char	*str_join(char *s1, char *s2)
+{
+	int i;
+	int j;
+	char *str;
+
+	i = 0;
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
+		return (NULL);
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	free(s1);
+	return (str);
 }

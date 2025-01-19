@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   headerfile.h                                       :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 15:29:35 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/18 11:33:28 by abakhcha         ###   ########.fr       */
+/*   Created: 2025/01/19 18:43:39 by tkerroum          #+#    #+#             */
+/*   Updated: 2025/01/19 18:44:02 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADERFILE_H
-# define HEADERFILE_H
-
+#ifndef CUB3D_H
+# define CUB3D_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 # include "../parsing/get_next_line.h"
 # include <fcntl.h>
 # include <math.h>
@@ -28,7 +30,6 @@
 
 # define TILE_SIZE 64
 # define FOV 60
-
 # define W 119
 # define A 97
 # define S 115
@@ -36,12 +37,11 @@
 # define LEFT 65361
 # define RIGHT 65363
 # define ESC 65307
-
 # define M_PI 3.14159265358979323846
-# define R_SPEED 0.07
-# define P_SPEED 2
+# define R_SPEED 0.03
+# define P_SPEED 0.8
 
-struct	s_global;
+struct s_global;
 
 typedef struct s_ray
 {
@@ -64,10 +64,10 @@ typedef struct s_key_flags
 
 typedef struct s_player
 {
-	double	px;
-	double	py;
-	double	angle;
-	double	fov_rad;
+	double			px;
+	double			py;
+	double			angle;
+	double			fov_rad;
 }					t_player;
 
 typedef struct s_img
@@ -99,26 +99,27 @@ typedef struct s_minilibx
 	int				wall_height;
 }					t_minilibx;
 
-typedef struct s_elements
-{
-	int				no;
-	int				so;
-	int				we;
-	int				ea;
-	int				f;
-	int				c;
-	char			**map;
-}					t_elements;
-
 typedef struct s_global
 {
 	char			**map;
+	char			**tmp;
+	char			**real_map;
 	char			*no;
 	char			*so;
 	char			*we;
 	char			*ea;
 	char			*f;
 	char			*c;
+	char			*no_path;
+	char			*so_path;
+	char			*we_path;
+	char			*ea_path;
+	int				no_flag;
+	int				so_flag;
+	int				we_flag;
+	int				ea_flag;
+	int				f_flag;
+	int				c_flag;
 	int				map_height;
 	int				map_width;
 	int				floor_red;
@@ -127,44 +128,72 @@ typedef struct s_global
 	int				ceiling_red;
 	int				ceiling_green;
 	int				ceiling_blue;
+	int				index;
+	int				mapstart;
+	int				mapend;
 }					t_global;
 
-/*parsing*/
-int					checkextention(char *av);
+/*   parsing    */
+void				parse_first_part(t_global *global, int fd);
 void				error_print(char *str);
-char				*ft_substr(char *s, int start, size_t len);
+char				*ft_strjoin(char const *s1, char const *s2);
 int					ft_strncmp(char *s1, char *s2, size_t n);
-char				**ft_split(char *s, char c);
+char				*ft_strtrim_free(char *str, char *rts);
+char				*ft_strneww(size_t n);
+int					ft_strncmp(char *s1, char *s2, size_t n);
+char				*ft_substr(char *s, int start, size_t len);
+void				ft_doublepointerfree(char **str);
+int					ft_atoi(char *str);
+char				**doublepointercopy(char **map);
+int					is_space(char c);
 char				*ft_strtrim(char *s1);
 size_t				ft_strlcpy(char *dst, char *src, size_t dstsize);
 char				*ft_strdup(char *s1);
+char				*ft_strjoin_l(char const *s1, char const *s2);
+int					checkextention(char *str);
+void				free_global(t_global *global);
+size_t				ft_countwords(char *s, char c);
+size_t				ft_getwordlen(char *s, char c);
+void				ft_freearray(size_t i, char **array);
+char				**ft_split(char *s, char c);
+char				*my_strjoin(char const *s1, char const *s2);
+char				*free_join(char *s1, char *s2);
+char				*ft_strneww(size_t n);
+int					ft_strncmp(char *s1, char *s2, size_t n);
+char				*ft_substr(char *s, int start, size_t len);
+void				ft_doublepointerfree(char **str);
 int					ft_atoi(char *str);
 char				**doublepointercopy(char **map);
-char				**map_to_doublepointer(char *av);
-
-int					check_elements(char **map, t_elements **elements);
-int					comparaison(char *str);
+void				error_print(char *str);
+int					is_space(char c);
+char				*ft_strtrim(char *s1);
+size_t				ft_strlcpy(char *dst, char *src, size_t dstsize);
+char				*ft_strdup(char *s1);
+char				*str_join(char *s1, char *s2);
+char				**fill_map(int fd);
+void				init(t_global *global);
+void				fill_elements(t_global *global, char *tmp, int x);
+int					all_elements(t_global *global);
+void				get_infos_from_map(char **str, t_global *global);
 int					ft_doublepointerlen(char **str);
-int					ft_doublepointerlen(char **str);
-void				check_for_textures_extension(t_global *global);
+void				get_realmap(t_global *global, int size);
+void				check_emptymap(t_global *global);
+void				check_emptymap2(t_global *global);
+void				player_exists(t_global *global);
 void				check_for_unwanted_chars(t_global *global);
+int					chek_walls2(t_global *global, int i, int j);
 void				check_walls(t_global *global);
-void				palyer_exists(t_global *global);
-void				ft_doublepointerfree(char **str);
-void				check_textures_extention(t_global *global);
-void				check_fc(t_global *global);
-char				**fill_map(char **str);
-int					fill_otherelements(char **file_content3, t_global **global);
-char				**doubleptr_strim(char **str, int end);
-void				pars(t_global *global, int ac, char **av);
+void				check_emptyline(t_global *global);
 int					rgb_format(char *str);
-void				compare_floorcellingcolor(char **str,
-						t_elements **elements);
-int					elements_are_mixed(char *str);
-int					check_elementsnumber(t_elements *elements);
-void				compare_texture(char **str, t_elements **elements);
-void				map_size(t_global *global);
+void				check_rgb_format(t_global *global);
+void				check_rgb_format1(t_global *global);
 void				store_rgb(t_global *global);
+void				check_for_textures_extension(t_global *global);
+void				check_textures_extention(t_global *global);
+void				check_extentions_format(t_global *global);
+void				check_extentions_format2(t_global *global);
+void				parse_first_part(t_global *global, int fd);
+int					map_size(t_global *global);
 
 /*game initialization*/
 int					mlx_intro(t_minilibx *mlx, t_global *global);
@@ -178,7 +207,7 @@ int					key_release(int keycode, void *cub);
 void				events(t_minilibx *mlx);
 void				get_direction(t_minilibx *mlx, double *dx, double *dy);
 int					check_wall(t_minilibx *mlx, double px, double py);
-char **split_once(char *s, char c);
+char				**split_once(char *s, char c);
 
 /*Game routine*/
 int					program_routine(void *cub3d);
@@ -202,9 +231,10 @@ t_img				*get_wall_texture(t_minilibx *mlx);
 
 /*end game (free all data)*/
 int					end_program(void *cub3d);
-void    			free_elements(t_minilibx *mlx);
+void				free_elements(t_minilibx *mlx);
 
-void	pars2(t_global *global);
-void	map_size(t_global *global);
-void	store_rgb(t_global *global);
+void				pars2(t_global *global);
+void				map_size2(t_global *global);
+void				store_rgb(t_global *global);
+
 #endif

@@ -1,91 +1,89 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pars2.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 19:52:42 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/18 14:12:15 by abakhcha         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../includes/cub3d.h"
 
-#include "../inc/headerfile.h"
-
-char	**map_to_doublepointer(char *av)
+void	get_infos_from_map2(char *tmp, t_global *global)
 {
-	char	*s1;
-	char	*l;
-	int		fd;
-	char	**map;
-
-	fd = open(av, O_RDWR);
-	if (fd == -1 || !fd)
-		error_print("Error::can not open the file\n");
-	l = get_next_line(fd);
-	if (l == NULL)
-		error_print("Error\nempty file \n");
-	s1 = calloc(1, 1);
-	while (l != NULL)
+	if (ft_strncmp(tmp, "NO", 2) == 0)
+		return (fill_elements(global, tmp, 1), free(tmp));
+	if (ft_strncmp(tmp, "SO", 2) == 0)
+		return (fill_elements(global, tmp, 2), free(tmp));
+	if (ft_strncmp(tmp, "WE", 2) == 0)
+		return (fill_elements(global, tmp, 3), free(tmp));
+	if (ft_strncmp(tmp, "EA", 2) == 0)
+		return (fill_elements(global, tmp, 4), free(tmp));
+	if (ft_strncmp(tmp, "F", 1) == 0)
+		return (fill_elements(global, tmp, 5), free(tmp));
+	if (ft_strncmp(tmp, "C", 1) == 0)
+		return (fill_elements(global, tmp, 6), free(tmp));
+	if (ft_strlen(tmp) != 0)
 	{
-		if (l[0] == '\n')
-			s1 = str_join(s1, "  \n");
-		else
-			s1 = str_join(s1, l);
-		free(l);
-		l = get_next_line(fd);
+		free(tmp);
+		free_global(global);
+		error_print("Error\nmap file contains an error\n");
 	}
-	map = ft_split(s1, '\n');
-	free(s1);
-	close(fd);
-	return (map);
+	free(tmp);
 }
 
-int	rgb_format(char *str)
+void	get_infos_from_map(char **str, t_global *global)
 {
-	int	def;
+	int		flag;
+	int		j;
+	char	*tmp;
+
+	j = 0;
+	flag = 0;
+	while (str[j])
+	{
+		tmp = ft_strtrim(str[j]);
+		if (all_elements(global) == 1)
+		{
+			free(tmp);
+			global->index = j;
+			break ;
+		}
+		get_infos_from_map2(tmp, global);
+		j++;
+	}
+}
+
+int	map_size(t_global *global)
+{
+	int	i;
+	int	size;
+
+	size = 0;
+	i = global->index;
+	while (global->map && global->map[i])
+	{
+		i++;
+		size++;
+	}
+	return (size);
+}
+int	ft_doublepointerlen(char **str)
+{
 	int	i;
 
-	i = 1;
-	def = 0;
+	i = 0;
 	while (str[i])
-	{
-		if ((str[i] >= '0' && str[i] <= '9') || str[i] == ' ')
-			i++;
-		else if (str[i] == ','
-			&& ((str[i - 1] >= '0'
-					&& str[i - 1] <= '9')
-				|| str[i - 1] == ' '))
-		{
-			def += 1;
-			i++;
-		}
-		else
-			break ;
-	}
-	if (str[i] == '\0' && def == 2)
-		return (1);
-	return (-1);
+		i++;
+	return (i);
 }
 
-void	pars2(t_global *global)
+void	get_realmap(t_global *global, int size)
 {
-	check_for_textures_extension(global);
-	check_for_unwanted_chars(global);
-	check_fc(global);
-	check_textures_extention(global);
-	check_walls(global);
-	palyer_exists(global);
-	// if (rgb_format(global->c) == -1 || rgb_format(global->f) == -1)
-	// {
-	// 	free(global->c);
-	// 	free(global->f);
-	// 	free(global->ea);
-	// 	free(global->no);	
-	// 	free(global->so);	
-	// 	free(global->we);		
-	// 	free(global->map);
-	// 	free(global);
-	// 	error_print("check your rgb format\n");
-	// }
+	int	i;
+	int	j;
+
+	j = 0;
+	global->real_map = malloc((size + 1) * sizeof(char *));
+	if (!global->real_map)
+		error_print("alloc erro\n");
+	i = global->mapstart;
+	while (global->map[i] && i <= global->mapend)
+	{
+		global->real_map[j] = ft_strdup(global->map[i]);
+		i++;
+		j++;
+	}
+	global->real_map[j] = (NULL);
 }

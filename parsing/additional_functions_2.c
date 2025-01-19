@@ -1,57 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   additional_functions_2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 13:34:15 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/18 11:21:50 by abakhcha         ###   ########.fr       */
+/*   Created: 2025/01/19 17:53:13 by tkerroum          #+#    #+#             */
+/*   Updated: 2025/01/19 17:53:14 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
-
-size_t	ft_countwords(char *s, char c)//add it here
-{
-	size_t	count;
-	size_t	i;
-
-	count = 0;
-	i = 0;
-	while (*(s + i))
-	{
-		if (*(s + i) != c)
-		{
-			count++;
-			while (*(s + i) && *(s + i) != c)
-				i++;
-		}
-		else if (*(s + i) == c)
-			i++;
-	}
-	return (count);
-}
-
-size_t	ft_getwordlen(char *s, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (*(s + i) && *(s + i) != c)
-		i++;
-	return (i);
-}
-
-void	ft_freearray(size_t i, char **array)
-{
-	while (i > 0)
-	{
-		i--;
-		free(*(array + i));
-	}
-	free(array);
-}
+#include "../includes/cub3d.h"
 
 static char	**split(char *s, char c, char **array, size_t words_count)
 {
@@ -91,4 +50,41 @@ char	**ft_split(char *s, char c)
 		return (NULL);
 	array = split(s, c, array, words);
 	return (array);
+}
+
+char	*my_strjoin(char const *s1, char const *s2)
+{
+	int		x;
+	int		y;
+	char	*str;
+
+	if (!s2)
+		return (NULL);
+	if (s1 == 0)
+		s1 = "";
+	x = 0;
+	y = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	while (x < (int)ft_strlen(s1))
+	{
+		x[str] = x[s1];
+		x++;
+	}
+	while (y < (int)ft_strlen(s2))
+		x++[str] = y++[s2];
+	x[str] = '\0';
+	return (str);
+}
+
+char	*free_join(char *s1, char *s2)
+{
+	char	*tmp;
+	char	*tmp1;
+
+	tmp = s1;
+	tmp1 = my_strjoin(tmp, s2);
+	free(s1);
+	return (tmp1);
 }

@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:48:22 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 07:07:42 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:23:55 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
+#include "../includes/cub3d.h"
 
 void	player_pos_dir(t_minilibx *mlx, t_global *data)
 {
@@ -18,15 +18,15 @@ void	player_pos_dir(t_minilibx *mlx, t_global *data)
 	int	j;
 
 	i = -1;
-	while (data->map[++i])
+	while (data->real_map[++i])
 	{
 		j = -1;
-		while (data->map[i][++j])
+		while (data->real_map[i][++j])
 		{
-			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
-				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
+			if (data->real_map[i][j] == 'N' || data->real_map[i][j] == 'S'
+				|| data->real_map[i][j] == 'W' || data->real_map[i][j] == 'E')
 			{
-				player_type(&mlx->player, data->map[i][j]);
+				player_type(&mlx->player, data->real_map[i][j]);
 				mlx->player.px = j * TILE_SIZE + (TILE_SIZE / 2);
 				mlx->player.py = i * TILE_SIZE + (TILE_SIZE / 2);
 				mlx->player.fov_rad = FOV * (M_PI / 180);

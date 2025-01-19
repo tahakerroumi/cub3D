@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:00:09 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 07:01:46 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:08:38 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
+#include "../includes/cub3d.h"
 
 void	get_direction(t_minilibx *mlx, double *dx, double *dy)
 {
@@ -46,5 +46,5 @@ int	check_wall(t_minilibx *mlx, double px, double py)
 	get_direction(mlx, &dx, &dy);
 	px = floor((px + (dx * (P_SPEED + 10.0))) / TILE_SIZE);
 	py = floor((py + (dy * (P_SPEED + 10.0))) / TILE_SIZE);
-	return (safe_place(mlx->data->map, px, py));
+	return (safe_place(mlx->data->real_map, px, py));
 }

@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:47:17 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 07:19:31 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:38:24 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
+#include "../includes/cub3d.h"
 
 void	world_manager(t_minilibx *mlx, int ray)
 {
@@ -42,8 +42,8 @@ int	wall_hit(t_minilibx *mlx, double dx, double dy)
 	if (x < 0 || y < 0 || y >= mlx->data->map_height
 		|| x >= mlx->data->map_width)
 		return (0);
-	if (mlx->data->map[y] && x <= (int)ft_strlen(mlx->data->map[y]))
-		if (mlx->data->map[y][x] != '1')
+	if (mlx->data->real_map[y] && x <= (int)ft_strlen(mlx->data->real_map[y]))
+		if (mlx->data->real_map[y][x] != '1')
 			return (1);
 	return (0);
 }

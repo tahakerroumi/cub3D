@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/15 07:02:00 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:55:36 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
+#include "../includes/cub3d.h"
 
 void	update_position(t_minilibx *mlx)
 {

@@ -1,51 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   additional_functions2.c                            :+:      :+:    :+:   */
+/*   additional_functions1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 11:53:33 by abakhcha          #+#    #+#             */
-/*   Updated: 2025/01/18 14:23:15 by abakhcha         ###   ########.fr       */
+/*   Created: 2025/01/19 17:53:19 by tkerroum          #+#    #+#             */
+/*   Updated: 2025/01/19 17:53:20 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
+#include "../includes/cub3d.h"
 
-void	ft_doublepointerfree(char **str)
+void	atoiii(char p)
 {
-	int	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-		{
-			free(str[i]);
-			i++;
-		}
-		free(str);
-	}
+	if (p != ' ' && p != '\n' && p != '\t' && p != '\v' && p != '\f'
+		&& p != '\r' && (p < '0' || p > '9'))
+		error_print("Error\nmixed int and chars\n");
 }
-
 int	ft_atoi(char *str)
 {
 	int	res;
 	int	negative;
-	int i;
+	int	i;
 
 	negative = 1;
 	i = 0;
 	res = 0;
-	while(str[i])
+	while (str[i])
 	{
-		// printf();
-		if(str[i] != ' ' && str[i] != '\n' && str[i] != '\t' && str[i] != '\v' && str[i] != '\f' && str[i] != '\r' && (str[i] < '0' || str[i] > '9'))
-			error_print("Error\nmixed int and chars\n");
+		atoiii(str[i]);
 		i++;
 	}
-	while (*str && (*str == ' ' || *str == '\n' || *str == '\t'
-			|| *str == '\v' || *str == '\f' || *str == '\r'))
+	while (*str && (*str == ' ' || *str == '\n' || *str == '\t' || *str == '\v'
+			|| *str == '\f' || *str == '\r'))
 		++str;
 	if (*str == '-')
 		negative = -1;
@@ -87,4 +75,9 @@ void	error_print(char *str)
 	while (str[i])
 		write(1, &str[i++], 1);
 	exit(1);
+}
+
+int	is_space(char c)
+{
+	return (c == ' ' || (c > 8 && c < 14));
 }

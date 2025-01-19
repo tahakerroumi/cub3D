@@ -6,11 +6,11 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 04:55:41 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/16 16:30:59 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:04:52 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/headerfile.h"
+#include "../includes/cub3d.h"
 
 void	keys_init(t_minilibx *mlx)
 {
@@ -24,14 +24,10 @@ void	keys_init(t_minilibx *mlx)
 
 int	textures_init(t_minilibx *mlx)
 {
-	mlx->ea_img = new_img(mlx, mlx->data->ea);
-	mlx->we_img = new_img(mlx, mlx->data->we);
-	mlx->so_img = new_img(mlx, mlx->data->so);
-	mlx->no_img = new_img(mlx, mlx->data->no);
-	free(mlx->data->ea);
-    free(mlx->data->no);
-    free(mlx->data->so);
-    free(mlx->data->we);
+	mlx->ea_img = new_img(mlx, mlx->data->ea_path);
+	mlx->we_img = new_img(mlx, mlx->data->we_path);
+	mlx->so_img = new_img(mlx, mlx->data->so_path);
+	mlx->no_img = new_img(mlx, mlx->data->no_path);
 	if (!mlx->ea_img || !mlx->we_img || !mlx->so_img || !mlx->no_img)
 		return (1);
 	return (0);

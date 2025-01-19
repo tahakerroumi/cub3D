@@ -1,14 +1,12 @@
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 CC = cc
 NAME = cub3D
 
-SRC = main.c \
-		parsing/additional_functions.c parsing/additional_functions2.c parsing/additional_functions3.c \
-		parsing/check_elements.c parsing/check_elements2.c parsing/check_extention.c parsing/fill_file.c \
-		parsing/ft_split.c parsing/get_next_line_utils.c parsing/get_next_line.c parsing/mapsize.c parsing/pars2.c\
-		parsing/pars.c parsing/playerexists.c parsing/free_elements.c parsing/check_extention3.c\
-		game_loop/initialization.c game_loop/keys_manager.c game_loop/ray_casting.c game_loop/start_game.c \
-		game_loop/texturespart.c game_loop/tools.c game_loop/world_maker.c game_loop/movement.c
+SRC =  main.c parsing/get_next_line.c parsing/get_next_line_utils.c parsing/parse_first_part.c\
+  	   parsing/additional_functions1.c parsing/additional_functios.c parsing/additional_functions_2.c \
+	   parsing/additional_functions_3.c parsing/additional_functions_4.c parsing/pars.c\
+	   parsing/pars2.c parsing/pars3.c parsing/pars4.c parsing/pars5.c parsing/init.c game_loop/free_elements.c game_loop/initialization.c game_loop/keys_manager.c  \
+	   game_loop/texturespart.c game_loop/tools.c game_loop/world_maker.c game_loop/start_game.c game_loop/movement.c game_loop/ray_casting.c
 		
 
 OBJ = $(SRC:.c=.o)
@@ -28,3 +26,8 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
+
+
+
+
+

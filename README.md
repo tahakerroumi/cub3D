@@ -12,58 +12,45 @@ This project is inspired by the classic Wolfenstein 3D. It focuses on implementi
 - **Collision Detection:** Ensures the player cannot walk through walls.
 - **Basic Graphics:** Visual representation of walls and floor/ceiling differentiation.
 
-## Goals
-1. **Understand Raycasting:** Learn the mathematics and logic behind the raycasting technique.
-2. **Game Logic Development:** Implement essential game features like movement, collision detection, and rendering.
-3. **Interactive Map Design:** Create a simple and functional map layout for the player to explore.
-
-## Implementation Details
-### Coordinate System
-- The coordinate system is defined with the origin (0, 0) at the top-left corner of the screen.
-- The **x-axis** increases to the right, and the **y-axis** increases downward.
-
-### Key Components
-1. **Map Representation:**
-   - A grid-based 2D array where each cell represents either a wall or empty space.
-   - Example:
-     ```
-     1 1 1 1 1
-     1 0 0 0 1
-     1 0 1 0 1
-     1 0 0 0 1
-     1 1 1 1 1
-     ```
-     (`1` represents a wall, and `0` represents empty space).
-
-2. **Raycasting Algorithm:**
-   - Casts rays from the player’s viewpoint to determine the distance to walls.
-   - Calculates the height of walls based on the distance to simulate depth perception.
-
-3. **Player Controls:**
-   - **Movement:** Forward, backward, and strafing left/right.
-   - **Rotation:** Turning the view left or right to adjust the perspective.
-
-4. **Rendering:**
-   - Draws vertical slices of the walls based on the distance computed by raycasting.
-   - Implements basic shading or color variation to enhance depth perception.
-
-## Tools and Technologies
-- **Programming Language:** C
-- **Graphics Library:** Simple drawing or rendering library like SDL or similar.
-- **Development Environment:** Any C-supported IDE or text editor with compiler.
-
 ## Challenges
 - Implementing accurate collision detection.
 - Optimizing raycasting calculations for performance.
 - Creating a visually appealing environment within the constraints of the project.
-
-## Future Improvements
 - Add textures to walls for a more immersive experience.
-- Implement enemies or other interactive objects in the environment.
-- Enhance lighting and shading effects.
-- Expand the map with more complex layouts and challenges.
+- 
+## What I Have Learned
+Working on this raycasting project has been an enriching experience. Here are the key takeaways:
 
-## How to Run
+1. **Understanding Raycasting:**
+   - Learned the mathematical principles behind raycasting and how it simulates 3D effects in a 2D game environment.
+   - Gained insight into the importance of optimizing calculations for performance.
+
+2. **Improved C Programming Skills:**
+   - Enhanced my ability to work with pointers, arrays, and complex data structures in C.
+   - Learned to use the MiniLibX library for graphical rendering and event handling.
+
+3. **Game Development Concepts:**
+   - Developed a better understanding of player controls, collision detection, and rendering techniques.
+   - Built foundational knowledge in creating interactive and dynamic game environments.
+
+4. **Debugging and Problem-Solving:**
+   - Overcame challenges related to collision detection, accurate raycasting, and rendering performance.
+   - Improved my debugging skills by identifying and fixing logical errors in the implementation.
+
+5. **Project Organization:**
+   - Learned how to structure a project effectively, dividing it into manageable modules and components.
+   - Gained experience in writing clean and maintainable code.
+
+## Usage
+
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
+   git clone git@github.com:tahakerroumi/cub3D.git
+   cd cub3D
+2. Compile the program using make
+   ```bash
+   make
+3. Run the program
+   ```bash
+   ./cub3D map.cub
+

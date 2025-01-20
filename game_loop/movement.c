@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:00:09 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 18:08:38 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:41:07 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	get_direction(t_minilibx *mlx, double *dx, double *dy)
 {
-	*dx = 0;
-	*dy = 0;
 	if (mlx->key.move_forward)
 	{
 		*dx = cos(mlx->player.angle);
@@ -43,6 +41,8 @@ int	check_wall(t_minilibx *mlx, double px, double py)
 	double	dx;
 	double	dy;
 
+	dx = 0;
+	dy = 0;
 	get_direction(mlx, &dx, &dy);
 	px = floor((px + (dx * (P_SPEED + 10.0))) / TILE_SIZE);
 	py = floor((py + (dy * (P_SPEED + 10.0))) / TILE_SIZE);

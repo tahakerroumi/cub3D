@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:47:17 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 18:38:24 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:39:39 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	world_manager(t_minilibx *mlx, int ray)
 				- mlx->player.angle));
 	wall_h = (TILE_SIZE / mlx->ray.distance) * ((WIDTH / 2)
 			/ tan(mlx->player.fov_rad / 2));
-	b_pix = (HEIGHT / 2) + (wall_h / 2);
 	t_pix = (HEIGHT / 2) - (wall_h / 2);
+	b_pix = (HEIGHT / 2) + (wall_h / 2);
 	mlx->wall_height = b_pix - t_pix;
 	draw_ceiling(mlx, ray, t_pix);
 	draw_wall(mlx, ray, t_pix, b_pix);

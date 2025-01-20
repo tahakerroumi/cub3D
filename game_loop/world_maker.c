@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world_maker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 18:29:42 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 20:02:25 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:55:54 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_wall(t_minilibx *mlx, int ray, int t_pix, int b_pix)
 	texture = get_wall_texture(mlx);
 	while (t_pix < b_pix)
 	{
-		py = (t_pix - y) * ((double)mlx->ea_img->height / mlx->wall_height);
+		py = (t_pix - y) * ((double)texture->height / mlx->wall_height);
 		my_pixel_put(ray, t_pix++, &mlx->img, get_color(get_x_cord(mlx), py,
 				texture));
 	}

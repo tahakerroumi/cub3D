@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abakhcha <abakhcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 18:43:39 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 20:02:48 by abakhcha         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:49:17 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define ESC 65307
 # define M_PI 3.14159265358979323846
 # define R_SPEED 0.01
-# define P_SPEED 0.8
+# define P_SPEED 1
 
 struct	s_global;
 

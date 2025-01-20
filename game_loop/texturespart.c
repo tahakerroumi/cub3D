@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:05:52 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 16:55:36 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:55:09 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_img	*get_wall_texture(t_minilibx *mlx)
 	{
 		if (mlx->ray.ray_angle < ((3 * M_PI) / 2) && mlx->ray.ray_angle > M_PI
 			/ 2)
-			return (mlx->we_img);
-		return (mlx->ea_img);
+			return (mlx->ea_img);
+		return (mlx->we_img);
 	}
 	if (mlx->ray.ray_angle < M_PI && mlx->ray.ray_angle > 0)
 		return (mlx->no_img);

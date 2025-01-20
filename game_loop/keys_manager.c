@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:31:45 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/19 16:55:36 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:32:11 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	update_position(t_minilibx *mlx)
 	double	dx;
 	double	dy;
 
+	dx = 0.0;
+	dy = 0.0;
 	get_direction(mlx, &dx, &dy);
 	if (check_wall(mlx, mlx->player.px, mlx->player.py))
 	{

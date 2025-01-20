@@ -17,7 +17,7 @@ This project is inspired by the classic Wolfenstein 3D. It focuses on implementi
 - Optimizing raycasting calculations for performance.
 - Creating a visually appealing environment within the constraints of the project.
 - Add textures to walls for a more immersive experience.
-- 
+
 ## What I Have Learned
 Working on this raycasting project has been an enriching experience. Here are the key takeaways:
 

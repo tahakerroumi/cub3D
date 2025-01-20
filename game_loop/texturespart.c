@@ -6,7 +6,7 @@
 /*   By: tkerroum <tkerroum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:05:52 by tkerroum          #+#    #+#             */
-/*   Updated: 2025/01/20 11:55:09 by tkerroum         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:13:25 by tkerroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_img	*new_img(t_minilibx *data, char *path)
 		error_print("Error\nMalloc failed\n");
 	img->img = mlx_xpm_file_to_image(data->intro, path, &img->width,
 			&img->height);
+	if (!img->img)
+		return (NULL);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	return (img);
@@ -36,8 +38,8 @@ t_img	*get_wall_texture(t_minilibx *mlx)
 		return (mlx->we_img);
 	}
 	if (mlx->ray.ray_angle < M_PI && mlx->ray.ray_angle > 0)
-		return (mlx->no_img);
-	return (mlx->so_img);
+		return (mlx->so_img);
+	return (mlx->no_img);
 }
 
 unsigned int	get_color(int x, int y, t_img *text)

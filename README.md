@@ -1,7 +1,9 @@
-# Raycasting Project
+# cub3D Project
 
 ## Overview
-This project is a game development endeavor inspired by the classic Wolfenstein 3D. It focuses on implementing raycasting, a rendering technique used to create a pseudo-3D perspective in a 2D game environment. The goal is to build a basic game engine that demonstrates raycasting and allows the player to navigate a simple map.
+This project is inspired by the classic Wolfenstein 3D. It focuses on implementing raycasting, a rendering technique used to create a pseudo-3D perspective in a 2D game environment. The goal is to build a basic game engine that demonstrates raycasting and allows the player to navigate a simple map. This project was developed using the MiniLibX library and the C programming language.
+
+![Project Demo](![Design sans titre (1)](https://github.com/user-attachments/assets/c6d7622c-fe69-491e-88b3-4523d41a30f1))
 
 ## Features
 - **Raycasting Engine:** Implements the fundamental mechanics of raycasting to simulate a 3D perspective using 2D grid-based maps.
